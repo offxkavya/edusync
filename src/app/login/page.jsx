@@ -189,9 +189,9 @@ export default function Login() {
                 </span>
               </h2>
               <p className="max-w-md text-base text-blue-100/90 leading-relaxed">
-                EduSync keeps every learner, tutor, and guardian aligned with
-                analytics, session notes, and scheduling in one clean dashboard.
-                Track progress, surface blockers, and celebrate wins together.
+                EduSync – A College Management and Automation System that unifies
+                analytics, scheduling, and collaboration for administrators,
+                educators, and students to stay aligned effortlessly.
               </p>
             </div>
             
