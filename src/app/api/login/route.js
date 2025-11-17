@@ -1,13 +1,12 @@
-import { PrismaClient } from "@/generated/prisma";
+import prisma from "@/lib/prisma";
 import jwt from "jsonwebtoken"
 import bcrypt from "bcryptjs"
 import { NextResponse } from "next/server";
 
-const prisma = new PrismaClient();
-
-export async function POST(req, res) {
+export async function POST(req) {
   try{
-    const {email,password} = req.body;
+    const body = await req.json();
+    const {email, password} = body;
 
     const checkUser = await prisma.user.findUnique({where:{email}})
 
@@ -18,12 +17,12 @@ export async function POST(req, res) {
     const passMatch = await bcrypt.compare(password, checkUser.password);
     if(passMatch){
         const token = jwt.sign(
-            {userId: newUser.id, email: newUser.email,name:newUser.name},
+            {userId: checkUser.id, email: checkUser.email, name: checkUser.name},
             process.env.JWT_SECRET,
             {expiresIn: '7d'}
         );
 
-        return NextResponse.json({token}, {status: 200});
+        return NextResponse.json({token, user: { id: checkUser.id, name: checkUser.name, email: checkUser.email }}, {status: 200});
     }
 
     return NextResponse.json({message:"Invalid credentials"}, {status: 401});
