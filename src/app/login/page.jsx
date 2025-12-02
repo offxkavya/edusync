@@ -3,8 +3,7 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-
-const AUTH_STORAGE_KEY = "token";
+import { getAuthToken, saveAuthToken, decodeToken } from "@/lib/auth-client";
 
 export default function Login() {
   const router = useRouter();
@@ -13,9 +12,20 @@ export default function Login() {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   useEffect(() => {
-    const existingToken = window.localStorage.getItem(AUTH_STORAGE_KEY);
+    const existingToken = getAuthToken();
     if (existingToken) {
-      router.replace("/profile");
+      const decoded = decodeToken(existingToken);
+      if (decoded?.role) {
+        if (decoded.role === "ADMIN") {
+          router.replace("/admin/dashboard");
+        } else if (decoded.role === "FACULTY") {
+          router.replace("/faculty/dashboard");
+        } else if (decoded.role === "STUDENT") {
+          router.replace("/student/dashboard");
+        } else {
+          router.replace("/dashboard");
+        }
+      }
     }
   }, [router]);
 
@@ -48,8 +58,18 @@ export default function Login() {
       }
 
       if (data?.token) {
-        window.localStorage.setItem(AUTH_STORAGE_KEY, data.token);
-        router.push("/profile");
+        saveAuthToken(data.token);
+        // Redirect based on role
+        const role = data.user?.role;
+        if (role === "ADMIN") {
+          router.push("/admin/dashboard");
+        } else if (role === "FACULTY") {
+          router.push("/faculty/dashboard");
+        } else if (role === "STUDENT") {
+          router.push("/student/dashboard");
+        } else {
+          router.push("/dashboard");
+        }
       }
     } catch (err) {
       setError("Unable to reach the server. Please try again.");

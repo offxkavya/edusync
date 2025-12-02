@@ -3,8 +3,13 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import { getAuthToken, saveAuthToken, decodeToken } from "@/lib/auth-client";
 
-const AUTH_STORAGE_KEY = "token";
+const ROLE_OPTIONS = [
+  { label: "Student", value: "STUDENT", description: "Access courses, marks, attendance" },
+  { label: "Faculty", value: "FACULTY", description: "Manage classes, marks, announcements" },
+  { label: "Admin", value: "ADMIN", description: "Oversee entire institution" },
+];
 
 export default function Signup() {
   const router = useRouter();
@@ -13,14 +18,38 @@ export default function Signup() {
     email: "",
     password: "",
   });
+  const [role, setRole] = useState("STUDENT");
+  const [studentProfile, setStudentProfile] = useState({
+    enrollmentNo: "",
+    department: "",
+    semester: 1,
+    guardianName: "",
+    guardianPhone: "",
+  });
+  const [facultyProfile, setFacultyProfile] = useState({
+    employeeCode: "",
+    department: "",
+    specialization: "",
+  });
   const [error, setError] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   useEffect(() => {
-    const existingToken = window.localStorage.getItem(AUTH_STORAGE_KEY);
+    const existingToken = getAuthToken();
     if (existingToken) {
-      router.replace("/profile");
+      const decoded = decodeToken(existingToken);
+      if (decoded?.role) {
+        if (decoded.role === "ADMIN") {
+          router.replace("/admin/dashboard");
+        } else if (decoded.role === "FACULTY") {
+          router.replace("/faculty/dashboard");
+        } else if (decoded.role === "STUDENT") {
+          router.replace("/student/dashboard");
+        } else {
+          router.replace("/dashboard");
+        }
+      }
     }
   }, [router]);
 
@@ -29,17 +58,43 @@ export default function Signup() {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
+  const handleStudentProfileChange = (event) => {
+    const { name, value } = event.target;
+    setStudentProfile((prev) => ({
+      ...prev,
+      [name]: name === "semester" ? Number(value) : value,
+    }));
+  };
+
+  const handleFacultyProfileChange = (event) => {
+    const { name, value } = event.target;
+    setFacultyProfile((prev) => ({ ...prev, [name]: value }));
+  };
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     setError("");
     setSuccessMessage("");
     setIsSubmitting(true);
 
+    const payload = {
+      ...formData,
+      role,
+    };
+
+    if (role === "STUDENT") {
+      payload.studentProfile = studentProfile;
+    }
+
+    if (role === "FACULTY") {
+      payload.facultyProfile = facultyProfile;
+    }
+
     try {
       const response = await fetch("/api/signup", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
+        body: JSON.stringify(payload),
       });
 
       const isJson = response.headers
@@ -54,8 +109,18 @@ export default function Signup() {
       }
 
       if (data?.token) {
-        window.localStorage.setItem(AUTH_STORAGE_KEY, data.token);
-        router.push("/profile");
+        saveAuthToken(data.token);
+        // Redirect based on role
+        const role = data.user?.role;
+        if (role === "ADMIN") {
+          router.push("/admin/dashboard");
+        } else if (role === "FACULTY") {
+          router.push("/faculty/dashboard");
+        } else if (role === "STUDENT") {
+          router.push("/student/dashboard");
+        } else {
+          router.push("/dashboard");
+        }
         return;
       }
 
@@ -74,12 +139,12 @@ export default function Signup() {
     <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 text-white">
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(59,130,246,0.15),transparent_50%)]" />
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_80%,rgba(147,51,234,0.15),transparent_50%)]" />
-      
+
       <div className="relative mx-auto flex min-h-screen w-full max-w-7xl flex-col lg:flex-row">
         <section className="relative hidden flex-1 overflow-hidden bg-gradient-to-br from-blue-900/40 via-purple-900/40 to-slate-900/60 px-12 py-16 backdrop-blur-xl lg:flex">
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(59,130,246,0.3),_transparent_70%)]" />
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_right,_rgba(147,51,234,0.2),_transparent_60%)]" />
-          
+
           <div className="relative z-10 flex flex-col justify-between">
             <div className="space-y-6 animate-in fade-in slide-in-from-left duration-700">
               <div className="inline-block rounded-full bg-blue-500/20 px-4 py-2 backdrop-blur-sm">
@@ -98,7 +163,7 @@ export default function Signup() {
                 weekly goals, assignments, and feedback in one streamlined flow.
               </p>
             </div>
-            
+
             <div className="space-y-4 rounded-2xl border border-white/20 bg-white/10 p-8 backdrop-blur-xl shadow-2xl animate-in fade-in slide-in-from-bottom duration-1000 delay-300">
               <div className="flex items-center gap-2">
                 <div className="h-1 w-12 bg-gradient-to-r from-blue-400 to-purple-400 rounded-full" />
@@ -145,6 +210,27 @@ export default function Signup() {
             </div>
 
             <form onSubmit={handleSubmit} className="mt-12 space-y-6 animate-in fade-in slide-in-from-bottom duration-700 delay-300">
+              <div className="space-y-3">
+                <p className="text-sm font-semibold text-slate-200">
+                  Select your role
+                </p>
+                <div className="grid gap-3 sm:grid-cols-3">
+                  {ROLE_OPTIONS.map((option) => (
+                    <button
+                      type="button"
+                      key={option.value}
+                      onClick={() => setRole(option.value)}
+                      className={`rounded-xl border px-4 py-3 text-left transition ${role === option.value ? "border-blue-500 bg-slate-800/70" : "border-slate-700/50 bg-slate-900/40 hover:border-slate-600"}`}
+                    >
+                      <p className="text-sm font-semibold text-white">
+                        {option.label}
+                      </p>
+                      <p className="text-xs text-slate-400">{option.description}</p>
+                    </button>
+                  ))}
+                </div>
+              </div>
+
               <div className="space-y-2">
                 <label
                   htmlFor="name"
@@ -205,6 +291,128 @@ export default function Signup() {
                   minLength={6}
                 />
               </div>
+
+              {role === "STUDENT" && (
+                <div className="rounded-2xl border border-white/10 bg-white/5 p-5 space-y-4">
+                  <p className="text-sm font-semibold text-white">Student details</p>
+                  <div className="grid gap-4 sm:grid-cols-2">
+                    <div className="space-y-2">
+                      <label className="text-xs font-semibold text-slate-300">
+                        Enrollment Number
+                      </label>
+                      <input
+                        type="text"
+                        name="enrollmentNo"
+                        value={studentProfile.enrollmentNo}
+                        onChange={handleStudentProfileChange}
+                        required
+                        className="w-full rounded-xl border border-slate-700/50 bg-slate-900/30 px-4 py-3 text-sm text-white placeholder:text-slate-500 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/30"
+                        placeholder="e.g., CSE23A001"
+                      />
+                    </div>
+                    <div className="space-y-2">
+                      <label className="text-xs font-semibold text-slate-300">
+                        Department
+                      </label>
+                      <input
+                        type="text"
+                        name="department"
+                        value={studentProfile.department}
+                        onChange={handleStudentProfileChange}
+                        required
+                        className="w-full rounded-xl border border-slate-700/50 bg-slate-900/30 px-4 py-3 text-sm text-white placeholder:text-slate-500 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/30"
+                        placeholder="Computer Science"
+                      />
+                    </div>
+                    <div className="space-y-2">
+                      <label className="text-xs font-semibold text-slate-300">
+                        Semester
+                      </label>
+                      <input
+                        type="number"
+                        min={1}
+                        max={12}
+                        name="semester"
+                        value={studentProfile.semester}
+                        onChange={handleStudentProfileChange}
+                        required
+                        className="w-full rounded-xl border border-slate-700/50 bg-slate-900/30 px-4 py-3 text-sm text-white placeholder:text-slate-500 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/30"
+                      />
+                    </div>
+                    <div className="space-y-2">
+                      <label className="text-xs font-semibold text-slate-300">
+                        Guardian Name (optional)
+                      </label>
+                      <input
+                        type="text"
+                        name="guardianName"
+                        value={studentProfile.guardianName}
+                        onChange={handleStudentProfileChange}
+                        className="w-full rounded-xl border border-slate-700/50 bg-slate-900/30 px-4 py-3 text-sm text-white placeholder:text-slate-500 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/30"
+                      />
+                    </div>
+                    <div className="space-y-2 sm:col-span-2">
+                      <label className="text-xs font-semibold text-slate-300">
+                        Guardian Phone (optional)
+                      </label>
+                      <input
+                        type="tel"
+                        name="guardianPhone"
+                        value={studentProfile.guardianPhone}
+                        onChange={handleStudentProfileChange}
+                        className="w-full rounded-xl border border-slate-700/50 bg-slate-900/30 px-4 py-3 text-sm text-white placeholder:text-slate-500 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/30"
+                      />
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {role === "FACULTY" && (
+                <div className="rounded-2xl border border-white/10 bg-white/5 p-5 space-y-4">
+                  <p className="text-sm font-semibold text-white">Faculty details</p>
+                  <div className="grid gap-4 sm:grid-cols-2">
+                    <div className="space-y-2">
+                      <label className="text-xs font-semibold text-slate-300">
+                        Employee Code
+                      </label>
+                      <input
+                        type="text"
+                        name="employeeCode"
+                        value={facultyProfile.employeeCode}
+                        onChange={handleFacultyProfileChange}
+                        required
+                        className="w-full rounded-xl border border-slate-700/50 bg-slate-900/30 px-4 py-3 text-sm text-white placeholder:text-slate-500 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/30"
+                        placeholder="EMP-102"
+                      />
+                    </div>
+                    <div className="space-y-2">
+                      <label className="text-xs font-semibold text-slate-300">
+                        Department
+                      </label>
+                      <input
+                        type="text"
+                        name="department"
+                        value={facultyProfile.department}
+                        onChange={handleFacultyProfileChange}
+                        required
+                        className="w-full rounded-xl border border-slate-700/50 bg-slate-900/30 px-4 py-3 text-sm text-white placeholder:text-slate-500 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/30"
+                      />
+                    </div>
+                    <div className="space-y-2 sm:col-span-2">
+                      <label className="text-xs font-semibold text-slate-300">
+                        Specialization (optional)
+                      </label>
+                      <input
+                        type="text"
+                        name="specialization"
+                        value={facultyProfile.specialization}
+                        onChange={handleFacultyProfileChange}
+                        className="w-full rounded-xl border border-slate-700/50 bg-slate-900/30 px-4 py-3 text-sm text-white placeholder:text-slate-500 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/30"
+                      />
+                    </div>
+                  </div>
+                </div>
+              )}
 
               {error && (
                 <div className="rounded-xl border border-red-500/50 bg-red-500/10 px-4 py-3 text-sm text-red-300 backdrop-blur-sm animate-in fade-in slide-in-from-top duration-300">

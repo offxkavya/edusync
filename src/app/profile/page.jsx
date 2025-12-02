@@ -3,8 +3,7 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-
-const AUTH_STORAGE_KEY = "token";
+import { getAuthToken, clearAuthToken } from "@/lib/auth-client";
 
 export default function Profile() {
   const router = useRouter();
@@ -13,7 +12,7 @@ export default function Profile() {
   const [error, setError] = useState("");
 
   useEffect(() => {
-    const token = window.localStorage.getItem(AUTH_STORAGE_KEY);
+    const token = getAuthToken();
     if (!token) {
       router.push("/login");
       return;
@@ -35,7 +34,7 @@ export default function Profile() {
 
       if (!response.ok) {
         if (response.status === 401) {
-          window.localStorage.removeItem(AUTH_STORAGE_KEY);
+          clearAuthToken();
           router.push("/login");
           return;
         }
@@ -52,7 +51,7 @@ export default function Profile() {
   };
 
   const handleLogout = () => {
-    window.localStorage.removeItem(AUTH_STORAGE_KEY);
+    clearAuthToken();
     router.push("/login");
   };
 
@@ -95,6 +94,11 @@ export default function Profile() {
       .join("")
       .toUpperCase()
       .slice(0, 2);
+  };
+
+  const formatRole = (role) => {
+    if (!role) return "Member";
+    return role.charAt(0) + role.slice(1).toLowerCase();
   };
 
   return (
@@ -161,7 +165,7 @@ export default function Profile() {
                         {user?.name}
                       </h2>
                       <p className="text-blue-300 font-medium">
-                        Active Member
+                        {formatRole(user?.role)}
                       </p>
                     </div>
                   </div>
@@ -243,6 +247,80 @@ export default function Profile() {
                       <div className="h-3 w-3 rounded-full bg-emerald-500 animate-pulse" />
                     </div>
                   </div>
+
+                  {user?.studentProfile && (
+                    <div className="grid gap-6 rounded-2xl border border-white/10 bg-white/5 p-6 sm:grid-cols-2">
+                      <div>
+                        <p className="text-xs uppercase tracking-widest text-slate-400">
+                          Enrollment Number
+                        </p>
+                        <p className="mt-2 text-xl font-semibold text-white">
+                          {user.studentProfile.enrollmentNo}
+                        </p>
+                      </div>
+                      <div>
+                        <p className="text-xs uppercase tracking-widest text-slate-400">
+                          Department
+                        </p>
+                        <p className="mt-2 text-xl font-semibold text-white">
+                          {user.studentProfile.department}
+                        </p>
+                      </div>
+                      <div>
+                        <p className="text-xs uppercase tracking-widest text-slate-400">
+                          Semester
+                        </p>
+                        <p className="mt-2 text-xl font-semibold text-white">
+                          {user.studentProfile.semester}
+                        </p>
+                      </div>
+                      {(user.studentProfile.guardianName ||
+                        user.studentProfile.guardianPhone) && (
+                        <div>
+                          <p className="text-xs uppercase tracking-widest text-slate-400">
+                            Guardian
+                          </p>
+                          <p className="mt-2 text-sm text-slate-200">
+                            {user.studentProfile.guardianName}
+                          </p>
+                          <p className="text-sm text-slate-400">
+                            {user.studentProfile.guardianPhone}
+                          </p>
+                        </div>
+                      )}
+                    </div>
+                  )}
+
+                  {user?.facultyProfile && (
+                    <div className="grid gap-6 rounded-2xl border border-white/10 bg-white/5 p-6 sm:grid-cols-2">
+                      <div>
+                        <p className="text-xs uppercase tracking-widest text-slate-400">
+                          Employee Code
+                        </p>
+                        <p className="mt-2 text-xl font-semibold text-white">
+                          {user.facultyProfile.employeeCode}
+                        </p>
+                      </div>
+                      <div>
+                        <p className="text-xs uppercase tracking-widest text-slate-400">
+                          Department
+                        </p>
+                        <p className="mt-2 text-xl font-semibold text-white">
+                          {user.facultyProfile.department}
+                        </p>
+                      </div>
+                      {user.facultyProfile.specialization && (
+                        <div className="sm:col-span-2">
+                          <p className="text-xs uppercase tracking-widest text-slate-400">
+                            Specialization
+                          </p>
+                          <p className="mt-2 text-xl font-semibold text-white">
+                            {user.facultyProfile.specialization}
+                          </p>
+                        </div>
+                      )}
+                    </div>
+                  )}
                 </div>
               </div>
             </div>

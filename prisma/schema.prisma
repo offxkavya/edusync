@@ -14,9 +14,137 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+enum Role {
+  ADMIN
+  FACULTY
+  STUDENT
+}
+
+enum AttendanceStatus {
+  PRESENT
+  ABSENT
+  LATE
+  EXCUSED
+}
+
+enum AssessmentType {
+  MIDTERM
+  FINAL
+  ASSIGNMENT
+  QUIZ
+  PROJECT
+}
+
 model User {
-  id Int @id @default(autoincrement())
-  name String 
-  email String @unique
-  password String 
+  id       Int    @id @default(autoincrement())
+  name     String
+  email    String @unique
+  password String
+  role     Role   @default(STUDENT)
+
+  studentProfile StudentProfile?
+  facultyProfile FacultyProfile?
+  announcements  Announcement[] @relation("AnnouncementAuthor")
+  attendanceRecords Attendance[] @relation("AttendanceFaculty")
+  marksRecorded     Mark[]       @relation("MarkFaculty")
+  createdAt      DateTime        @default(now())
+  updatedAt      DateTime        @default(now()) @updatedAt
+}
+
+model StudentProfile {
+  id            Int      @id @default(autoincrement())
+  userId        Int      @unique
+  enrollmentNo  String   @unique
+  department    String
+  semester      Int
+  guardianName  String?
+  guardianPhone String?
+  joinedAt      DateTime @default(now())
+
+  user        User        @relation(fields: [userId], references: [id])
+  enrollments Enrollment[]
+  attendance  Attendance[]
+  marks       Mark[]
+}
+
+model FacultyProfile {
+  id           Int      @id @default(autoincrement())
+  userId       Int      @unique
+  employeeCode String   @unique
+  department   String
+  specialization String?
+  joinedAt     DateTime @default(now())
+
+  user    User     @relation(fields: [userId], references: [id])
+  courses Course[]
+}
+
+model Course {
+  id          Int      @id @default(autoincrement())
+  code        String   @unique
+  title       String
+  department  String
+  credits     Int      @default(3)
+  facultyProfileId Int?
+  semester    Int
+
+  faculty     FacultyProfile? @relation(fields: [facultyProfileId], references: [id])
+  enrollments Enrollment[]
+  attendance  Attendance[]
+  marks       Mark[]
+}
+
+model Enrollment {
+  id         Int      @id @default(autoincrement())
+  studentId  Int
+  courseId   Int
+  status     String   @default("ACTIVE")
+  enrolledAt DateTime @default(now())
+
+  student StudentProfile @relation(fields: [studentId], references: [id])
+  course  Course         @relation(fields: [courseId], references: [id])
+
+  @@unique([studentId, courseId])
+}
+
+model Attendance {
+  id        Int              @id @default(autoincrement())
+  date      DateTime         @default(now())
+  status    AttendanceStatus
+  remarks   String?
+  courseId  Int
+  studentId Int
+  recordedBy Int
+
+  course  Course         @relation(fields: [courseId], references: [id])
+  student StudentProfile @relation(fields: [studentId], references: [id])
+  faculty User           @relation("AttendanceFaculty", fields: [recordedBy], references: [id])
+}
+
+model Mark {
+  id            Int            @id @default(autoincrement())
+  studentId     Int
+  courseId      Int
+  assessment    AssessmentType
+  score         Float
+  maxScore      Float
+  recordedAt    DateTime       @default(now())
+  recordedBy    Int
+
+  student StudentProfile @relation(fields: [studentId], references: [id])
+  course  Course         @relation(fields: [courseId], references: [id])
+  faculty User           @relation("MarkFaculty", fields: [recordedBy], references: [id])
+
+  @@unique([studentId, courseId, assessment])
+}
+
+model Announcement {
+  id        Int      @id @default(autoincrement())
+  title     String
+  body      String
+  audience  Role?    @default(STUDENT)
+  authorId  Int
+  createdAt DateTime @default(now())
+
+  author User @relation("AnnouncementAuthor", fields: [authorId], references: [id])
 }
