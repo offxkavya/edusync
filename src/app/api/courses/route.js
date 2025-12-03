@@ -35,7 +35,7 @@ export async function GET(req) {
     // If faculty, only show assigned courses
     if (auth.user.role === "FACULTY" && auth.user.facultyProfile) {
       const facultyCourses = await prisma.course.findMany({
-        where: { facultyProfileId: auth.user.facultyProfile.id },
+        where: { facultyId: auth.user.facultyProfile.id },
         select: { id: true },
       });
       where.id = { in: facultyCourses.map((c) => c.id) };
@@ -66,7 +66,7 @@ export async function GET(req) {
             },
           },
         },
-        orderBy: { id: "desc" },
+        orderBy: { createdAt: "desc" },
       }),
       prisma.course.count({ where }),
     ]);
@@ -99,11 +99,11 @@ export async function POST(req) {
     }
 
     const body = await req.json();
-    const { title, code, credits, facultyProfileId, department, semester } = body;
+    const { title, code, description, credits, facultyId } = body;
 
-    if (!title || !code || !department || semester === undefined) {
+    if (!title || !code || !facultyId) {
       return NextResponse.json(
-        { error: "Title, code, department, and semester are required" },
+        { error: "Title, code, and faculty are required" },
         { status: 400 }
       );
     }
@@ -112,10 +112,9 @@ export async function POST(req) {
       data: {
         title,
         code,
+        description,
         credits: credits ? parseInt(credits) : 3,
-        department,
-        semester: parseInt(semester),
-        facultyProfileId: facultyProfileId ? parseInt(facultyProfileId) : null,
+        facultyId: parseInt(facultyId),
       },
       include: {
         faculty: {
