@@ -31,7 +31,7 @@ export default function Dashboard() {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-slate-950">
-      <div className="text-center space-y-4">
+      <div className="text-center space-y-6">
         <div className="animate-spin h-12 w-12 text-blue-500 mx-auto" />
         <p className="text-slate-400">Redirecting to your dashboard...</p>
       </div>
