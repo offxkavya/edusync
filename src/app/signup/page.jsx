@@ -247,7 +247,7 @@ export default function Signup() {
                   value={formData.name}
                   onChange={handleChange}
                   className="w-full rounded-xl border border-slate-700/50 bg-slate-800/50 px-4 py-3.5 text-sm text-slate-100 placeholder:text-slate-500 shadow-lg backdrop-blur-sm transition-all duration-200 focus:border-blue-500 focus:bg-slate-800/80 focus:outline-none focus:ring-2 focus:ring-blue-500/30 hover:border-slate-600"
-                  placeholder="Jordan Smith"
+                  placeholder="Enter your full name"
                 />
               </div>
 
