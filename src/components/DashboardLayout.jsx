@@ -44,8 +44,8 @@ export default function DashboardLayout({ children, role }) {
 
   if (!user) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-slate-950">
-        <div className="text-white">Loading...</div>
+      <div className="min-h-screen flex items-center justify-center bg-background">
+        <div className="text-foreground">Loading...</div>
       </div>
     );
   }
@@ -82,19 +82,22 @@ export default function DashboardLayout({ children, role }) {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 text-white">
+    <div className="min-h-screen bg-background text-foreground flex flex-col">
       {/* Header */}
-      <header className="border-b border-slate-800/50 bg-slate-900/30 backdrop-blur-xl sticky top-0 z-50">
-        <div className="mx-auto max-w-7xl px-6 py-4 sm:px-8">
-          <div className="flex items-center justify-between">
-            <Link href="/" className="text-xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
-              EduSync
+      <header className="border-b border-border bg-card sticky top-0 z-50 shadow-sm">
+        <div className="mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex h-16 items-center justify-between">
+            <Link href="/" className="flex items-center gap-2">
+              <div className="h-8 w-8 rounded-lg bg-primary flex items-center justify-center">
+                <span className="text-white font-bold text-lg">E</span>
+              </div>
+              <span className="text-xl font-bold tracking-tight text-foreground">EduSync</span>
             </Link>
             <div className="flex items-center gap-4">
-              <span className="text-sm text-slate-400 capitalize">{user.role}</span>
+              <span className="text-sm text-muted-foreground capitalize hidden sm:inline-block">{user.role.toLowerCase()}</span>
               <button
                 onClick={handleLogout}
-                className="rounded-lg border border-slate-700 bg-slate-800/50 px-4 py-2 text-sm font-medium text-slate-300 transition hover:bg-slate-800 hover:text-white"
+                className="rounded-md border border-border bg-background px-3 py-1.5 text-sm font-medium text-muted-foreground transition hover:bg-muted hover:text-foreground"
               >
                 Sign out
               </button>
@@ -103,33 +106,36 @@ export default function DashboardLayout({ children, role }) {
         </div>
       </header>
 
-      <div className="flex">
+      <div className="flex flex-1">
         {/* Sidebar */}
-        <aside className="w-64 border-r border-slate-800/50 bg-slate-900/30 backdrop-blur-xl min-h-[calc(100vh-73px)] p-6">
-          <nav className="space-y-2">
-            {navItems.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                className={`flex items-center gap-3 px-4 py-3 rounded-lg transition ${
-                  pathname === item.href
-                    ? "bg-blue-600/20 text-blue-400 border border-blue-500/30"
-                    : "text-slate-300 hover:bg-slate-800/50 hover:text-white"
-                }`}
-              >
-                <span className="text-lg">{item.icon}</span>
-                <span className="font-medium">{item.label}</span>
-              </Link>
-            ))}
+        <aside className="w-64 border-r border-border bg-card hidden lg:block">
+          <nav className="space-y-1 p-4">
+            {navItems.map((item) => {
+              const isActive = pathname === item.href;
+              return (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className={`flex items-center gap-3 px-3 py-2 rounded-md transition-all ${isActive
+                      ? "bg-primary/10 text-primary font-medium"
+                      : "text-muted-foreground hover:bg-muted hover:text-foreground"
+                    }`}
+                >
+                  <span className="text-lg">{item.icon}</span>
+                  <span className="text-sm">{item.label}</span>
+                </Link>
+              );
+            })}
           </nav>
         </aside>
 
         {/* Main Content */}
-        <main className="flex-1 p-6 sm:p-8">
-          {children}
+        <main className="flex-1 p-6 sm:p-8 bg-secondary/20">
+          <div className="mx-auto max-w-6xl">
+            {children}
+          </div>
         </main>
       </div>
     </div>
   );
 }
-

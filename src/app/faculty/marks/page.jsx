@@ -94,106 +94,120 @@ export default function FacultyMarks() {
   return (
     <DashboardLayout role="FACULTY">
       <div className="space-y-6">
-        <h1 className="text-3xl font-bold text-white">Upload Marks</h1>
+        <div>
+          <h1 className="text-3xl font-bold tracking-tight text-foreground">Upload Marks</h1>
+          <p className="text-muted-foreground mt-1">Record grades and assessment scores.</p>
+        </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           {/* Course Selection */}
           <div className="space-y-4">
-            <h2 className="text-xl font-semibold text-white">Select Course</h2>
-            <div className="space-y-2">
+            <h2 className="text-xl font-semibold text-foreground">1. Select Course</h2>
+            <div className="grid gap-3">
               {courses.map((course) => (
                 <button
                   key={course.id}
                   onClick={() => handleCourseSelect(course.id)}
-                  className={`w-full rounded-xl border p-4 text-left transition ${
-                    selectedCourse?.id === course.id
-                      ? "border-blue-500 bg-blue-500/20"
-                      : "border-slate-700/50 bg-slate-800/30 hover:bg-slate-800/50"
-                  }`}
+                  className={`w-full rounded-xl border p-4 text-left transition shadow-sm ${selectedCourse?.id === course.id
+                      ? "border-primary bg-primary/5 ring-1 ring-primary"
+                      : "border-border bg-card hover:bg-muted/50"
+                    }`}
                 >
-                  <h3 className="font-semibold text-white">{course.title}</h3>
-                  <p className="text-xs text-slate-400">{course.code}</p>
+                  <h3 className={`font-semibold ${selectedCourse?.id === course.id ? "text-primary" : "text-foreground"}`}>{course.title}</h3>
+                  <p className="text-xs text-muted-foreground mt-1 font-mono">{course.code}</p>
                 </button>
               ))}
+              {courses.length === 0 && <p className="text-muted-foreground italic">No courses available.</p>}
             </div>
           </div>
 
           {/* Marks Form */}
-          {selectedCourse && (
-            <div className="space-y-4">
-              <h2 className="text-xl font-semibold text-white">Record Marks</h2>
-              <form onSubmit={handleSubmit} className="space-y-4 rounded-xl border border-slate-700/50 bg-slate-800/30 p-6">
-                <div>
-                  <label className="block text-sm font-medium text-slate-300 mb-2">Student</label>
-                  <select
-                    value={formData.studentId}
-                    onChange={(e) => setFormData({ ...formData, studentId: e.target.value })}
-                    required
-                    className="w-full rounded-lg border border-slate-700 bg-slate-900 px-4 py-2 text-white"
-                  >
-                    <option value="">Select student</option>
-                    {students.map((student) => (
-                      <option key={student.id} value={student.id}>
-                        {student.user?.name} ({student.enrollmentNo})
-                      </option>
-                    ))}
-                  </select>
-                </div>
+          <div className="space-y-4">
+            <h2 className={`text-xl font-semibold ${!selectedCourse ? "text-muted-foreground" : "text-foreground"}`}>2. Record Marks</h2>
+            {selectedCourse ? (
+              <div className="rounded-xl border border-border bg-card p-6 shadow-sm">
+                <form onSubmit={handleSubmit} className="space-y-4">
+                  <div>
+                    <label className="block text-sm font-medium text-foreground mb-2">Student</label>
+                    <select
+                      value={formData.studentId}
+                      onChange={(e) => setFormData({ ...formData, studentId: e.target.value })}
+                      required
+                      className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+                    >
+                      <option value="">Select student</option>
+                      {students.map((student) => (
+                        <option key={student.id} value={student.id}>
+                          {student.user?.name} ({student.enrollmentNo})
+                        </option>
+                      ))}
+                    </select>
+                  </div>
 
-                <div>
-                  <label className="block text-sm font-medium text-slate-300 mb-2">Assessment Type</label>
-                  <select
-                    value={formData.assessment}
-                    onChange={(e) => setFormData({ ...formData, assessment: e.target.value })}
-                    required
-                    className="w-full rounded-lg border border-slate-700 bg-slate-900 px-4 py-2 text-white"
-                  >
-                    <option value="">Select type</option>
-                    <option value="QUIZ">Quiz</option>
-                    <option value="ASSIGNMENT">Assignment</option>
-                    <option value="MIDTERM">Midterm</option>
-                    <option value="FINAL">Final</option>
-                    <option value="PROJECT">Project</option>
-                  </select>
-                </div>
+                  <div>
+                    <label className="block text-sm font-medium text-foreground mb-2">Assessment Type</label>
+                    <select
+                      value={formData.assessment}
+                      onChange={(e) => setFormData({ ...formData, assessment: e.target.value })}
+                      required
+                      className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+                    >
+                      <option value="">Select type</option>
+                      <option value="QUIZ">Quiz</option>
+                      <option value="ASSIGNMENT">Assignment</option>
+                      <option value="MIDTERM">Midterm</option>
+                      <option value="FINAL">Final</option>
+                      <option value="PROJECT">Project</option>
+                    </select>
+                  </div>
 
-                <div>
-                  <label className="block text-sm font-medium text-slate-300 mb-2">Score</label>
-                  <input
-                    type="number"
-                    step="0.01"
-                    value={formData.score}
-                    onChange={(e) => setFormData({ ...formData, score: e.target.value })}
-                    required
-                    className="w-full rounded-lg border border-slate-700 bg-slate-900 px-4 py-2 text-white"
-                  />
-                </div>
+                  <div className="grid grid-cols-2 gap-4">
+                    <div>
+                      <label className="block text-sm font-medium text-foreground mb-2">Score</label>
+                      <input
+                        type="number"
+                        step="0.01"
+                        value={formData.score}
+                        onChange={(e) => setFormData({ ...formData, score: e.target.value })}
+                        required
+                        className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+                        placeholder="0.00"
+                      />
+                    </div>
 
-                <div>
-                  <label className="block text-sm font-medium text-slate-300 mb-2">Max Score</label>
-                  <input
-                    type="number"
-                    step="0.01"
-                    value={formData.maxScore}
-                    onChange={(e) => setFormData({ ...formData, maxScore: e.target.value })}
-                    required
-                    className="w-full rounded-lg border border-slate-700 bg-slate-900 px-4 py-2 text-white"
-                  />
-                </div>
+                    <div>
+                      <label className="block text-sm font-medium text-foreground mb-2">Max Score</label>
+                      <input
+                        type="number"
+                        step="0.01"
+                        value={formData.maxScore}
+                        onChange={(e) => setFormData({ ...formData, maxScore: e.target.value })}
+                        required
+                        className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+                        placeholder="100.00"
+                      />
+                    </div>
+                  </div>
 
-                <button
-                  type="submit"
-                  disabled={submitting}
-                  className="w-full rounded-xl bg-gradient-to-r from-blue-600 to-purple-600 px-6 py-3 font-semibold text-white hover:from-blue-500 hover:to-purple-500 transition disabled:opacity-50"
-                >
-                  {submitting ? "Recording..." : "Record Marks"}
-                </button>
-              </form>
-            </div>
-          )}
+                  <div className="pt-4">
+                    <button
+                      type="submit"
+                      disabled={submitting}
+                      className="w-full rounded-lg bg-primary px-6 py-3 font-semibold text-white hover:bg-primary/90 transition disabled:opacity-50 shadow-sm"
+                    >
+                      {submitting ? "Recording..." : "Record Marks"}
+                    </button>
+                  </div>
+                </form>
+              </div>
+            ) : (
+              <div className="h-48 rounded-xl border border-dashed border-border flex items-center justify-center bg-muted/20">
+                <p className="text-muted-foreground text-sm">Please select a course first</p>
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </DashboardLayout>
   );
 }
-

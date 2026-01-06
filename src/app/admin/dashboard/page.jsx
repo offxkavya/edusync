@@ -83,8 +83,8 @@ export default function AdminDashboard() {
       <DashboardLayout role="ADMIN">
         <div className="flex items-center justify-center min-h-[400px]">
           <div className="text-center space-y-4">
-            <div className="animate-spin h-12 w-12 text-blue-500 mx-auto" />
-            <p className="text-slate-400">Loading dashboard...</p>
+            <div className="animate-spin h-10 w-10 text-primary border-4 border-primary border-t-transparent rounded-full mx-auto" />
+            <p className="text-muted-foreground">Loading dashboard...</p>
           </div>
         </div>
       </DashboardLayout>
@@ -95,138 +95,153 @@ export default function AdminDashboard() {
     <DashboardLayout role="ADMIN">
       <div className="space-y-8">
         {/* Header */}
-        <div>
-          <h1 className="text-4xl font-bold text-white mb-2">
+        <div className="border-b border-border pb-6">
+          <h1 className="text-3xl font-bold tracking-tight text-foreground mb-2">
             Admin Dashboard
           </h1>
-          <p className="text-slate-400">
-            Welcome, <span className="text-white font-medium">{profile?.name}</span>
+          <p className="text-muted-foreground">
+            Welcome, {profile?.name}
           </p>
         </div>
 
         {/* Stats Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          <StatCard title="Total Students" value={stats.totalStudents} icon="👥" color="blue" />
-          <StatCard title="Total Faculty" value={stats.totalFaculty} icon="👨‍🏫" color="purple" />
-          <StatCard title="Total Courses" value={stats.totalCourses} icon="📚" color="emerald" />
-          <StatCard title="Announcements" value={stats.totalAnnouncements} icon="📢" color="orange" />
+          <StatCard title="Total Students" value={stats.totalStudents} icon="👥" />
+          <StatCard title="Total Faculty" value={stats.totalFaculty} icon="👨‍🏫" />
+          <StatCard title="Total Courses" value={stats.totalCourses} icon="📚" />
+          <StatCard title="Announcements" value={stats.totalAnnouncements} icon="📢" />
         </div>
 
         {/* Quick Actions */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-          <Link href="/students" className="rounded-xl border border-slate-700/50 bg-slate-800/30 p-6 hover:bg-slate-800/50 transition text-center">
-            <div className="text-4xl mb-3">👥</div>
-            <p className="font-semibold text-white">Manage Students</p>
-            <p className="text-xs text-slate-400 mt-1">View and edit students</p>
-          </Link>
-          <Link href="/admin/faculty" className="rounded-xl border border-slate-700/50 bg-slate-800/30 p-6 hover:bg-slate-800/50 transition text-center">
-            <div className="text-4xl mb-3">👨‍🏫</div>
-            <p className="font-semibold text-white">Manage Faculty</p>
-            <p className="text-xs text-slate-400 mt-1">View and edit faculty</p>
-          </Link>
-          <Link href="/admin/courses" className="rounded-xl border border-slate-700/50 bg-slate-800/30 p-6 hover:bg-slate-800/50 transition text-center">
-            <div className="text-4xl mb-3">📚</div>
-            <p className="font-semibold text-white">Manage Courses</p>
-            <p className="text-xs text-slate-400 mt-1">Create and assign courses</p>
-          </Link>
-          <Link href="/announcements/new" className="rounded-xl border border-slate-700/50 bg-slate-800/30 p-6 hover:bg-slate-800/50 transition text-center">
-            <div className="text-4xl mb-3">📢</div>
-            <p className="font-semibold text-white">Post Announcement</p>
-            <p className="text-xs text-slate-400 mt-1">Share updates</p>
-          </Link>
+          <QuickActionLink href="/students" icon="👥" title="Manage Students" description="View and edit students" />
+          <QuickActionLink href="/admin/faculty" icon="👨‍🏫" title="Manage Faculty" description="View and edit faculty" />
+          <QuickActionLink href="/admin/courses" icon="📚" title="Manage Courses" description="Create and assign courses" />
+          <QuickActionLink href="/announcements/new" icon="📢" title="Post Announcement" description="Share updates" />
         </div>
 
-        {/* Recent Students */}
-        {students.length > 0 && (
-          <div className="rounded-2xl border border-slate-800/50 bg-slate-900/40 backdrop-blur-xl p-6">
-            <div className="flex items-center justify-between mb-6">
-              <h2 className="text-2xl font-bold text-white">Recent Students</h2>
-              <Link href="/students" className="text-blue-400 hover:text-blue-300 text-sm font-medium">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          {/* Recent Students */}
+          <div className="space-y-4">
+            <div className="flex items-center justify-between">
+              <h2 className="text-xl font-semibold text-foreground">Recent Students</h2>
+              <Link href="/students" className="text-sm font-medium text-primary hover:text-primary/80 transition-colors">
                 View all →
               </Link>
             </div>
-            <div className="space-y-3">
-              {students.slice(0, 5).map((student) => (
-                <div key={student.id} className="flex items-center justify-between rounded-xl border border-slate-700/50 bg-slate-800/30 p-4">
-                  <div>
-                    <p className="font-medium text-white">{student.name}</p>
-                    <p className="text-sm text-slate-400">{student.studentProfile?.department} • Sem {student.studentProfile?.semester}</p>
-                  </div>
-                  <div className="text-right">
-                    <p className="text-sm text-slate-300">{student.studentProfile?.enrollmentNo}</p>
-                    <Link href={`/students/${student.id}`} className="text-xs text-blue-400 hover:text-blue-300">
-                      View →
-                    </Link>
-                  </div>
+            {students.length > 0 ? (
+              <div className="rounded-xl border border-border bg-card shadow-sm overflow-hidden">
+                <div className="divide-y divide-border">
+                  {students.slice(0, 5).map((student) => (
+                    <div key={student.id} className="flex items-center justify-between p-4 hover:bg-muted/50 transition-colors">
+                      <div>
+                        <p className="font-medium text-foreground">{student.name}</p>
+                        <p className="text-sm text-muted-foreground">{student.studentProfile?.department} • Sem {student.studentProfile?.semester}</p>
+                      </div>
+                      <div className="text-right">
+                        <p className="text-sm text-muted-foreground font-mono bg-muted px-2 py-0.5 rounded inline-block mb-1">{student.studentProfile?.enrollmentNo}</p>
+                        <Link href={`/students/${student.id}`} className="block text-xs text-primary hover:underline">
+                          View →
+                        </Link>
+                      </div>
+                    </div>
+                  ))}
                 </div>
-              ))}
-            </div>
+              </div>
+            ) : (
+              <div className="rounded-xl border border-dashed border-border p-8 text-center bg-muted/50 h-full flex items-center justify-center">
+                <p className="text-muted-foreground">No students found</p>
+              </div>
+            )}
           </div>
-        )}
 
-        {/* Recent Courses */}
-        {courses.length > 0 && (
-          <div className="rounded-2xl border border-slate-800/50 bg-slate-900/40 backdrop-blur-xl p-6">
-            <div className="flex items-center justify-between mb-6">
-              <h2 className="text-2xl font-bold text-white">Recent Courses</h2>
-              <Link href="/admin/courses" className="text-blue-400 hover:text-blue-300 text-sm font-medium">
+          {/* Recent Courses */}
+          <div className="space-y-4">
+            <div className="flex items-center justify-between">
+              <h2 className="text-xl font-semibold text-foreground">Recent Courses</h2>
+              <Link href="/admin/courses" className="text-sm font-medium text-primary hover:text-primary/80 transition-colors">
                 View all →
               </Link>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-              {courses.slice(0, 6).map((course) => (
-                <div key={course.id} className="rounded-xl border border-slate-700/50 bg-slate-800/30 p-4 hover:bg-slate-800/50 transition">
-                  <h3 className="font-semibold text-white mb-1">{course.title}</h3>
-                  <p className="text-xs text-slate-400 mb-2">{course.code}</p>
-                  <p className="text-sm text-slate-300">{course.faculty?.user?.name || "TBA"}</p>
-                  <p className="text-xs text-slate-500 mt-2">{course.enrollments?.length || 0} Students</p>
+            {courses.length > 0 ? (
+              <div className="rounded-xl border border-border bg-card shadow-sm overflow-hidden">
+                <div className="divide-y divide-border">
+                  {courses.slice(0, 5).map((course) => (
+                    <div key={course.id} className="p-4 hover:bg-muted/50 transition-colors">
+                      <h3 className="font-semibold text-foreground mb-1">{course.title}</h3>
+                      <p className="text-xs text-muted-foreground mb-2">{course.code}</p>
+                      <div className="flex items-center justify-between">
+                        <span className="text-sm text-muted-foreground">{course.faculty?.user?.name || "TBA"}</span>
+                        <span className="text-xs text-muted-foreground bg-muted px-2 py-0.5 rounded">{course.enrollments?.length || 0} Students</span>
+                      </div>
+                    </div>
+                  ))}
                 </div>
-              ))}
-            </div>
+              </div>
+            ) : (
+              <div className="rounded-xl border border-dashed border-border p-8 text-center bg-muted/50 h-full flex items-center justify-center">
+                <p className="text-muted-foreground">No courses found</p>
+              </div>
+            )}
           </div>
-        )}
+        </div>
 
         {/* Recent Announcements */}
-        {announcements.length > 0 && (
-          <div className="rounded-2xl border border-slate-800/50 bg-slate-900/40 backdrop-blur-xl p-6">
-            <div className="flex items-center justify-between mb-6">
-              <h2 className="text-2xl font-bold text-white">Latest Announcements</h2>
-              <Link href="/announcements" className="text-blue-400 hover:text-blue-300 text-sm font-medium">
-                View all →
-              </Link>
-            </div>
-            <div className="space-y-4">
-              {announcements.slice(0, 3).map((announcement) => (
-                <div key={announcement.id} className="border-b border-slate-700/50 pb-4 last:border-0">
-                  <h3 className="font-semibold text-white mb-1">{announcement.title}</h3>
-                  <p className="text-sm text-slate-300 mb-2">{announcement.body}</p>
-                  <p className="text-xs text-slate-500">{announcement.author?.name} • {new Date(announcement.createdAt).toLocaleDateString()}</p>
-                </div>
-              ))}
-            </div>
+        <div className="space-y-4">
+          <div className="flex items-center justify-between">
+            <h2 className="text-xl font-semibold text-foreground">Latest Announcements</h2>
+            <Link href="/announcements" className="text-sm font-medium text-primary hover:text-primary/80 transition-colors">
+              View all →
+            </Link>
           </div>
-        )}
+          {announcements.length > 0 ? (
+            <div className="rounded-xl border border-border bg-card shadow-sm overflow-hidden">
+              <div className="divide-y divide-border">
+                {announcements.slice(0, 3).map((announcement) => (
+                  <div key={announcement.id} className="p-4 hover:bg-muted/50 transition-colors">
+                    <h3 className="font-semibold text-foreground mb-1">{announcement.title}</h3>
+                    <p className="text-sm text-muted-foreground mb-2 line-clamp-2">{announcement.body}</p>
+                    <p className="text-xs text-muted-foreground flex items-center gap-2">
+                      <span>{announcement.author?.name}</span>
+                      <span>•</span>
+                      <span>{new Date(announcement.createdAt).toLocaleDateString()}</span>
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          ) : (
+            <div className="rounded-xl border border-dashed border-border p-8 text-center bg-muted/50">
+              <p className="text-muted-foreground">No announcements yet</p>
+            </div>
+          )}
+        </div>
+
       </div>
     </DashboardLayout>
   );
 }
 
-function StatCard({ title, value, icon, color }) {
-  const colorClasses = {
-    blue: "from-blue-500/20 to-blue-600/20 border-blue-500/30",
-    purple: "from-purple-500/20 to-purple-600/20 border-purple-500/30",
-    emerald: "from-emerald-500/20 to-emerald-600/20 border-emerald-500/30",
-    orange: "from-orange-500/20 to-orange-600/20 border-orange-500/30",
-  };
-
+function StatCard({ title, value, icon }) {
   return (
-    <div className={`rounded-xl border bg-gradient-to-br ${colorClasses[color]} p-6 backdrop-blur-sm`}>
+    <div className="rounded-xl border border-border bg-card p-6 shadow-sm">
       <div className="flex items-center justify-between mb-4">
-        <span className="text-3xl">{icon}</span>
+        <span className="text-2xl p-2 rounded-lg bg-primary/10">{icon}</span>
       </div>
-      <p className="text-3xl font-bold text-white mb-1">{value}</p>
-      <p className="text-sm text-slate-400">{title}</p>
+      <div>
+        <p className="text-2xl font-bold text-foreground">{value}</p>
+        <p className="text-sm text-muted-foreground">{title}</p>
+      </div>
     </div>
   );
 }
 
+function QuickActionLink({ href, icon, title, description }) {
+  return (
+    <Link href={href} className="flex flex-col items-center justify-center rounded-xl border border-border bg-card p-6 text-center hover:bg-muted/50 hover:border-primary/50 transition-all shadow-sm group">
+      <div className="text-3xl mb-3 transform group-hover:scale-110 transition-transform">{icon}</div>
+      <p className="font-semibold text-foreground">{title}</p>
+      <p className="text-xs text-muted-foreground mt-1">{description}</p>
+    </Link>
+  );
+}

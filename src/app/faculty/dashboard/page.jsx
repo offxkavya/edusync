@@ -48,7 +48,7 @@ export default function FacultyDashboard() {
         const coursesData = await coursesRes.json();
         setCourses(coursesData.data || []);
         setStats((prev) => ({ ...prev, totalCourses: coursesData.data?.length || 0 }));
-        
+
         // Count total students across all courses
         const totalStudents = coursesData.data?.reduce((sum, course) => sum + (course.enrollments?.length || 0), 0) || 0;
         setStats((prev) => ({ ...prev, totalStudents }));
@@ -82,8 +82,8 @@ export default function FacultyDashboard() {
       <DashboardLayout role="FACULTY">
         <div className="flex items-center justify-center min-h-[400px]">
           <div className="text-center space-y-4">
-            <div className="animate-spin h-12 w-12 text-blue-500 mx-auto" />
-            <p className="text-slate-400">Loading dashboard...</p>
+            <div className="animate-spin h-10 w-10 text-primary border-4 border-primary border-t-transparent rounded-full mx-auto" />
+            <p className="text-muted-foreground">Loading dashboard...</p>
           </div>
         </div>
       </DashboardLayout>
@@ -94,64 +94,48 @@ export default function FacultyDashboard() {
     <DashboardLayout role="FACULTY">
       <div className="space-y-8">
         {/* Header */}
-        <div>
-          <h1 className="text-4xl font-bold text-white mb-2">
-            Welcome, <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400">{profile?.name}</span>
+        <div className="border-b border-border pb-6">
+          <h1 className="text-3xl font-bold tracking-tight text-foreground mb-2">
+            Welcome, {profile?.name}
           </h1>
-          <p className="text-slate-400">
+          <p className="text-muted-foreground">
             {profile?.facultyProfile?.department} • {profile?.facultyProfile?.specialization}
           </p>
         </div>
 
         {/* Stats Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          <StatCard title="My Courses" value={stats.totalCourses} icon="📚" color="blue" />
-          <StatCard title="Total Students" value={stats.totalStudents} icon="👥" color="purple" />
-          <StatCard title="Pending Tasks" value={stats.pendingAttendance} icon="📋" color="orange" />
-          <StatCard title="Announcements" value={stats.totalAnnouncements} icon="📢" color="emerald" />
+          <StatCard title="My Courses" value={stats.totalCourses} icon="📚" />
+          <StatCard title="Total Students" value={stats.totalStudents} icon="👥" />
+          <StatCard title="Pending Tasks" value={stats.pendingAttendance} icon="📋" />
+          <StatCard title="Announcements" value={stats.totalAnnouncements} icon="📢" />
         </div>
 
         {/* Quick Actions */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-          <Link href="/faculty/attendance" className="rounded-xl border border-slate-700/50 bg-slate-800/30 p-6 hover:bg-slate-800/50 transition text-center">
-            <div className="text-4xl mb-3">✅</div>
-            <p className="font-semibold text-white">Mark Attendance</p>
-            <p className="text-xs text-slate-400 mt-1">Record today's attendance</p>
-          </Link>
-          <Link href="/faculty/marks" className="rounded-xl border border-slate-700/50 bg-slate-800/30 p-6 hover:bg-slate-800/50 transition text-center">
-            <div className="text-4xl mb-3">📝</div>
-            <p className="font-semibold text-white">Upload Marks</p>
-            <p className="text-xs text-slate-400 mt-1">Add assessment scores</p>
-          </Link>
-          <Link href="/faculty/students" className="rounded-xl border border-slate-700/50 bg-slate-800/30 p-6 hover:bg-slate-800/50 transition text-center">
-            <div className="text-4xl mb-3">👥</div>
-            <p className="font-semibold text-white">View Students</p>
-            <p className="text-xs text-slate-400 mt-1">Manage your students</p>
-          </Link>
-          <Link href="/announcements/new" className="rounded-xl border border-slate-700/50 bg-slate-800/30 p-6 hover:bg-slate-800/50 transition text-center">
-            <div className="text-4xl mb-3">📢</div>
-            <p className="font-semibold text-white">Post Announcement</p>
-            <p className="text-xs text-slate-400 mt-1">Share updates</p>
-          </Link>
+          <QuickActionLink href="/faculty/attendance" icon="✅" title="Mark Attendance" description="Record today's attendance" />
+          <QuickActionLink href="/faculty/marks" icon="📝" title="Upload Marks" description="Add assessment scores" />
+          <QuickActionLink href="/faculty/students" icon="👥" title="View Students" description="Manage your students" />
+          <QuickActionLink href="/announcements/new" icon="📢" title="Post Announcement" description="Share updates" />
         </div>
 
         {/* My Courses */}
-        <div className="rounded-2xl border border-slate-800/50 bg-slate-900/40 backdrop-blur-xl p-6">
-          <div className="flex items-center justify-between mb-6">
-            <h2 className="text-2xl font-bold text-white">My Courses</h2>
-            <Link href="/faculty/courses" className="text-blue-400 hover:text-blue-300 text-sm font-medium">
+        <div className="space-y-4">
+          <div className="flex items-center justify-between">
+            <h2 className="text-xl font-semibold text-foreground">My Courses</h2>
+            <Link href="/faculty/courses" className="text-sm font-medium text-primary hover:text-primary/80 transition-colors">
               View all →
             </Link>
           </div>
           {courses.length > 0 ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {courses.map((course) => (
-                <div key={course.id} className="rounded-xl border border-slate-700/50 bg-slate-800/30 p-4 hover:bg-slate-800/50 transition">
-                  <h3 className="font-semibold text-white mb-1">{course.title}</h3>
-                  <p className="text-xs text-slate-400 mb-2">{course.code}</p>
-                  <div className="flex items-center justify-between mt-3">
-                    <p className="text-sm text-slate-300">{course.enrollments?.length || 0} Students</p>
-                    <Link href={`/faculty/courses/${course.id}`} className="text-blue-400 hover:text-blue-300 text-xs">
+                <div key={course.id} className="rounded-xl border border-border bg-card p-6 shadow-sm hover:shadow-md transition-shadow">
+                  <h3 className="font-semibold text-foreground mb-1">{course.title}</h3>
+                  <p className="text-xs text-muted-foreground mb-3">{course.code}</p>
+                  <div className="flex items-center justify-between mt-4 pt-4 border-t border-border">
+                    <p className="text-sm text-muted-foreground">{course.enrollments?.length || 0} Students</p>
+                    <Link href={`/faculty/courses/${course.id}`} className="text-xs font-semibold text-primary hover:underline">
                       Manage →
                     </Link>
                   </div>
@@ -159,74 +143,98 @@ export default function FacultyDashboard() {
               ))}
             </div>
           ) : (
-            <p className="text-slate-400 text-center py-8">No courses assigned yet</p>
+            <div className="rounded-xl border border-dashed border-border p-8 text-center bg-muted/50">
+              <p className="text-muted-foreground">No courses assigned yet</p>
+            </div>
           )}
         </div>
 
-        {/* Recent Students */}
-        {students.length > 0 && (
-          <div className="rounded-2xl border border-slate-800/50 bg-slate-900/40 backdrop-blur-xl p-6">
-            <div className="flex items-center justify-between mb-6">
-              <h2 className="text-2xl font-bold text-white">Recent Students</h2>
-              <Link href="/faculty/students" className="text-blue-400 hover:text-blue-300 text-sm font-medium">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          {/* Recent Students */}
+          <div className="space-y-4">
+            <div className="flex items-center justify-between">
+              <h2 className="text-xl font-semibold text-foreground">Recent Students</h2>
+              <Link href="/faculty/students" className="text-sm font-medium text-primary hover:text-primary/80 transition-colors">
                 View all →
               </Link>
             </div>
-            <div className="space-y-3">
-              {students.slice(0, 5).map((student) => (
-                <div key={student.id} className="flex items-center justify-between rounded-xl border border-slate-700/50 bg-slate-800/30 p-4">
-                  <div>
-                    <p className="font-medium text-white">{student.name}</p>
-                    <p className="text-sm text-slate-400">{student.studentProfile?.department} • Sem {student.studentProfile?.semester}</p>
-                  </div>
-                  <p className="text-sm text-slate-300">{student.studentProfile?.enrollmentNo}</p>
+            {students.length > 0 ? (
+              <div className="rounded-xl border border-border bg-card shadow-sm overflow-hidden">
+                <div className="divide-y divide-border">
+                  {students.slice(0, 5).map((student) => (
+                    <div key={student.id} className="flex items-center justify-between p-4 hover:bg-muted/50 transition-colors">
+                      <div>
+                        <p className="font-medium text-foreground">{student.name}</p>
+                        <p className="text-sm text-muted-foreground">{student.studentProfile?.department} • Sem {student.studentProfile?.semester}</p>
+                      </div>
+                      <p className="text-sm text-muted-foreground font-mono bg-muted px-2 py-0.5 rounded">{student.studentProfile?.enrollmentNo}</p>
+                    </div>
+                  ))}
                 </div>
-              ))}
-            </div>
+              </div>
+            ) : (
+              <div className="rounded-xl border border-dashed border-border p-8 text-center bg-muted/50 h-full flex items-center justify-center">
+                <p className="text-muted-foreground">No students found</p>
+              </div>
+            )}
           </div>
-        )}
 
-        {/* Recent Announcements */}
-        {announcements.length > 0 && (
-          <div className="rounded-2xl border border-slate-800/50 bg-slate-900/40 backdrop-blur-xl p-6">
-            <div className="flex items-center justify-between mb-6">
-              <h2 className="text-2xl font-bold text-white">Latest Announcements</h2>
-              <Link href="/announcements" className="text-blue-400 hover:text-blue-300 text-sm font-medium">
+          {/* Recent Announcements */}
+          <div className="space-y-4">
+            <div className="flex items-center justify-between">
+              <h2 className="text-xl font-semibold text-foreground">Latest Announcements</h2>
+              <Link href="/announcements" className="text-sm font-medium text-primary hover:text-primary/80 transition-colors">
                 View all →
               </Link>
             </div>
-            <div className="space-y-4">
-              {announcements.slice(0, 3).map((announcement) => (
-                <div key={announcement.id} className="border-b border-slate-700/50 pb-4 last:border-0">
-                  <h3 className="font-semibold text-white mb-1">{announcement.title}</h3>
-                  <p className="text-sm text-slate-300 mb-2">{announcement.body}</p>
-                  <p className="text-xs text-slate-500">{announcement.author?.name} • {new Date(announcement.createdAt).toLocaleDateString()}</p>
+            {announcements.length > 0 ? (
+              <div className="rounded-xl border border-border bg-card shadow-sm overflow-hidden">
+                <div className="divide-y divide-border">
+                  {announcements.slice(0, 3).map((announcement) => (
+                    <div key={announcement.id} className="p-4 hover:bg-muted/50 transition-colors">
+                      <h3 className="font-semibold text-foreground mb-1">{announcement.title}</h3>
+                      <p className="text-sm text-muted-foreground mb-2 line-clamp-2">{announcement.body}</p>
+                      <p className="text-xs text-muted-foreground flex items-center gap-2">
+                        <span>{announcement.author?.name}</span>
+                        <span>•</span>
+                        <span>{new Date(announcement.createdAt).toLocaleDateString()}</span>
+                      </p>
+                    </div>
+                  ))}
                 </div>
-              ))}
-            </div>
+              </div>
+            ) : (
+              <div className="rounded-xl border border-dashed border-border p-8 text-center bg-muted/50 h-full flex items-center justify-center">
+                <p className="text-muted-foreground">No announcements yet</p>
+              </div>
+            )}
           </div>
-        )}
+        </div>
       </div>
     </DashboardLayout>
   );
 }
 
-function StatCard({ title, value, icon, color }) {
-  const colorClasses = {
-    blue: "from-blue-500/20 to-blue-600/20 border-blue-500/30",
-    purple: "from-purple-500/20 to-purple-600/20 border-purple-500/30",
-    emerald: "from-emerald-500/20 to-emerald-600/20 border-emerald-500/30",
-    orange: "from-orange-500/20 to-orange-600/20 border-orange-500/30",
-  };
-
+function StatCard({ title, value, icon }) {
   return (
-    <div className={`rounded-xl border bg-gradient-to-br ${colorClasses[color]} p-6 backdrop-blur-sm`}>
+    <div className="rounded-xl border border-border bg-card p-6 shadow-sm">
       <div className="flex items-center justify-between mb-4">
-        <span className="text-3xl">{icon}</span>
+        <span className="text-2xl p-2 rounded-lg bg-primary/10">{icon}</span>
       </div>
-      <p className="text-3xl font-bold text-white mb-1">{value}</p>
-      <p className="text-sm text-slate-400">{title}</p>
+      <div>
+        <p className="text-2xl font-bold text-foreground">{value}</p>
+        <p className="text-sm text-muted-foreground">{title}</p>
+      </div>
     </div>
   );
 }
 
+function QuickActionLink({ href, icon, title, description }) {
+  return (
+    <Link href={href} className="flex flex-col items-center justify-center rounded-xl border border-border bg-card p-6 text-center hover:bg-muted/50 hover:border-primary/50 transition-all shadow-sm group">
+      <div className="text-3xl mb-3 transform group-hover:scale-110 transition-transform">{icon}</div>
+      <p className="font-semibold text-foreground">{title}</p>
+      <p className="text-xs text-muted-foreground mt-1">{description}</p>
+    </Link>
+  );
+}
