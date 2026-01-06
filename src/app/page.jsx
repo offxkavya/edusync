@@ -60,10 +60,7 @@ export default function Home() {
 
           <div className="mx-auto max-w-7xl px-6 lg:px-8">
             <div className="mx-auto max-w-2xl text-center">
-              <div className="inline-flex items-center rounded-full border border-border bg-secondary/50 px-3 py-1 text-sm font-medium text-secondary-foreground mb-8">
-                <span className="flex h-2 w-2 rounded-full bg-blue-500 mr-2"></span>
-                v2.0 is now live
-              </div>
+
               <h1 className="text-4xl font-bold tracking-tight text-foreground sm:text-6xl mb-6">
                 College management <br />
                 <span className="text-primary">simplified.</span>
@@ -87,14 +84,7 @@ export default function Home() {
               </div>
             </div>
 
-            {/* Dashboard Mockup Placeholder */}
-            <div className="mt-16 flow-root sm:mt-24">
-              <div className="-m-2 rounded-xl bg-gray-900/5 p-2 ring-1 ring-inset ring-gray-900/10 lg:-m-4 lg:rounded-2xl lg:p-4 dark:bg-white/5 dark:ring-white/10">
-                <div className="rounded-md bg-card shadow-2xl ring-1 ring-gray-900/10 min-h-[400px] flex items-center justify-center border border-border">
-                  <p className="text-muted-foreground text-sm">[ Dashboard Mockup Preview ]</p>
-                </div>
-              </div>
-            </div>
+
           </div>
         </section>
 
