@@ -142,9 +142,9 @@ export default function Signup() {
           <div>
             <Link href="/" className="flex items-center gap-2 mb-8">
               <div className="h-8 w-8 rounded-lg bg-primary flex items-center justify-center">
-                <span className="text-white font-bold text-lg">E</span>
+                <span className="text-white font-bold text-lg">K</span>
               </div>
-              <span className="text-xl font-bold tracking-tight text-foreground">EduSync</span>
+              <span className="text-xl font-bold tracking-tight text-foreground">Knowva</span>
             </Link>
             <h2 className="mt-8 text-2xl font-bold leading-9 tracking-tight text-foreground">
               Create your account
@@ -173,8 +173,8 @@ export default function Signup() {
                         key={option.value}
                         onClick={() => setRole(option.value)}
                         className={`rounded-md px-3 py-2 text-sm font-semibold shadow-sm ring-1 ring-inset ${role === option.value
-                            ? "bg-primary text-white ring-primary"
-                            : "bg-white text-gray-900 ring-gray-300 hover:bg-gray-50"
+                          ? "bg-primary text-white ring-primary"
+                          : "bg-white text-gray-900 ring-gray-300 hover:bg-gray-50"
                           } transition-all`}
                       >
                         {option.label}

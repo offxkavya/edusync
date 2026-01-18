@@ -31,9 +31,9 @@ export default function Home() {
         <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-6">
           <div className="flex items-center gap-2">
             <div className="h-8 w-8 rounded-lg bg-primary flex items-center justify-center">
-              <span className="text-white font-bold text-lg">E</span>
+              <span className="text-white font-bold text-lg">K</span>
             </div>
-            <span className="text-xl font-bold tracking-tight text-foreground">EduSync</span>
+            <span className="text-xl font-bold tracking-tight text-foreground">Knowva</span>
           </div>
           <div className="flex items-center gap-4">
             <Link
@@ -66,7 +66,7 @@ export default function Home() {
                 <span className="text-primary">simplified.</span>
               </h1>
               <p className="text-lg leading-8 text-muted-foreground mb-10 max-w-xl mx-auto">
-                EduSync unifies students, faculty, and administration in one intuitive platform. Manage courses, attendance, and grades with ease.
+                Knowva unifies students, faculty, and administration in one intuitive platform. Manage courses, attendance, and grades with ease.
               </p>
               <div className="flex items-center justify-center gap-x-6">
                 <Link
@@ -127,7 +127,7 @@ export default function Home() {
       <footer className="border-t border-border py-12 bg-background">
         <div className="mx-auto max-w-7xl px-6 lg:px-8 text-center">
           <p className="text-xs leading-5 text-muted-foreground">
-            &copy; {new Date().getFullYear()} EduSync Inc. All rights reserved.
+            &copy; {new Date().getFullYear()} Knowva Inc. All rights reserved.
           </p>
         </div>
       </footer>

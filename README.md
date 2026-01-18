@@ -1,8 +1,8 @@
-![EduSync cover](./public/og-image.png)
+![Knowva cover](./public/og-image.png)
 
-# EduSync – College Management & Automation
+# Knowva – College Management & Automation
 
-EduSync is a full-stack platform for colleges to manage admissions, faculty workloads, attendance, marks, announcements, and dashboards in a single pane of glass. It is built entirely on Next.js App Router with Prisma + PostgreSQL, so the frontend, API routes, and ORM all live in one codebase.
+Knowva is a full-stack platform for colleges to manage admissions, faculty workloads, attendance, marks, announcements, and dashboards in a single pane of glass. It is built entirely on Next.js App Router with Prisma + PostgreSQL, so the frontend, API routes, and ORM all live in one codebase.
 
 ---
 

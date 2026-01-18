@@ -89,9 +89,9 @@ export default function DashboardLayout({ children, role }) {
           <div className="flex h-16 items-center justify-between">
             <Link href="/" className="flex items-center gap-2">
               <div className="h-8 w-8 rounded-lg bg-primary flex items-center justify-center">
-                <span className="text-white font-bold text-lg">E</span>
+                <span className="text-white font-bold text-lg">K</span>
               </div>
-              <span className="text-xl font-bold tracking-tight text-foreground">EduSync</span>
+              <span className="text-xl font-bold tracking-tight text-foreground">Knowva</span>
             </Link>
             <div className="flex items-center gap-4">
               <span className="text-sm text-muted-foreground capitalize hidden sm:inline-block">{user.role.toLowerCase()}</span>
@@ -117,8 +117,8 @@ export default function DashboardLayout({ children, role }) {
                   key={item.href}
                   href={item.href}
                   className={`flex items-center gap-3 px-3 py-2 rounded-md transition-all ${isActive
-                      ? "bg-primary/10 text-primary font-medium"
-                      : "text-muted-foreground hover:bg-muted hover:text-foreground"
+                    ? "bg-primary/10 text-primary font-medium"
+                    : "text-muted-foreground hover:bg-muted hover:text-foreground"
                     }`}
                 >
                   <span className="text-lg">{item.icon}</span>

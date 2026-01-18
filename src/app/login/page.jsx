@@ -89,9 +89,9 @@ export default function Login() {
           <div>
             <Link href="/" className="flex items-center gap-2 mb-8">
               <div className="h-8 w-8 rounded-lg bg-primary flex items-center justify-center">
-                <span className="text-white font-bold text-lg">E</span>
+                <span className="text-white font-bold text-lg">K</span>
               </div>
-              <span className="text-xl font-bold tracking-tight text-foreground">EduSync</span>
+              <span className="text-xl font-bold tracking-tight text-foreground">Knowva</span>
             </Link>
             <h2 className="mt-8 text-2xl font-bold leading-9 tracking-tight text-foreground">
               Sign in to your account
@@ -102,7 +102,7 @@ export default function Login() {
                 href="/signup"
                 className="font-semibold text-primary hover:text-primary/80 transition-colors"
               >
-                Start using EduSync for free
+                Start using Knowva for free
               </Link>
             </p>
           </div>
@@ -191,7 +191,7 @@ export default function Login() {
               <span className="text-primary">Reliable</span> foundation for your institution.
             </h1>
             <p className="text-lg leading-8 text-slate-600 max-w-md">
-              Managed securely, designed professionally. Join thousands of educators and students on EduSync.
+              Managed securely, designed professionally. Join thousands of educators and students on Knowva.
             </p>
           </div>
         </div>
