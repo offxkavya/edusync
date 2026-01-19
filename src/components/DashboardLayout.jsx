@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useRouter, usePathname } from "next/navigation";
 import Link from "next/link";
 import { getAuthToken, clearAuthToken, decodeToken } from "@/lib/auth-client";
+import Brand from "@/components/Brand";
 
 export default function DashboardLayout({ children, role }) {
   const router = useRouter();
@@ -87,11 +88,8 @@ export default function DashboardLayout({ children, role }) {
       <header className="border-b border-border bg-card sticky top-0 z-50 shadow-sm">
         <div className="mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex h-16 items-center justify-between">
-            <Link href="/" className="flex items-center gap-2">
-              <div className="h-8 w-8 rounded-lg bg-primary flex items-center justify-center">
-                <span className="text-white font-bold text-lg">K</span>
-              </div>
-              <span className="text-xl font-bold tracking-tight text-foreground">Knowva</span>
+            <Link href="/" className="hover:opacity-80 transition-opacity">
+              <Brand />
             </Link>
             <div className="flex items-center gap-4">
               <span className="text-sm text-muted-foreground capitalize hidden sm:inline-block">{user.role.toLowerCase()}</span>

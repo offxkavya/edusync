@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { getAuthToken, decodeToken } from "@/lib/auth-client";
+import Brand from "@/components/Brand";
 
 export default function Home() {
   const router = useRouter();
@@ -29,12 +30,7 @@ export default function Home() {
       {/* Navbar */}
       <header className="border-b border-border bg-white/50 dark:bg-slate-900/50 backdrop-blur-md sticky top-0 z-50">
         <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-6">
-          <div className="flex items-center gap-2">
-            <div className="h-8 w-8 rounded-lg bg-primary flex items-center justify-center">
-              <span className="text-white font-bold text-lg">K</span>
-            </div>
-            <span className="text-xl font-bold tracking-tight text-foreground">Knowva</span>
-          </div>
+          <Brand />
           <div className="flex items-center gap-4">
             <Link
               href="/login"

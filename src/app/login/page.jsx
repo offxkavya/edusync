@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { getAuthToken, saveAuthToken, decodeToken } from "@/lib/auth-client";
+import Brand from "@/components/Brand";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -87,11 +88,8 @@ export default function Login() {
       <div className="flex flex-1 flex-col justify-center px-4 py-12 sm:px-6 lg:flex-none lg:px-20 xl:px-24 bg-background">
         <div className="mx-auto w-full max-w-sm lg:w-96">
           <div>
-            <Link href="/" className="flex items-center gap-2 mb-8">
-              <div className="h-8 w-8 rounded-lg bg-primary flex items-center justify-center">
-                <span className="text-white font-bold text-lg">K</span>
-              </div>
-              <span className="text-xl font-bold tracking-tight text-foreground">Knowva</span>
+            <Link href="/" className="mb-8 block hover:opacity-80 transition-opacity">
+              <Brand size="lg" />
             </Link>
             <h2 className="mt-8 text-2xl font-bold leading-9 tracking-tight text-foreground">
               Sign in to your account
