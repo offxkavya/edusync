@@ -102,7 +102,8 @@ export default function DashboardLayout({ children, role }) {
           </div>
 
           <div className="flex items-center gap-6">
-            <div className="flex items-center gap-3 px-3 py-1.5 rounded-full bg-slate-50 border border-border shadow-sm">
+            <div className="flex items-center gap-3 px-3 py-1.5 rounded-full bg-slate-50 border border-border shadow-sm relative">
+              <div className="absolute top-0 right-0 w-3 h-3 bg-accent rounded-full border-2 border-white -mr-1 -mt-1 scale-110 animate-pulse"></div>
               <div className="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-[10px] text-white font-bold uppercase shadow-lg shadow-primary/20">
                 {user.name.charAt(0)}
               </div>
@@ -132,10 +133,10 @@ export default function DashboardLayout({ children, role }) {
                     href={item.href}
                     className={`flex items-center gap-4 px-5 py-4 rounded-2xl transition-all duration-500 group ${isActive
                       ? "bg-primary text-white shadow-xl shadow-primary/30 translate-x-1"
-                      : "text-slate-500 hover:bg-[#F5FEFE] hover:text-secondary hover:translate-x-1"
+                      : "text-slate-500 hover:bg-accent/5 hover:text-accent hover:translate-x-1"
                       }`}
                   >
-                    <div className={`${isActive ? "text-white" : "text-slate-400 group-hover:text-secondary"} transition-colors shrink-0`}>
+                    <div className={`${isActive ? "text-white" : "text-slate-400 group-hover:text-accent"} transition-colors shrink-0`}>
                       {item.icon}
                     </div>
                     <span className="text-sm font-bold tracking-tight">{item.label}</span>
@@ -146,13 +147,13 @@ export default function DashboardLayout({ children, role }) {
           </div>
 
           <div className="p-6">
-            <div className="p-5 bg-[#F5FEFE] rounded-3xl border border-[#d1e9e9] relative overflow-hidden group">
+            <div className="p-5 bg-accent/5 rounded-3xl border border-accent/20 relative overflow-hidden group">
               <div className="relative z-10">
-                <p className="text-[10px] font-black text-secondary uppercase tracking-widest mb-2">Support</p>
+                <p className="text-[10px] font-black text-accent uppercase tracking-widest mb-2">Support</p>
                 <p className="text-xs text-slate-500 leading-relaxed font-medium">Need institutional help?<br />Contact our tech desk.</p>
               </div>
               {/* Subtle decoration */}
-              <div className="absolute -bottom-4 -right-4 w-12 h-12 bg-secondary/10 rounded-full blur-xl group-hover:scale-150 transition-transform duration-700" />
+              <div className="absolute -bottom-4 -right-4 w-12 h-12 bg-accent/10 rounded-full blur-xl group-hover:scale-150 transition-transform duration-700" />
             </div>
           </div>
         </aside>

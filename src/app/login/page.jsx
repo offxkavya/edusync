@@ -98,7 +98,7 @@ export default function Login() {
               New to Knowva?{" "}
               <Link
                 href="/signup"
-                className="font-bold text-secondary hover:text-secondary/80 underline underline-offset-4 decoration-teal-100 transition-all"
+                className="font-bold text-[#FF7A0F] hover:text-[#FF7A0F]/80 underline underline-offset-4 decoration-[#FF7A0F]/20 transition-all"
               >
                 Create an account for free
               </Link>
@@ -122,7 +122,7 @@ export default function Login() {
                   required
                   value={formData.email}
                   onChange={handleChange}
-                  className="block w-full rounded-2xl border-[#d1e9e9] bg-[#F5FEFE] py-3.5 shadow-sm focus:border-secondary focus:ring-secondary sm:text-sm px-4 text-primary transition-all outline-none"
+                  className="block w-full rounded-2xl border-[#d1e9e9] bg-[#F5FEFE] py-3.5 shadow-sm focus:border-accent focus:ring-accent sm:text-sm px-4 text-primary transition-all outline-none"
                   placeholder="name@institution.edu"
                 />
               </div>
@@ -142,7 +142,7 @@ export default function Login() {
                   required
                   value={formData.password}
                   onChange={handleChange}
-                  className="block w-full rounded-2xl border-[#d1e9e9] bg-[#F5FEFE] py-3.5 shadow-sm focus:border-secondary focus:ring-secondary sm:text-sm px-4 text-primary transition-all outline-none"
+                  className="block w-full rounded-2xl border-[#d1e9e9] bg-[#F5FEFE] py-3.5 shadow-sm focus:border-accent focus:ring-accent sm:text-sm px-4 text-primary transition-all outline-none"
                   placeholder="••••••••"
                 />
               </div>

@@ -31,16 +31,16 @@ export default function Brand({ size = "md", className = "" }) {
                         fill="currentColor"
                         className="animate-pulse"
                     />
-                    {/* Secondary Glow/Spark */}
+                    {/* Secondary Glow/Spark - Now Cosmic Orange */}
                     <path
                         d="M17 6L17.5 7.5L19 8L17.5 8.5L17 10L16.5 8.5L15 8L16.5 7.5L17 6Z"
-                        fill="currentColor"
-                        fillOpacity="0.6"
+                        fill="#ff7a0f"
+                        fillOpacity="0.8"
                     />
                     <path
                         d="M7 14L7.5 15.5L9 16L7.5 16.5L7 18L6.5 16.5L5 16L6.5 15.5L7 14Z"
-                        fill="currentColor"
-                        fillOpacity="0.4"
+                        fill="#ff7a0f"
+                        fillOpacity="0.6"
                     />
                 </svg>
             </div>

@@ -151,7 +151,7 @@ export default function Signup() {
               Already have an account?{" "}
               <Link
                 href="/login"
-                className="font-bold text-blue-600 hover:text-blue-700 underline underline-offset-4 decoration-blue-100 transition-all"
+                className="font-bold text-accent hover:text-accent/80 underline underline-offset-4 decoration-accent/20 transition-all"
               >
                 Sign in
               </Link>
@@ -193,7 +193,7 @@ export default function Signup() {
                     required
                     value={formData.name}
                     onChange={handleChange}
-                    className="block w-full rounded-2xl border-slate-200 bg-slate-50 py-3.5 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm px-4 text-slate-900 transition-all outline-none"
+                    className="block w-full rounded-2xl border-[#d1e9e9] bg-[#F5FEFE] py-3.5 shadow-sm focus:border-accent focus:ring-accent sm:text-sm px-4 text-primary transition-all outline-none"
                     placeholder="John Doe"
                   />
                 </div>
@@ -206,7 +206,7 @@ export default function Signup() {
                     required
                     value={formData.email}
                     onChange={handleChange}
-                    className="block w-full rounded-2xl border-slate-200 bg-slate-50 py-3.5 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm px-4 text-slate-900 transition-all outline-none"
+                    className="block w-full rounded-2xl border-[#d1e9e9] bg-[#F5FEFE] py-3.5 shadow-sm focus:border-accent focus:ring-accent sm:text-sm px-4 text-primary transition-all outline-none"
                     placeholder="name@inst.edu"
                   />
                 </div>
@@ -221,7 +221,7 @@ export default function Signup() {
                   required
                   value={formData.password}
                   onChange={handleChange}
-                  className="block w-full rounded-2xl border-slate-200 bg-slate-50 py-3.5 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm px-4 text-slate-900 transition-all outline-none"
+                  className="block w-full rounded-2xl border-[#d1e9e9] bg-[#F5FEFE] py-3.5 shadow-sm focus:border-accent focus:ring-accent sm:text-sm px-4 text-primary transition-all outline-none"
                   placeholder="••••••••"
                   minLength={6}
                 />

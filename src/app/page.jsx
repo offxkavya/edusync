@@ -85,7 +85,7 @@ export default function Home() {
           <div className="mx-auto max-w-7xl px-6 lg:px-8">
             <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-16">
               <div className="flex-1 text-center lg:text-left order-2 lg:order-1">
-                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#f5fefe] border border-[#d1e9e9] text-secondary text-[10px] sm:text-xs font-bold mb-6 lg:mb-8 uppercase tracking-wider">
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent/10 border border-accent/20 text-accent text-[10px] sm:text-xs font-bold mb-6 lg:mb-8 uppercase tracking-wider animate-bounce-subtle">
                   🚀 Next Generation Education
                 </div>
                 <h1 className="text-4xl sm:text-5xl md:text-7xl font-extrabold tracking-tight text-primary leading-[1.1] mb-6 lg:mb-8">
@@ -103,7 +103,7 @@ export default function Home() {
                   </Link>
                   <Link
                     href="#features"
-                    className="w-full sm:w-auto px-8 py-4 rounded-full border border-border bg-white text-primary font-bold hover:bg-slate-50 transition-all text-center"
+                    className="w-full sm:w-auto px-8 py-4 rounded-full border border-border bg-white text-primary font-bold hover:border-accent hover:text-accent transition-all text-center"
                   >
                     See how it works
                   </Link>
@@ -164,29 +164,29 @@ export default function Home() {
                 </div>
               </div>
 
-              {/* Feature 2: Wide Bento Card */}
-              <div className="md:col-span-3 md:row-span-1 group bg-primary p-8 rounded-[2rem] shadow-xl hover:-translate-y-1 transition-all duration-500 flex flex-col sm:flex-row items-center gap-8 overflow-hidden">
+              {/* Feature 2: Wide Bento Card - Now Cosmic Orange High Impact */}
+              <div className="md:col-span-3 md:row-span-1 group bg-accent p-8 rounded-[2rem] shadow-xl hover:-translate-y-1 transition-all duration-500 flex flex-col sm:flex-row items-center gap-8 overflow-hidden">
                 <div className="flex-1 text-center sm:text-left">
                   <h3 className="text-2xl font-bold text-white mb-4">
                     Faculty Tools
                   </h3>
-                  <p className="text-[#F5FEFE]/80 leading-relaxed text-sm">
+                  <p className="text-white/80 leading-relaxed text-sm">
                     Empowering educators with automated grading and seamless attendance workflows.
                   </p>
                 </div>
-                <div className="w-20 h-20 shrink-0 bg-white/10 rounded-2xl flex items-center justify-center text-white backdrop-blur-md">
+                <div className="w-20 h-20 shrink-0 bg-white/20 rounded-2xl flex items-center justify-center text-white backdrop-blur-md">
                   <div className="w-10 h-10"><AcademicCapIcon /></div>
                 </div>
               </div>
 
               {/* Feature 3: Small Bento Card A - Orange Accent */}
-              <div className="md:col-span-1 md:row-span-1 group bg-accent p-6 rounded-[2rem] shadow-lg hover:shadow-accent/20 hover:-translate-y-1 transition-all duration-500 flex flex-col items-center justify-center text-center">
-                <div className="w-12 h-12 text-white mb-4 h-12 w-12"><ChartBarIcon /></div>
-                <h4 className="font-bold text-white text-sm tracking-tight">Analytics</h4>
+              <div className="md:col-span-1 md:row-span-1 group bg-[#F5FEFE] border border-accent/20 p-6 rounded-[2rem] shadow-lg hover:shadow-accent/10 hover:-translate-y-1 transition-all duration-500 flex flex-col items-center justify-center text-center">
+                <div className="w-12 h-12 text-accent mb-4 h-12 w-12 animate-pulse-slow"><ChartBarIcon /></div>
+                <h4 className="font-bold text-primary text-sm tracking-tight">Analytics</h4>
               </div>
 
               {/* Feature 4: Small Bento Card B */}
-              <div className="md:col-span-2 md:row-span-1 group bg-secondary p-8 rounded-[2rem] shadow-xl hover:-translate-y-1 transition-all duration-500 flex flex-col justify-end relative overflow-hidden">
+              <div className="md:col-span-2 md:row-span-1 group bg-secondary p-8 rounded-[2rem] shadow-xl hover:-translate-y-1 hover:border-accent border border-transparent transition-all duration-500 flex flex-col justify-end relative overflow-hidden">
                 <div className="absolute top-0 right-0 p-4 opacity-20 text-white">
                   <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <circle cx="20" cy="20" r="20" fill="currentColor" />
