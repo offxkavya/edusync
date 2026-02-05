@@ -1,47 +1,42 @@
 @import "tailwindcss";
 
 :root {
-  /* Premium Blended Light Theme Palette */
-  --background: #f8fafc;
-  /* slate-50 - softer background */
-  --foreground: #020617;
-  /* slate-950 */
+  /* User-Provided Custom Palette */
+  --background: #f5fefe;
+  /* Crisp off-white/cyan tint */
+  --foreground: #01406d;
+  /* Deep Blue branding */
 
   --card: #ffffff;
-  --card-foreground: #020617;
+  --card-foreground: #01406d;
 
   --popover: #ffffff;
-  --popover-foreground: #020617;
+  --popover-foreground: #01406d;
 
-  --primary: #2563eb;
-  /* blue-600 */
-  --primary-foreground: #ffffff;
+  --primary: #01406d;
+  /* Deep Blue */
+  --primary-foreground: #f5fefe;
 
-  --secondary: #f1f5f9;
-  /* slate-100 */
-  --secondary-foreground: #0f172a;
-  /* slate-900 */
+  --secondary: #01b4ba;
+  /* Teal/Cyan */
+  --secondary-foreground: #ffffff;
 
-  --muted: #f1f5f9;
-  /* slate-100 */
-  --muted-foreground: #64748b;
-  /* slate-500 */
+  --muted: #e0f2f1;
+  /* Subtlest teal tint */
+  --muted-foreground: #5a7b8f;
 
-  --accent: #eff6ff;
-  /* blue-50 - subtle tint */
-  --accent-foreground: #1e40af;
-  /* blue-800 */
+  --accent: #ff7a0f;
+  /* Vibrant Orange */
+  --accent-foreground: #ffffff;
 
   --destructive: #ef4444;
   /* red-500 */
   --destructive-foreground: #ffffff;
 
-  --border: #e2e8f0;
-  /* slate-200 */
-  --input: #e2e8f0;
-  /* slate-200 */
-  --ring: #3b82f6;
-  /* blue-500 */
+  --border: #d1e9e9;
+  /* Blended border */
+  --input: #d1e9e9;
+  --ring: #01b4ba;
 
   --radius: 1rem;
   /* Slightly rounder for modern feel */
