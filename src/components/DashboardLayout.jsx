@@ -87,30 +87,30 @@ export default function DashboardLayout({ children, role }) {
   }
 
   return (
-    <div className="min-h-screen bg-slate-50 text-slate-900 flex flex-col font-sans">
+    <div className="min-h-screen bg-background text-primary flex flex-col font-sans">
       {/* Header */}
-      <header className="h-20 border-b border-slate-200 bg-white/80 backdrop-blur-md sticky top-0 z-[60]">
+      <header className="h-20 border-b border-border bg-white/80 backdrop-blur-md sticky top-0 z-[60]">
         <div className="h-full px-6 flex items-center justify-between">
           <div className="flex items-center gap-8">
             <Link href="/" className="hover:opacity-80 transition-opacity">
               <Brand size="md" />
             </Link>
-            <div className="h-6 w-px bg-slate-200 hidden sm:block"></div>
-            <span className="text-xs font-bold text-blue-600 uppercase tracking-widest hidden sm:inline-block">
+            <div className="h-6 w-px bg-border hidden sm:block"></div>
+            <span className="text-xs font-bold text-secondary uppercase tracking-widest hidden sm:inline-block">
               {user.role} Control
             </span>
           </div>
 
           <div className="flex items-center gap-6">
-            <div className="flex items-center gap-3 px-3 py-1.5 rounded-full bg-slate-100 border border-slate-200">
-              <div className="w-6 h-6 rounded-full bg-blue-600 flex items-center justify-center text-[10px] text-white font-bold uppercase">
+            <div className="flex items-center gap-3 px-3 py-1.5 rounded-full bg-slate-50 border border-border shadow-sm">
+              <div className="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-[10px] text-white font-bold uppercase shadow-lg shadow-primary/20">
                 {user.name.charAt(0)}
               </div>
-              <span className="text-sm font-semibold text-slate-700">{user.name}</span>
+              <span className="text-sm font-bold text-primary">{user.name}</span>
             </div>
             <button
               onClick={handleLogout}
-              className="px-4 py-2 rounded-full text-sm font-bold text-slate-500 hover:text-red-600 hover:bg-red-50 transition-all active:scale-95"
+              className="px-5 py-2 rounded-full text-xs font-black uppercase tracking-tighter text-slate-400 hover:text-red-600 hover:bg-red-50 transition-all active:scale-95 border border-transparent hover:border-red-100"
             >
               Log out
             </button>
@@ -120,25 +120,25 @@ export default function DashboardLayout({ children, role }) {
 
       <div className="flex flex-1 overflow-hidden">
         {/* Sidebar */}
-        <aside className="w-72 border-r border-slate-200 bg-white hidden lg:flex flex-col">
-          <div className="flex-1 overflow-y-auto py-8 px-6">
-            <p className="text-[10px] font-bold text-slate-400 uppercase tracking-[0.2em] mb-6 ml-4">Main Menu</p>
-            <nav className="space-y-2">
+        <aside className="w-72 border-r border-border bg-white hidden lg:flex flex-col">
+          <div className="flex-1 overflow-y-auto py-10 px-6">
+            <p className="text-[10px] font-black text-slate-300 uppercase tracking-[0.3em] mb-8 ml-4">Main Menu</p>
+            <nav className="space-y-3">
               {navItems.map((item) => {
                 const isActive = pathname === item.href;
                 return (
                   <Link
                     key={item.href}
                     href={item.href}
-                    className={`flex items-center gap-4 px-4 py-3.5 rounded-2xl transition-all duration-300 ${isActive
-                      ? "bg-blue-600 text-white shadow-lg shadow-blue-200 translate-x-1"
-                      : "text-slate-500 hover:bg-slate-50 hover:text-slate-900"
+                    className={`flex items-center gap-4 px-5 py-4 rounded-2xl transition-all duration-500 group ${isActive
+                      ? "bg-primary text-white shadow-xl shadow-primary/30 translate-x-1"
+                      : "text-slate-500 hover:bg-[#F5FEFE] hover:text-secondary hover:translate-x-1"
                       }`}
                   >
-                    <div className={`${isActive ? "text-white" : "text-slate-400 group-hover:text-slate-600"} transition-colors shrink-0`}>
+                    <div className={`${isActive ? "text-white" : "text-slate-400 group-hover:text-secondary"} transition-colors shrink-0`}>
                       {item.icon}
                     </div>
-                    <span className="text-sm font-bold">{item.label}</span>
+                    <span className="text-sm font-bold tracking-tight">{item.label}</span>
                   </Link>
                 );
               })}
@@ -146,21 +146,26 @@ export default function DashboardLayout({ children, role }) {
           </div>
 
           <div className="p-6">
-            <div className="p-4 bg-slate-50 rounded-2xl border border-slate-100">
-              <p className="text-[10px] font-bold text-slate-400 uppercase mb-2">Support</p>
-              <p className="text-xs text-slate-500 leading-relaxed">Need help? Contact our tech desk anytime.</p>
+            <div className="p-5 bg-[#F5FEFE] rounded-3xl border border-[#d1e9e9] relative overflow-hidden group">
+              <div className="relative z-10">
+                <p className="text-[10px] font-black text-secondary uppercase tracking-widest mb-2">Support</p>
+                <p className="text-xs text-slate-500 leading-relaxed font-medium">Need institutional help?<br />Contact our tech desk.</p>
+              </div>
+              {/* Subtle decoration */}
+              <div className="absolute -bottom-4 -right-4 w-12 h-12 bg-secondary/10 rounded-full blur-xl group-hover:scale-150 transition-transform duration-700" />
             </div>
           </div>
         </aside>
 
         {/* Main Content Area */}
-        <main className="flex-1 overflow-y-auto p-6 lg:p-10 relative">
+        <main className="flex-1 overflow-y-auto p-6 lg:p-10 relative bg-background/50">
           <div className="mx-auto max-w-6xl relative z-10">
             {children}
           </div>
 
           {/* Subtle background decoration */}
-          <div className="absolute top-0 right-0 w-96 h-96 bg-blue-100/20 rounded-full blur-[100px] -z-10 pointer-events-none" />
+          <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-secondary/5 rounded-full blur-[120px] -z-10 pointer-events-none" />
+          <div className="absolute bottom-0 left-0 w-[300px] h-[300px] bg-accent/5 rounded-full blur-[100px] -z-10 pointer-events-none" />
         </main>
       </div>
     </div>

@@ -85,25 +85,25 @@ export default function Home() {
           <div className="mx-auto max-w-7xl px-6 lg:px-8">
             <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-16">
               <div className="flex-1 text-center lg:text-left order-2 lg:order-1">
-                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 border border-blue-100 text-blue-700 text-[10px] sm:text-xs font-bold mb-6 lg:mb-8 uppercase tracking-wider">
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#f5fefe] border border-[#d1e9e9] text-secondary text-[10px] sm:text-xs font-bold mb-6 lg:mb-8 uppercase tracking-wider">
                   🚀 Next Generation Education
                 </div>
-                <h1 className="text-4xl sm:text-5xl md:text-7xl font-extrabold tracking-tight text-slate-950 leading-[1.1] mb-6 lg:mb-8">
-                  Empowering the future of <span className="text-blue-600">learning.</span>
+                <h1 className="text-4xl sm:text-5xl md:text-7xl font-extrabold tracking-tight text-primary leading-[1.1] mb-6 lg:mb-8">
+                  Empowering the future of <span className="text-secondary">learning.</span>
                 </h1>
-                <p className="text-lg sm:text-xl leading-relaxed text-slate-600 mb-8 lg:mb-10 max-w-2xl mx-auto lg:mx-0">
+                <p className="text-lg sm:text-xl leading-relaxed text-slate-600 mb-8 lg:mb-10 max-w-2xl mx-auto lg:mx-0 font-medium">
                   Knowva is an all-in-one ecosystem designed to bridge the gap between students, faculty, and administration with seamless collaboration tools.
                 </p>
                 <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
                   <Link
                     href="/signup"
-                    className="w-full sm:w-auto px-8 py-4 rounded-full bg-blue-600 text-white font-bold hover:bg-blue-700 transition-all shadow-xl hover:shadow-2xl hover:-translate-y-1 active:translate-y-0 text-center"
+                    className="w-full sm:w-auto px-8 py-4 rounded-full bg-primary text-white font-bold hover:bg-primary/90 transition-all shadow-xl shadow-primary/20 hover:shadow-2xl hover:-translate-y-1 active:translate-y-0 text-center"
                   >
                     Start for free
                   </Link>
                   <Link
                     href="#features"
-                    className="w-full sm:w-auto px-8 py-4 rounded-full border border-slate-200 bg-white text-slate-900 font-bold hover:bg-slate-50 transition-all text-center"
+                    className="w-full sm:w-auto px-8 py-4 rounded-full border border-border bg-white text-primary font-bold hover:bg-slate-50 transition-all text-center"
                   >
                     See how it works
                   </Link>
@@ -115,31 +115,27 @@ export default function Home() {
               </div>
 
               <div className="flex-1 relative order-1 lg:order-2 w-full max-w-lg lg:max-w-none">
-                <div className="relative z-10 rounded-3xl border border-slate-100 bg-white p-2 sm:p-4 shadow-2xl overflow-hidden group">
+                <div className="relative z-10 rounded-3xl border border-border bg-white p-2 sm:p-4 shadow-2xl overflow-hidden group">
                   <div className="aspect-[4/3] bg-slate-50 rounded-2xl flex items-center justify-center group-hover:scale-[1.02] transition-transform duration-700">
-                    <Brand size="lg" className="scale-125 sm:scale-150 opacity-20" />
-                    <div className="absolute inset-0 bg-gradient-to-tr from-blue-500/10 to-transparent" />
-                    {/* Mock UI Elements */}
-                    <div className="absolute top-4 left-4 right-4 h-6 rounded bg-slate-200/50" />
-                    <div className="absolute top-14 left-4 w-2/3 h-4 rounded bg-slate-200/50" />
-                    <div className="absolute top-22 left-4 right-4 h-20 rounded bg-slate-100/50" />
+                    <Brand size="lg" className="scale-125 sm:scale-150 opacity-10" />
+                    <div className="absolute inset-0 bg-gradient-to-tr from-primary/10 to-transparent" />
                   </div>
                 </div>
                 {/* Decorative floating elements */}
-                <div className="absolute -top-6 -right-6 w-24 h-24 bg-blue-600/10 rounded-full blur-2xl animate-pulse" />
-                <div className="absolute -bottom-8 -left-8 w-32 h-32 bg-indigo-600/10 rounded-full blur-3xl animate-pulse delay-700" />
+                <div className="absolute -top-6 -right-6 w-24 h-24 bg-primary/10 rounded-full blur-2xl animate-pulse" />
+                <div className="absolute -bottom-8 -left-8 w-32 h-32 bg-secondary/10 rounded-full blur-3xl animate-pulse delay-700" />
               </div>
             </div>
           </div>
         </section>
 
         {/* Features Section - Bento Grid Layout */}
-        <section id="features" className="py-24 bg-white/40 backdrop-blur-sm border-t border-slate-100">
+        <section id="features" className="py-24 bg-white/40 backdrop-blur-sm border-t border-border">
           <div className="mx-auto max-w-7xl px-6 lg:px-8">
             <div className="mx-auto max-w-2xl text-center mb-16 lg:mb-24">
-              <h2 className="text-blue-600 font-bold tracking-tight uppercase text-xs sm:text-sm mb-4">Core Ecosystem</h2>
-              <p className="text-4xl font-bold tracking-tight text-slate-950 sm:text-6xl mb-6">
-                Redefining the <br className="hidden sm:block" /> institutional <span className="text-blue-600">standard.</span>
+              <h2 className="text-secondary font-bold tracking-tight uppercase text-xs sm:text-sm mb-4">Core Ecosystem</h2>
+              <p className="text-4xl font-bold tracking-tight text-primary sm:text-6xl mb-6">
+                Redefining the <br className="hidden sm:block" /> institutional <span className="text-secondary">standard.</span>
               </p>
               <p className="text-lg leading-relaxed text-slate-600 max-w-xl mx-auto">
                 Discover a suite of tools designed to harmonize education through precision engineering and human-centric design.
@@ -148,12 +144,12 @@ export default function Home() {
 
             <div className="grid grid-cols-1 md:grid-cols-6 grid-rows-none md:grid-rows-2 gap-4 h-auto md:h-[600px]">
               {/* Feature 1: Large Bento Card */}
-              <div className="md:col-span-3 md:row-span-2 group relative bg-white p-8 lg:p-12 rounded-[2rem] border border-slate-200 shadow-sm hover:shadow-2xl hover:-translate-y-1 transition-all duration-500 overflow-hidden flex flex-col justify-between">
+              <div className="md:col-span-3 md:row-span-2 group relative bg-white p-8 lg:p-12 rounded-[2rem] border border-border shadow-sm hover:shadow-2xl hover:-translate-y-1 transition-all duration-500 overflow-hidden flex flex-col justify-between">
                 <div className="relative z-10">
-                  <div className="mb-8 w-16 h-16 rounded-2xl bg-blue-50 text-blue-600 flex items-center justify-center">
+                  <div className="mb-8 w-16 h-16 rounded-2xl bg-[#F5FEFE] text-secondary flex items-center justify-center border border-[#d1e9e9]">
                     <UserIcon />
                   </div>
-                  <h3 className="text-3xl font-bold text-slate-950 mb-6 group-hover:text-blue-600 transition-colors">
+                  <h3 className="text-3xl font-bold text-primary mb-6 group-hover:text-secondary transition-colors">
                     Student Portal
                   </h3>
                   <p className="text-slate-600 leading-relaxed text-lg max-w-md">
@@ -161,20 +157,20 @@ export default function Home() {
                   </p>
                 </div>
                 {/* Visual decoration for the large card */}
-                <div className="absolute -bottom-10 -right-10 w-64 h-64 bg-blue-50 rounded-full opacity-50 group-hover:scale-110 transition-transform duration-700" />
+                <div className="absolute -bottom-10 -right-10 w-64 h-64 bg-[#F5FEFE] rounded-full opacity-50 group-hover:scale-110 transition-transform duration-700" />
                 <div className="relative z-10 mt-8 flex gap-2">
-                  <span className="px-3 py-1 bg-slate-100 rounded-full text-[10px] font-bold text-slate-500 uppercase">Live Tracking</span>
-                  <span className="px-3 py-1 bg-slate-100 rounded-full text-[10px] font-bold text-slate-500 uppercase">Interactive</span>
+                  <span className="px-3 py-1 bg-[#F5FEFE] border border-[#d1e9e9] rounded-full text-[10px] font-bold text-secondary uppercase tracking-wider">Live Tracking</span>
+                  <span className="px-3 py-1 bg-[#F5FEFE] border border-[#d1e9e9] rounded-full text-[10px] font-bold text-secondary uppercase tracking-wider">Interactive</span>
                 </div>
               </div>
 
               {/* Feature 2: Wide Bento Card */}
-              <div className="md:col-span-3 md:row-span-1 group bg-indigo-600 p-8 rounded-[2rem] shadow-xl hover:-translate-y-1 transition-all duration-500 flex flex-col sm:flex-row items-center gap-8 overflow-hidden">
+              <div className="md:col-span-3 md:row-span-1 group bg-primary p-8 rounded-[2rem] shadow-xl hover:-translate-y-1 transition-all duration-500 flex flex-col sm:flex-row items-center gap-8 overflow-hidden">
                 <div className="flex-1 text-center sm:text-left">
                   <h3 className="text-2xl font-bold text-white mb-4">
                     Faculty Tools
                   </h3>
-                  <p className="text-indigo-100 leading-relaxed text-sm">
+                  <p className="text-[#F5FEFE]/80 leading-relaxed text-sm">
                     Empowering educators with automated grading and seamless attendance workflows.
                   </p>
                 </div>
@@ -183,21 +179,21 @@ export default function Home() {
                 </div>
               </div>
 
-              {/* Feature 3: Small Bento Card A */}
-              <div className="md:col-span-1 md:row-span-1 group bg-white p-6 rounded-[2rem] border border-slate-200 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-500 flex flex-col items-center justify-center text-center">
-                <div className="w-12 h-12 text-blue-600 mb-4 h-12 w-12"><ChartBarIcon /></div>
-                <h4 className="font-bold text-slate-950 text-sm">Analytics</h4>
+              {/* Feature 3: Small Bento Card A - Orange Accent */}
+              <div className="md:col-span-1 md:row-span-1 group bg-accent p-6 rounded-[2rem] shadow-lg hover:shadow-accent/20 hover:-translate-y-1 transition-all duration-500 flex flex-col items-center justify-center text-center">
+                <div className="w-12 h-12 text-white mb-4 h-12 w-12"><ChartBarIcon /></div>
+                <h4 className="font-bold text-white text-sm tracking-tight">Analytics</h4>
               </div>
 
               {/* Feature 4: Small Bento Card B */}
-              <div className="md:col-span-2 md:row-span-1 group bg-slate-950 p-8 rounded-[2rem] shadow-xl hover:-translate-y-1 transition-all duration-500 flex flex-col justify-end relative overflow-hidden">
+              <div className="md:col-span-2 md:row-span-1 group bg-secondary p-8 rounded-[2rem] shadow-xl hover:-translate-y-1 transition-all duration-500 flex flex-col justify-end relative overflow-hidden">
                 <div className="absolute top-0 right-0 p-4 opacity-20 text-white">
                   <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <circle cx="20" cy="20" r="20" fill="currentColor" />
                   </svg>
                 </div>
                 <h3 className="text-xl font-bold text-white mb-2">Admin Control</h3>
-                <p className="text-slate-400 text-xs">High-level institutional management.</p>
+                <p className="text-white/70 text-xs">High-level institutional management.</p>
               </div>
             </div>
           </div>

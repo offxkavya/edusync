@@ -84,21 +84,21 @@ export default function Login() {
   };
 
   return (
-    <div className="flex min-h-screen flex-1 bg-slate-50 font-sans">
+    <div className="flex min-h-screen flex-1 bg-[#F5FEFE] font-sans">
       <div className="flex flex-1 flex-col justify-center px-6 py-12 lg:flex-none lg:px-20 xl:px-24 bg-white shadow-2xl z-10 transition-all">
         <div className="mx-auto w-full max-w-sm lg:w-96">
           <div>
             <Link href="/" className="mb-12 block hover:opacity-80 transition-opacity">
               <Brand size="lg" />
             </Link>
-            <h2 className="text-3xl font-extrabold tracking-tight text-slate-950 mb-2">
+            <h2 className="text-3xl font-extrabold tracking-tight text-primary mb-2">
               Welcome back.
             </h2>
             <p className="text-sm font-medium text-slate-500 mb-10">
               New to Knowva?{" "}
               <Link
                 href="/signup"
-                className="font-bold text-blue-600 hover:text-blue-700 underline underline-offset-4 decoration-blue-100 transition-all"
+                className="font-bold text-secondary hover:text-secondary/80 underline underline-offset-4 decoration-teal-100 transition-all"
               >
                 Create an account for free
               </Link>
@@ -122,7 +122,7 @@ export default function Login() {
                   required
                   value={formData.email}
                   onChange={handleChange}
-                  className="block w-full rounded-2xl border-slate-200 bg-slate-50 py-3.5 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm px-4 text-slate-900 transition-all outline-none"
+                  className="block w-full rounded-2xl border-[#d1e9e9] bg-[#F5FEFE] py-3.5 shadow-sm focus:border-secondary focus:ring-secondary sm:text-sm px-4 text-primary transition-all outline-none"
                   placeholder="name@institution.edu"
                 />
               </div>
@@ -142,24 +142,50 @@ export default function Login() {
                   required
                   value={formData.password}
                   onChange={handleChange}
-                  className="block w-full rounded-2xl border-slate-200 bg-slate-50 py-3.5 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm px-4 text-slate-900 transition-all outline-none"
+                  className="block w-full rounded-2xl border-[#d1e9e9] bg-[#F5FEFE] py-3.5 shadow-sm focus:border-secondary focus:ring-secondary sm:text-sm px-4 text-primary transition-all outline-none"
                   placeholder="••••••••"
                 />
               </div>
 
+              <div className="flex items-center justify-between px-1">
+                <div className="flex items-center">
+                  <input
+                    id="remember-me"
+                    name="remember-me"
+                    type="checkbox"
+                    className="h-4 w-4 rounded border-slate-300 text-primary focus:ring-secondary"
+                  />
+                  <label
+                    htmlFor="remember-me"
+                    className="ml-3 block text-sm font-medium text-slate-600"
+                  >
+                    Remember me
+                  </label>
+                </div>
+
+                <div className="text-sm">
+                  <Link
+                    href="#"
+                    className="font-bold text-secondary hover:text-secondary/80 transition-colors"
+                  >
+                    Forgot password?
+                  </Link>
+                </div>
+              </div>
+
               {error && (
-                <div className="rounded-2xl bg-red-50 p-4 border border-red-100 flex gap-3 animate-in fade-in slide-in-from-top-2">
+                <div className="rounded-2xl bg-red-50 p-4 border border-red-100 flex gap-3">
                   <svg className="h-5 w-5 text-red-500 shrink-0" viewBox="0 0 20 20" fill="currentColor">
                     <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.28 7.22a.75.75 0 00-1.06 1.06L8.94 10l-1.72 1.72a.75.75 0 101.06 1.06L10 11.06l1.72 1.72a.75.75 0 101.06-1.06L11.06 10l1.72-1.72a.75.75 0 00-1.06-1.06L10 8.94 8.28 7.22z" clipRule="evenodd" />
                   </svg>
-                  <p className="text-sm font-semibold text-red-700">{error}</p>
+                  <p className="text-sm font-bold text-red-700">{error}</p>
                 </div>
               )}
 
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="flex w-full justify-center rounded-2xl bg-blue-600 px-6 py-4 text-sm font-bold text-white shadow-xl shadow-blue-200 hover:bg-blue-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600 disabled:opacity-70 disabled:cursor-not-allowed transition-all active:scale-[0.98]"
+                className="flex w-full justify-center rounded-2xl bg-primary px-6 py-4 text-sm font-bold text-white shadow-xl shadow-primary/20 hover:bg-primary/90 disabled:opacity-70 disabled:cursor-not-allowed transition-all active:scale-[0.98]"
               >
                 {isSubmitting ? "Authenticating..." : "Sign in to Dashboard"}
               </button>
@@ -168,22 +194,21 @@ export default function Login() {
         </div>
       </div>
 
-      <div className="relative hidden w-0 flex-1 lg:block overflow-hidden bg-slate-950">
-        <div className="absolute inset-0 bg-[radial-gradient(#1e293b_1px,transparent_1px)] [background-size:32px_32px] opacity-20" />
+      <div className="relative hidden w-0 flex-1 lg:block overflow-hidden bg-primary">
+        <div className="absolute inset-0 bg-[radial-gradient(#1e406d_1px,transparent_1px)] [background-size:32px_32px] opacity-20" />
         <div className="absolute inset-0 flex flex-col justify-center items-center p-20 text-center z-10">
-          <div className="mb-12 w-24 h-24 rounded-[2rem] bg-blue-600 shadow-2xl shadow-blue-500/50 flex items-center justify-center text-white scale-125">
+          <div className="mb-12 w-24 h-24 rounded-[2rem] bg-secondary shadow-2xl shadow-secondary/50 flex items-center justify-center text-white scale-125">
             <Brand size="lg" className="scale-150" />
           </div>
           <h1 className="text-5xl font-black tracking-tight text-white mb-8 max-w-lg leading-tight">
-            Reliable foundation <br /> for your <span className="text-blue-500">legacy.</span>
+            Precision <span className="text-secondary">management.</span>
           </h1>
-          <p className="text-xl leading-relaxed text-slate-400 max-w-md font-medium">
-            Managed securely, designed professionally. Join thousands of educators and students shaping the future on Knowva.
+          <p className="text-xl leading-relaxed text-[#F5FEFE]/80 max-w-md font-medium">
+            Join the elite circle of institutions leveraging Knowva to harmonize administrative workflows and student engagement.
           </p>
         </div>
-        {/* Decorative elements */}
-        <div className="absolute -bottom-20 -right-20 w-96 h-96 bg-blue-600/10 rounded-full blur-[120px]" />
-        <div className="absolute top-20 left-20 w-48 h-48 bg-indigo-600/5 rounded-full blur-[80px]" />
+        <div className="absolute -top-20 -left-20 w-96 h-96 bg-secondary/10 rounded-full blur-[120px]" />
+        <div className="absolute bottom-20 right-20 w-48 h-48 bg-accent/10 rounded-full blur-[80px]" />
       </div>
     </div>
   );
