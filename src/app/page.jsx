@@ -133,38 +133,72 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Features Section */}
-        <section id="features" className="py-20 lg:py-24 bg-slate-50/50">
+        {/* Features Section - Bento Grid Layout */}
+        <section id="features" className="py-24 bg-white/40 backdrop-blur-sm border-t border-slate-100">
           <div className="mx-auto max-w-7xl px-6 lg:px-8">
-            <div className="mx-auto max-w-2xl text-center mb-12 lg:mb-20">
-              <h2 className="text-blue-600 font-bold tracking-tight uppercase text-xs sm:text-sm mb-4">Core Capabilities</h2>
-              <p className="text-3xl sm:text-4xl font-bold tracking-tight text-slate-900 lg:text-5xl mb-6">
-                Built for the modern institution
+            <div className="mx-auto max-w-2xl text-center mb-16 lg:mb-24">
+              <h2 className="text-blue-600 font-bold tracking-tight uppercase text-xs sm:text-sm mb-4">Core Ecosystem</h2>
+              <p className="text-4xl font-bold tracking-tight text-slate-950 sm:text-6xl mb-6">
+                Redefining the <br className="hidden sm:block" /> institutional <span className="text-blue-600">standard.</span>
               </p>
-              <p className="text-base sm:text-lg leading-relaxed text-slate-600">
-                Forget bloated legacy software. Knowva delivers exactly what you need with an interface you'll actually love to use.
+              <p className="text-lg leading-relaxed text-slate-600 max-w-xl mx-auto">
+                Discover a suite of tools designed to harmonize education through precision engineering and human-centric design.
               </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 text-left">
-              <FeatureCard
-                icon={<UserIcon />}
-                title="Student Portal"
-                description="Everything for the student journey. Manage assignments, track grades, and stay on top of your schedule in one place."
-                color="blue"
-              />
-              <FeatureCard
-                icon={<AcademicCapIcon />}
-                title="Faculty Tools"
-                description="Powerful grading engines and attendance tracking. Focus more on teaching and less on administrative overhead."
-                color="indigo"
-              />
-              <FeatureCard
-                icon={<ChartBarIcon />}
-                title="Admin Analytics"
-                description="Data-driven decisions start here. Get high-level overviews of institutional performance and resource utilization."
-                color="slate"
-              />
+            <div className="grid grid-cols-1 md:grid-cols-6 grid-rows-none md:grid-rows-2 gap-4 h-auto md:h-[600px]">
+              {/* Feature 1: Large Bento Card */}
+              <div className="md:col-span-3 md:row-span-2 group relative bg-white p-8 lg:p-12 rounded-[2rem] border border-slate-200 shadow-sm hover:shadow-2xl hover:-translate-y-1 transition-all duration-500 overflow-hidden flex flex-col justify-between">
+                <div className="relative z-10">
+                  <div className="mb-8 w-16 h-16 rounded-2xl bg-blue-50 text-blue-600 flex items-center justify-center">
+                    <UserIcon />
+                  </div>
+                  <h3 className="text-3xl font-bold text-slate-950 mb-6 group-hover:text-blue-600 transition-colors">
+                    Student Portal
+                  </h3>
+                  <p className="text-slate-600 leading-relaxed text-lg max-w-md">
+                    A comprehensive cockpit for the modern learner. From real-time grades to interactive course materials, everything is accessible in a single, unified interface.
+                  </p>
+                </div>
+                {/* Visual decoration for the large card */}
+                <div className="absolute -bottom-10 -right-10 w-64 h-64 bg-blue-50 rounded-full opacity-50 group-hover:scale-110 transition-transform duration-700" />
+                <div className="relative z-10 mt-8 flex gap-2">
+                  <span className="px-3 py-1 bg-slate-100 rounded-full text-[10px] font-bold text-slate-500 uppercase">Live Tracking</span>
+                  <span className="px-3 py-1 bg-slate-100 rounded-full text-[10px] font-bold text-slate-500 uppercase">Interactive</span>
+                </div>
+              </div>
+
+              {/* Feature 2: Wide Bento Card */}
+              <div className="md:col-span-3 md:row-span-1 group bg-indigo-600 p-8 rounded-[2rem] shadow-xl hover:-translate-y-1 transition-all duration-500 flex flex-col sm:flex-row items-center gap-8 overflow-hidden">
+                <div className="flex-1 text-center sm:text-left">
+                  <h3 className="text-2xl font-bold text-white mb-4">
+                    Faculty Tools
+                  </h3>
+                  <p className="text-indigo-100 leading-relaxed text-sm">
+                    Empowering educators with automated grading and seamless attendance workflows.
+                  </p>
+                </div>
+                <div className="w-20 h-20 shrink-0 bg-white/10 rounded-2xl flex items-center justify-center text-white backdrop-blur-md">
+                  <div className="w-10 h-10"><AcademicCapIcon /></div>
+                </div>
+              </div>
+
+              {/* Feature 3: Small Bento Card A */}
+              <div className="md:col-span-1 md:row-span-1 group bg-white p-6 rounded-[2rem] border border-slate-200 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-500 flex flex-col items-center justify-center text-center">
+                <div className="w-12 h-12 text-blue-600 mb-4 h-12 w-12"><ChartBarIcon /></div>
+                <h4 className="font-bold text-slate-950 text-sm">Analytics</h4>
+              </div>
+
+              {/* Feature 4: Small Bento Card B */}
+              <div className="md:col-span-2 md:row-span-1 group bg-slate-950 p-8 rounded-[2rem] shadow-xl hover:-translate-y-1 transition-all duration-500 flex flex-col justify-end relative overflow-hidden">
+                <div className="absolute top-0 right-0 p-4 opacity-20 text-white">
+                  <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="20" cy="20" r="20" fill="currentColor" />
+                  </svg>
+                </div>
+                <h3 className="text-xl font-bold text-white mb-2">Admin Control</h3>
+                <p className="text-slate-400 text-xs">High-level institutional management.</p>
+              </div>
             </div>
           </div>
         </section>

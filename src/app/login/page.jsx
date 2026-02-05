@@ -84,115 +84,106 @@ export default function Login() {
   };
 
   return (
-    <div className="flex min-h-screen flex-1">
-      <div className="flex flex-1 flex-col justify-center px-4 py-12 sm:px-6 lg:flex-none lg:px-20 xl:px-24 bg-background">
+    <div className="flex min-h-screen flex-1 bg-slate-50 font-sans">
+      <div className="flex flex-1 flex-col justify-center px-6 py-12 lg:flex-none lg:px-20 xl:px-24 bg-white shadow-2xl z-10 transition-all">
         <div className="mx-auto w-full max-w-sm lg:w-96">
           <div>
-            <Link href="/" className="mb-8 block hover:opacity-80 transition-opacity">
+            <Link href="/" className="mb-12 block hover:opacity-80 transition-opacity">
               <Brand size="lg" />
             </Link>
-            <h2 className="mt-8 text-2xl font-bold leading-9 tracking-tight text-foreground">
-              Sign in to your account
+            <h2 className="text-3xl font-extrabold tracking-tight text-slate-950 mb-2">
+              Welcome back.
             </h2>
-            <p className="mt-2 text-sm leading-6 text-muted-foreground">
-              Not a member?{" "}
+            <p className="text-sm font-medium text-slate-500 mb-10">
+              New to Knowva?{" "}
               <Link
                 href="/signup"
-                className="font-semibold text-primary hover:text-primary/80 transition-colors"
+                className="font-bold text-blue-600 hover:text-blue-700 underline underline-offset-4 decoration-blue-100 transition-all"
               >
-                Start using Knowva for free
+                Create an account for free
               </Link>
             </p>
           </div>
 
-          <div className="mt-10">
-            <div>
-              <form onSubmit={handleSubmit} className="space-y-6">
-                <div>
-                  <label
-                    htmlFor="email"
-                    className="block text-sm font-medium leading-6 text-foreground"
-                  >
-                    Email address
-                  </label>
-                  <div className="mt-2">
-                    <input
-                      id="email"
-                      name="email"
-                      type="email"
-                      autoComplete="email"
-                      required
-                      value={formData.email}
-                      onChange={handleChange}
-                      className="block w-full rounded-md border-0 py-1.5 shadow-sm ring-1 ring-inset ring-slate-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-primary sm:text-sm sm:leading-6 px-3 bg-white text-gray-900"
-                    />
-                  </div>
+          <div>
+            <form onSubmit={handleSubmit} className="space-y-6">
+              <div className="space-y-1.5">
+                <label
+                  htmlFor="email"
+                  className="block text-xs font-bold uppercase tracking-wider text-slate-400 ml-1"
+                >
+                  Email address
+                </label>
+                <input
+                  id="email"
+                  name="email"
+                  type="email"
+                  autoComplete="email"
+                  required
+                  value={formData.email}
+                  onChange={handleChange}
+                  className="block w-full rounded-2xl border-slate-200 bg-slate-50 py-3.5 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm px-4 text-slate-900 transition-all outline-none"
+                  placeholder="name@institution.edu"
+                />
+              </div>
+
+              <div className="space-y-1.5">
+                <label
+                  htmlFor="password"
+                  className="block text-xs font-bold uppercase tracking-wider text-slate-400 ml-1"
+                >
+                  Password
+                </label>
+                <input
+                  id="password"
+                  name="password"
+                  type="password"
+                  autoComplete="current-password"
+                  required
+                  value={formData.password}
+                  onChange={handleChange}
+                  className="block w-full rounded-2xl border-slate-200 bg-slate-50 py-3.5 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm px-4 text-slate-900 transition-all outline-none"
+                  placeholder="••••••••"
+                />
+              </div>
+
+              {error && (
+                <div className="rounded-2xl bg-red-50 p-4 border border-red-100 flex gap-3 animate-in fade-in slide-in-from-top-2">
+                  <svg className="h-5 w-5 text-red-500 shrink-0" viewBox="0 0 20 20" fill="currentColor">
+                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.28 7.22a.75.75 0 00-1.06 1.06L8.94 10l-1.72 1.72a.75.75 0 101.06 1.06L10 11.06l1.72 1.72a.75.75 0 101.06-1.06L11.06 10l1.72-1.72a.75.75 0 00-1.06-1.06L10 8.94 8.28 7.22z" clipRule="evenodd" />
+                  </svg>
+                  <p className="text-sm font-semibold text-red-700">{error}</p>
                 </div>
+              )}
 
-                <div>
-                  <label
-                    htmlFor="password"
-                    className="block text-sm font-medium leading-6 text-foreground"
-                  >
-                    Password
-                  </label>
-                  <div className="mt-2">
-                    <input
-                      id="password"
-                      name="password"
-                      type="password"
-                      autoComplete="current-password"
-                      required
-                      value={formData.password}
-                      onChange={handleChange}
-                      className="block w-full rounded-md border-0 py-1.5 shadow-sm ring-1 ring-inset ring-slate-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-primary sm:text-sm sm:leading-6 px-3 bg-white text-gray-900"
-                    />
-                  </div>
-                </div>
-
-                {error && (
-                  <div className="rounded-md bg-red-50 p-4 border border-red-200">
-                    <div className="flex">
-                      <div className="flex-shrink-0">
-                        <svg className="h-5 w-5 text-red-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                          <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.28 7.22a.75.75 0 00-1.06 1.06L8.94 10l-1.72 1.72a.75.75 0 101.06 1.06L10 11.06l1.72 1.72a.75.75 0 101.06-1.06L11.06 10l1.72-1.72a.75.75 0 00-1.06-1.06L10 8.94 8.28 7.22z" clipRule="evenodd" />
-                        </svg>
-                      </div>
-                      <div className="ml-3">
-                        <h3 className="text-sm font-medium text-red-800">{error}</h3>
-                      </div>
-                    </div>
-                  </div>
-                )}
-
-                <div>
-                  <button
-                    type="submit"
-                    disabled={isSubmitting}
-                    className="flex w-full justify-center rounded-md bg-primary px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-primary/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary disabled:opacity-70 disabled:cursor-not-allowed transition-all"
-                  >
-                    {isSubmitting ? "Signing in..." : "Sign in"}
-                  </button>
-                </div>
-              </form>
-            </div>
-
+              <button
+                type="submit"
+                disabled={isSubmitting}
+                className="flex w-full justify-center rounded-2xl bg-blue-600 px-6 py-4 text-sm font-bold text-white shadow-xl shadow-blue-200 hover:bg-blue-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600 disabled:opacity-70 disabled:cursor-not-allowed transition-all active:scale-[0.98]"
+              >
+                {isSubmitting ? "Authenticating..." : "Sign in to Dashboard"}
+              </button>
+            </form>
           </div>
         </div>
       </div>
-      <div className="relative hidden w-0 flex-1 lg:block">
-        <div className="absolute inset-0 bg-slate-50 flex items-center justify-center">
-          {/* Abstract pattern or solid color instead of gradient */}
-          <div className="w-full h-full bg-[radial-gradient(#cbd5e1_1px,transparent_1px)] [background-size:24px_24px] opacity-50"></div>
-          <div className="absolute inset-0 flex flex-col justify-center items-center p-12 text-center z-10">
-            <h1 className="text-4xl font-bold tracking-tight text-slate-900 sm:text-5xl mb-6 max-w-lg">
-              <span className="text-primary">Reliable</span> foundation for your institution.
-            </h1>
-            <p className="text-lg leading-8 text-slate-600 max-w-md">
-              Managed securely, designed professionally. Join thousands of educators and students on Knowva.
-            </p>
+
+      <div className="relative hidden w-0 flex-1 lg:block overflow-hidden bg-slate-950">
+        <div className="absolute inset-0 bg-[radial-gradient(#1e293b_1px,transparent_1px)] [background-size:32px_32px] opacity-20" />
+        <div className="absolute inset-0 flex flex-col justify-center items-center p-20 text-center z-10">
+          <div className="mb-12 w-24 h-24 rounded-[2rem] bg-blue-600 shadow-2xl shadow-blue-500/50 flex items-center justify-center text-white scale-125">
+            <Brand size="lg" className="scale-150" />
           </div>
+          <h1 className="text-5xl font-black tracking-tight text-white mb-8 max-w-lg leading-tight">
+            Reliable foundation <br /> for your <span className="text-blue-500">legacy.</span>
+          </h1>
+          <p className="text-xl leading-relaxed text-slate-400 max-w-md font-medium">
+            Managed securely, designed professionally. Join thousands of educators and students shaping the future on Knowva.
+          </p>
         </div>
+        {/* Decorative elements */}
+        <div className="absolute -bottom-20 -right-20 w-96 h-96 bg-blue-600/10 rounded-full blur-[120px]" />
+        <div className="absolute top-20 left-20 w-48 h-48 bg-indigo-600/5 rounded-full blur-[80px]" />
       </div>
     </div>
   );

@@ -137,269 +137,205 @@ export default function Signup() {
   };
 
   return (
-    <div className="flex min-h-screen flex-1">
-      <div className="flex flex-1 flex-col justify-center px-4 py-12 sm:px-6 lg:flex-none lg:px-20 xl:px-24 bg-background">
+    <div className="flex min-h-screen flex-1 bg-slate-50 font-sans">
+      <div className="flex flex-1 flex-col justify-center px-6 py-12 lg:flex-none lg:px-20 xl:px-24 bg-white shadow-2xl z-10 transition-all">
         <div className="mx-auto w-full max-w-sm lg:w-[480px]">
           <div>
-            <Link href="/" className="mb-8 block hover:opacity-80 transition-opacity">
+            <Link href="/" className="mb-10 block hover:opacity-80 transition-opacity">
               <Brand size="lg" />
             </Link>
-            <h2 className="mt-8 text-2xl font-bold leading-9 tracking-tight text-foreground">
-              Create your account
+            <h2 className="text-3xl font-extrabold tracking-tight text-slate-950 mb-2">
+              Start your journey.
             </h2>
-            <p className="mt-2 text-sm leading-6 text-muted-foreground">
+            <p className="text-sm font-medium text-slate-500 mb-8">
               Already have an account?{" "}
               <Link
                 href="/login"
-                className="font-semibold text-primary hover:text-primary/80 transition-colors"
+                className="font-bold text-blue-600 hover:text-blue-700 underline underline-offset-4 decoration-blue-100 transition-all"
               >
                 Sign in
               </Link>
             </p>
           </div>
 
-          <div className="mt-10">
-            <div>
-              <form onSubmit={handleSubmit} className="space-y-6">
-                {/* Role Selection */}
-                <div className="space-y-3">
-                  <p className="text-sm font-medium leading-6 text-foreground">I am a...</p>
-                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                    {ROLE_OPTIONS.map((option) => (
-                      <button
-                        type="button"
-                        key={option.value}
-                        onClick={() => setRole(option.value)}
-                        className={`rounded-md px-3 py-2 text-sm font-semibold shadow-sm ring-1 ring-inset ${role === option.value
-                          ? "bg-primary text-white ring-primary"
-                          : "bg-white text-gray-900 ring-gray-300 hover:bg-gray-50"
-                          } transition-all`}
-                      >
-                        {option.label}
-                      </button>
-                    ))}
-                  </div>
-                  <p className="text-xs text-muted-foreground">
-                    {ROLE_OPTIONS.find((r) => r.value === role)?.description}
-                  </p>
+          <div className="mt-8">
+            <form onSubmit={handleSubmit} className="space-y-6">
+              {/* Role Selection */}
+              <div className="space-y-3">
+                <p className="block text-xs font-bold uppercase tracking-wider text-slate-400 ml-1">Joining as...</p>
+                <div className="grid grid-cols-3 gap-3">
+                  {ROLE_OPTIONS.map((option) => (
+                    <button
+                      type="button"
+                      key={option.value}
+                      onClick={() => setRole(option.value)}
+                      className={`rounded-2xl px-3 py-3 text-sm font-bold transition-all border ${role === option.value
+                        ? "bg-blue-600 text-white border-blue-600 shadow-lg shadow-blue-100"
+                        : "bg-slate-50 text-slate-500 border-slate-100 hover:border-blue-200"
+                        }`}
+                    >
+                      {option.label}
+                    </button>
+                  ))}
                 </div>
+                <p className="text-[10px] text-slate-400 italic ml-1">
+                  {ROLE_OPTIONS.find((r) => r.value === role)?.description}
+                </p>
+              </div>
 
-                <div>
-                  <label htmlFor="name" className="block text-sm font-medium leading-6 text-foreground">
-                    Full Name
-                  </label>
-                  <div className="mt-2">
-                    <input
-                      id="name"
-                      name="name"
-                      type="text"
-                      autoComplete="name"
-                      required
-                      value={formData.name}
-                      onChange={handleChange}
-                      className="block w-full rounded-md border-0 py-1.5 shadow-sm ring-1 ring-inset ring-slate-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-primary sm:text-sm sm:leading-6 px-3 bg-white text-gray-900"
-                    />
-                  </div>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div className="space-y-1.5">
+                  <label htmlFor="name" className="block text-xs font-bold uppercase tracking-wider text-slate-400 ml-1">Full Name</label>
+                  <input
+                    id="name"
+                    name="name"
+                    type="text"
+                    required
+                    value={formData.name}
+                    onChange={handleChange}
+                    className="block w-full rounded-2xl border-slate-200 bg-slate-50 py-3.5 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm px-4 text-slate-900 transition-all outline-none"
+                    placeholder="John Doe"
+                  />
                 </div>
-
-                <div>
-                  <label htmlFor="email" className="block text-sm font-medium leading-6 text-foreground">
-                    Email address
-                  </label>
-                  <div className="mt-2">
-                    <input
-                      id="email"
-                      name="email"
-                      type="email"
-                      autoComplete="email"
-                      required
-                      value={formData.email}
-                      onChange={handleChange}
-                      className="block w-full rounded-md border-0 py-1.5 shadow-sm ring-1 ring-inset ring-slate-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-primary sm:text-sm sm:leading-6 px-3 bg-white text-gray-900"
-                    />
-                  </div>
+                <div className="space-y-1.5">
+                  <label htmlFor="email" className="block text-xs font-bold uppercase tracking-wider text-slate-400 ml-1">Email</label>
+                  <input
+                    id="email"
+                    name="email"
+                    type="email"
+                    required
+                    value={formData.email}
+                    onChange={handleChange}
+                    className="block w-full rounded-2xl border-slate-200 bg-slate-50 py-3.5 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm px-4 text-slate-900 transition-all outline-none"
+                    placeholder="name@inst.edu"
+                  />
                 </div>
+              </div>
 
-                <div>
-                  <label htmlFor="password" className="block text-sm font-medium leading-6 text-foreground">
-                    Password
-                  </label>
-                  <div className="mt-2">
-                    <input
-                      id="password"
-                      name="password"
-                      type="password"
-                      autoComplete="new-password"
-                      required
-                      value={formData.password}
-                      onChange={handleChange}
-                      className="block w-full rounded-md border-0 py-1.5 shadow-sm ring-1 ring-inset ring-slate-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-primary sm:text-sm sm:leading-6 px-3 bg-white text-gray-900"
-                      minLength={6}
-                    />
-                  </div>
-                </div>
+              <div className="space-y-1.5">
+                <label htmlFor="password" className="block text-xs font-bold uppercase tracking-wider text-slate-400 ml-1">Password</label>
+                <input
+                  id="password"
+                  name="password"
+                  type="password"
+                  required
+                  value={formData.password}
+                  onChange={handleChange}
+                  className="block w-full rounded-2xl border-slate-200 bg-slate-50 py-3.5 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm px-4 text-slate-900 transition-all outline-none"
+                  placeholder="••••••••"
+                  minLength={6}
+                />
+              </div>
 
-                {role === "STUDENT" && (
-                  <div className="rounded-lg bg-secondary/30 p-4 space-y-4 border border-border">
-                    <h3 className="text-sm font-semibold text-foreground">Student Details</h3>
-                    <div className="grid grid-cols-1 gap-x-6 gap-y-4 sm:grid-cols-6">
-                      <div className="sm:col-span-3">
-                        <label className="block text-xs font-medium leading-6 text-foreground">Enrollment No.</label>
-                        <input
-                          type="text"
-                          name="enrollmentNo"
-                          value={studentProfile.enrollmentNo}
-                          onChange={handleStudentProfileChange}
-                          required
-                          className="block w-full rounded-md border-0 py-1.5 shadow-sm ring-1 ring-inset ring-slate-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-primary sm:text-xs sm:leading-6 px-2 bg-white text-gray-900"
-                        />
-                      </div>
-                      <div className="sm:col-span-3">
-                        <label className="block text-xs font-medium leading-6 text-foreground">Semester</label>
-                        <input
-                          type="number"
-                          min={1}
-                          max={12}
-                          name="semester"
-                          value={studentProfile.semester}
-                          onChange={handleStudentProfileChange}
-                          required
-                          className="block w-full rounded-md border-0 py-1.5 shadow-sm ring-1 ring-inset ring-slate-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-primary sm:text-xs sm:leading-6 px-2 bg-white text-gray-900"
-                        />
-                      </div>
-                      <div className="sm:col-span-6">
-                        <label className="block text-xs font-medium leading-6 text-foreground">Department</label>
-                        <input
-                          type="text"
-                          name="department"
-                          value={studentProfile.department}
-                          onChange={handleStudentProfileChange}
-                          required
-                          className="block w-full rounded-md border-0 py-1.5 shadow-sm ring-1 ring-inset ring-slate-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-primary sm:text-xs sm:leading-6 px-2 bg-white text-gray-900"
-                        />
-                      </div>
-                      <div className="sm:col-span-3">
-                        <label className="block text-xs font-medium leading-6 text-foreground">Guardian Name (Opt)</label>
-                        <input
-                          type="text"
-                          name="guardianName"
-                          value={studentProfile.guardianName}
-                          onChange={handleStudentProfileChange}
-                          className="block w-full rounded-md border-0 py-1.5 shadow-sm ring-1 ring-inset ring-slate-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-primary sm:text-xs sm:leading-6 px-2 bg-white text-gray-900"
-                        />
-                      </div>
-                      <div className="sm:col-span-3">
-                        <label className="block text-xs font-medium leading-6 text-foreground">Guardian Phone (Opt)</label>
-                        <input
-                          type="tel"
-                          name="guardianPhone"
-                          value={studentProfile.guardianPhone}
-                          onChange={handleStudentProfileChange}
-                          className="block w-full rounded-md border-0 py-1.5 shadow-sm ring-1 ring-inset ring-slate-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-primary sm:text-xs sm:leading-6 px-2 bg-white text-gray-900"
-                        />
-                      </div>
+              {role === "STUDENT" && (
+                <div className="rounded-[2rem] bg-slate-50 p-6 space-y-5 border border-slate-100">
+                  <h3 className="text-xs font-bold uppercase tracking-widest text-slate-400">Student Profile</h3>
+                  <div className="grid grid-cols-2 gap-4">
+                    <div className="space-y-1.5">
+                      <label className="block text-[10px] font-bold uppercase text-slate-400 ml-1">Enrollment No.</label>
+                      <input
+                        type="text"
+                        name="enrollmentNo"
+                        value={studentProfile.enrollmentNo}
+                        onChange={handleStudentProfileChange}
+                        required
+                        className="block w-full rounded-xl border-slate-200 bg-white py-2 shadow-sm focus:ring-blue-500 sm:text-xs px-3 text-slate-900 outline-none"
+                      />
+                    </div>
+                    <div className="space-y-1.5">
+                      <label className="block text-[10px] font-bold uppercase text-slate-400 ml-1">Semester</label>
+                      <input
+                        type="number"
+                        min={1}
+                        max={12}
+                        name="semester"
+                        value={studentProfile.semester}
+                        onChange={handleStudentProfileChange}
+                        required
+                        className="block w-full rounded-xl border-slate-200 bg-white py-2 shadow-sm focus:ring-blue-500 sm:text-xs px-3 text-slate-900 outline-none"
+                      />
+                    </div>
+                    <div className="col-span-2 space-y-1.5">
+                      <label className="block text-[10px] font-bold uppercase text-slate-400 ml-1">Department</label>
+                      <input
+                        type="text"
+                        name="department"
+                        value={studentProfile.department}
+                        onChange={handleStudentProfileChange}
+                        required
+                        className="block w-full rounded-xl border-slate-200 bg-white py-2 shadow-sm focus:ring-blue-500 sm:text-xs px-3 text-slate-900 outline-none"
+                      />
                     </div>
                   </div>
-                )}
-
-                {role === "FACULTY" && (
-                  <div className="rounded-lg bg-secondary/30 p-4 space-y-4 border border-border">
-                    <h3 className="text-sm font-semibold text-foreground">Faculty Details</h3>
-                    <div className="grid grid-cols-1 gap-x-6 gap-y-4 sm:grid-cols-6">
-                      <div className="sm:col-span-3">
-                        <label className="block text-xs font-medium leading-6 text-foreground">Employee Code</label>
-                        <input
-                          type="text"
-                          name="employeeCode"
-                          value={facultyProfile.employeeCode}
-                          onChange={handleFacultyProfileChange}
-                          required
-                          className="block w-full rounded-md border-0 py-1.5 shadow-sm ring-1 ring-inset ring-slate-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-primary sm:text-xs sm:leading-6 px-2 bg-white text-gray-900"
-                          placeholder="EMP-123"
-                        />
-                      </div>
-                      <div className="sm:col-span-3">
-                        <label className="block text-xs font-medium leading-6 text-foreground">Department</label>
-                        <input
-                          type="text"
-                          name="department"
-                          value={facultyProfile.department}
-                          onChange={handleFacultyProfileChange}
-                          required
-                          className="block w-full rounded-md border-0 py-1.5 shadow-sm ring-1 ring-inset ring-slate-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-primary sm:text-xs sm:leading-6 px-2 bg-white text-gray-900"
-                        />
-                      </div>
-                      <div className="sm:col-span-6">
-                        <label className="block text-xs font-medium leading-6 text-foreground">Specialization</label>
-                        <input
-                          type="text"
-                          name="specialization"
-                          value={facultyProfile.specialization}
-                          onChange={handleFacultyProfileChange}
-                          className="block w-full rounded-md border-0 py-1.5 shadow-sm ring-1 ring-inset ring-slate-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-primary sm:text-xs sm:leading-6 px-2 bg-white text-gray-900"
-                        />
-                      </div>
-                    </div>
-                  </div>
-                )}
-
-                {error && (
-                  <div className="rounded-md bg-red-50 p-4 border border-red-200">
-                    <div className="flex">
-                      <div className="flex-shrink-0">
-                        <svg className="h-5 w-5 text-red-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                          <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.28 7.22a.75.75 0 00-1.06 1.06L8.94 10l-1.72 1.72a.75.75 0 101.06 1.06L10 11.06l1.72 1.72a.75.75 0 101.06-1.06L11.06 10l1.72-1.72a.75.75 0 00-1.06-1.06L10 8.94 8.28 7.22z" clipRule="evenodd" />
-                        </svg>
-                      </div>
-                      <div className="ml-3">
-                        <h3 className="text-sm font-medium text-red-800">{error}</h3>
-                      </div>
-                    </div>
-                  </div>
-                )}
-
-                {successMessage && (
-                  <div className="rounded-md bg-green-50 p-4 border border-green-200">
-                    <div className="flex">
-                      <div className="flex-shrink-0">
-                        <svg className="h-5 w-5 text-green-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-                          <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clipRule="evenodd" />
-                        </svg>
-                      </div>
-                      <div className="ml-3">
-                        <h3 className="text-sm font-medium text-green-800">{successMessage}</h3>
-                      </div>
-                    </div>
-                  </div>
-                )}
-
-                <div>
-                  <button
-                    type="submit"
-                    disabled={isSubmitting}
-                    className="flex w-full justify-center rounded-md bg-primary px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-primary/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary disabled:opacity-70 disabled:cursor-not-allowed transition-all"
-                  >
-                    {isSubmitting ? "Creating account..." : "Create account"}
-                  </button>
                 </div>
-              </form>
-            </div>
+              )}
+
+              {role === "FACULTY" && (
+                <div className="rounded-[2rem] bg-slate-50 p-6 space-y-5 border border-slate-100">
+                  <h3 className="text-xs font-bold uppercase tracking-widest text-slate-400">Faculty Profile</h3>
+                  <div className="grid grid-cols-2 gap-4">
+                    <div className="space-y-1.5">
+                      <label className="block text-[10px] font-bold uppercase text-slate-400 ml-1">Employee Code</label>
+                      <input
+                        type="text"
+                        name="employeeCode"
+                        value={facultyProfile.employeeCode}
+                        onChange={handleFacultyProfileChange}
+                        required
+                        className="block w-full rounded-xl border-slate-200 bg-white py-2 shadow-sm focus:ring-blue-500 sm:text-xs px-3 text-slate-900 outline-none"
+                      />
+                    </div>
+                    <div className="space-y-1.5">
+                      <label className="block text-[10px] font-bold uppercase text-slate-400 ml-1">Department</label>
+                      <input
+                        type="text"
+                        name="department"
+                        value={facultyProfile.department}
+                        onChange={handleFacultyProfileChange}
+                        required
+                        className="block w-full rounded-xl border-slate-200 bg-white py-2 shadow-sm focus:ring-blue-500 sm:text-xs px-3 text-slate-900 outline-none"
+                      />
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {error && (
+                <div className="rounded-2xl bg-red-50 p-4 border border-red-100 flex gap-3">
+                  <svg className="h-5 w-5 text-red-500 shrink-0" viewBox="0 0 20 20" fill="currentColor">
+                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.28 7.22a.75.75 0 00-1.06 1.06L8.94 10l-1.72 1.72a.75.75 0 101.06 1.06L10 11.06l1.72 1.72a.75.75 0 101.06-1.06L11.06 10l1.72-1.72a.75.75 0 00-1.06-1.06L10 8.94 8.28 7.22z" clipRule="evenodd" />
+                  </svg>
+                  <p className="text-sm font-semibold text-red-700">{error}</p>
+                </div>
+              )}
+
+              <button
+                type="submit"
+                disabled={isSubmitting}
+                className="flex w-full justify-center rounded-2xl bg-blue-600 px-6 py-4 text-sm font-bold text-white shadow-xl shadow-blue-200 hover:bg-blue-700 disabled:opacity-70 disabled:cursor-not-allowed transition-all active:scale-[0.98]"
+              >
+                {isSubmitting ? "Generating Credentials..." : "Create Account"}
+              </button>
+            </form>
           </div>
         </div>
       </div>
-      <div className="relative hidden w-0 flex-1 lg:block">
-        <div className="absolute inset-0 bg-slate-50 flex items-center justify-center">
-          {/* Abstract pattern or solid color instead of gradient */}
-          <div className="w-full h-full bg-[radial-gradient(#cbd5e1_1px,transparent_1px)] [background-size:24px_24px] opacity-50"></div>
-          <div className="absolute inset-0 flex flex-col justify-center items-center p-12 text-center z-10">
-            <h1 className="text-4xl font-bold tracking-tight text-slate-900 sm:text-5xl mb-6 max-w-lg">
-              Join the <span className="text-primary">future</span> of education management.
-            </h1>
-            <p className="text-lg leading-8 text-slate-600 max-w-md">
-              Streamline your workflow, engage students, and simplify administration.
-            </p>
+
+      <div className="relative hidden w-0 flex-1 lg:block overflow-hidden bg-slate-950">
+        <div className="absolute inset-0 bg-[radial-gradient(#1e293b_1px,transparent_1px)] [background-size:32px_32px] opacity-20" />
+        <div className="absolute inset-0 flex flex-col justify-center items-center p-20 text-center z-10">
+          <div className="mb-12 w-24 h-24 rounded-[2rem] bg-blue-600 shadow-2xl shadow-blue-500/50 flex items-center justify-center text-white scale-125">
+            <Brand size="lg" className="scale-150" />
           </div>
+          <h1 className="text-5xl font-black tracking-tight text-white mb-8 max-w-lg leading-tight">
+            The <span className="text-blue-500">standard</span> of excellence.
+          </h1>
+          <p className="text-xl leading-relaxed text-slate-400 max-w-md font-medium">
+            Streamline your entire academic workflow. Engage students, manage faculty, and simplify every administrative detail with Knowva.
+          </p>
         </div>
+        <div className="absolute -top-20 -left-20 w-96 h-96 bg-blue-600/10 rounded-full blur-[120px]" />
+        <div className="absolute bottom-20 right-20 w-48 h-48 bg-indigo-600/5 rounded-full blur-[80px]" />
       </div>
     </div>
   );
