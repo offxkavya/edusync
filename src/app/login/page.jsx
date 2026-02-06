@@ -198,7 +198,7 @@ export default function Login() {
         <div className="absolute inset-0 bg-[radial-gradient(#1e406d_1px,transparent_1px)] [background-size:32px_32px] opacity-20" />
         <div className="absolute inset-0 flex flex-col justify-center items-center p-20 text-center z-10">
           <div className="mb-12 w-24 h-24 rounded-[2rem] bg-secondary shadow-2xl shadow-secondary/50 flex items-center justify-center text-white scale-125">
-            <Brand size="lg" className="scale-150" />
+            <Brand size="lg" theme="light" className="scale-150" />
           </div>
           <h1 className="text-5xl font-black tracking-tight text-white mb-8 max-w-lg leading-tight">
             Precision <span className="text-secondary">management.</span>

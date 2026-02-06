@@ -117,7 +117,7 @@ export default function Home() {
               <div className="flex-1 relative order-1 lg:order-2 w-full max-w-lg lg:max-w-none">
                 <div className="relative z-10 rounded-3xl border border-border bg-white p-2 sm:p-4 shadow-2xl overflow-hidden group">
                   <div className="aspect-[4/3] bg-slate-50 rounded-2xl flex items-center justify-center group-hover:scale-[1.02] transition-transform duration-700">
-                    <Brand size="lg" className="scale-125 sm:scale-150 opacity-10" />
+                    <Brand size="lg" className="scale-125 sm:scale-150 opacity-20" />
                     <div className="absolute inset-0 bg-gradient-to-tr from-primary/10 to-transparent" />
                   </div>
                 </div>

@@ -324,8 +324,8 @@ export default function Signup() {
       <div className="relative hidden w-0 flex-1 lg:block overflow-hidden bg-slate-950">
         <div className="absolute inset-0 bg-[radial-gradient(#1e293b_1px,transparent_1px)] [background-size:32px_32px] opacity-20" />
         <div className="absolute inset-0 flex flex-col justify-center items-center p-20 text-center z-10">
-          <div className="mb-12 w-24 h-24 rounded-[2rem] bg-blue-600 shadow-2xl shadow-blue-500/50 flex items-center justify-center text-white scale-125">
-            <Brand size="lg" className="scale-150" />
+          <div className="mb-12 w-24 h-24 rounded-[2rem] bg-secondary shadow-2xl shadow-secondary/50 flex items-center justify-center text-white scale-125">
+            <Brand size="lg" theme="light" className="scale-150" />
           </div>
           <h1 className="text-5xl font-black tracking-tight text-white mb-8 max-w-lg leading-tight">
             The <span className="text-blue-500">standard</span> of excellence.

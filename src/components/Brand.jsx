@@ -6,14 +6,26 @@ import React from "react";
  * Brand component for Knowva.
  * Replaces the placeholder 'K' logo with a modern Sparkle symbol.
  */
-export default function Brand({ size = "md", className = "" }) {
+export default function Brand({ size = "md", theme = "dark", className = "" }) {
     const sizes = {
         sm: { icon: "h-5 w-5", text: "text-lg", gap: "gap-1.5" },
         md: { icon: "h-6 w-6", text: "text-xl", gap: "gap-2" },
         lg: { icon: "h-8 w-8", text: "text-2xl", gap: "gap-3" },
     };
 
+    const themes = {
+        dark: {
+            text: "text-primary",
+            sparkle: "text-primary",
+        },
+        light: {
+            text: "text-white",
+            sparkle: "text-white",
+        }
+    };
+
     const currentSize = sizes[size] || sizes.md;
+    const currentTheme = themes[theme] || themes.dark;
 
     return (
         <div className={`flex items-center ${currentSize.gap} ${className}`}>
@@ -23,7 +35,7 @@ export default function Brand({ size = "md", className = "" }) {
                     viewBox="0 0 24 24"
                     fill="none"
                     xmlns="http://www.w3.org/2000/svg"
-                    className="w-full h-full text-primary"
+                    className={`w-full h-full ${currentTheme.sparkle}`}
                 >
                     {/* Main Sparkle Body */}
                     <path
@@ -45,7 +57,7 @@ export default function Brand({ size = "md", className = "" }) {
                 </svg>
             </div>
 
-            <span className={`${currentSize.text} font-bold tracking-tight text-foreground transition-colors`}>
+            <span className={`${currentSize.text} font-bold tracking-tight ${currentTheme.text} transition-colors`}>
                 Knowva
             </span>
         </div>
