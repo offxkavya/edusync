@@ -27,20 +27,20 @@ export default function Home() {
   }, [router]);
 
   return (
-    <div className="min-h-screen bg-white text-[#0f172a] flex flex-col font-sans selection:bg-blue-100 selection:text-blue-900">
+    <div className="min-h-screen bg-background text-foreground flex flex-col font-sans selection:bg-primary/10 selection:text-primary">
       {/* Navbar */}
-      <header className="fixed top-0 w-full bg-white/80 backdrop-blur-md border-b border-slate-100 z-[100]">
-        <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-6 lg:px-8">
-          <Brand size="lg" />
+      <header className="fixed top-0 w-full bg-white/95 backdrop-blur-sm border-b border-border z-[100]">
+        <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-6 lg:px-8">
+          <Brand size="md" />
 
           {/* Desktop Nav */}
           <nav className="hidden md:flex items-center gap-8">
-            <Link href="#features" className="text-sm font-medium text-slate-600 hover:text-blue-600 transition-colors">Features</Link>
-            <Link href="#about" className="text-sm font-medium text-slate-600 hover:text-blue-600 transition-colors">About</Link>
-            <Link href="/login" className="text-sm font-medium text-slate-600 hover:text-blue-600 transition-colors">Log in</Link>
+            <Link href="#features" className="text-sm font-medium text-slate-600 hover:text-primary transition-colors">Features</Link>
+            <Link href="#about" className="text-sm font-medium text-slate-600 hover:text-primary transition-colors">About</Link>
+            <Link href="/login" className="text-sm font-medium text-slate-600 hover:text-primary transition-colors">Log in</Link>
             <Link
               href="/signup"
-              className="px-5 py-2.5 rounded-full bg-[#020617] text-white text-sm font-semibold hover:bg-slate-800 transition-all shadow-lg hover:shadow-xl active:scale-95"
+              className="px-4 py-2 rounded-md bg-primary text-primary-foreground text-sm font-medium hover:bg-primary/90 transition-all shadow-sm active:scale-95"
             >
               Get Started
             </Link>
@@ -49,7 +49,7 @@ export default function Home() {
           {/* Mobile Toggle */}
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="md:hidden p-2 text-slate-600 hover:text-blue-600 transition-colors"
+            className="md:hidden p-2 text-slate-600 hover:text-primary transition-colors"
             aria-label="Toggle menu"
           >
             {isMenuOpen ? <CloseIcon /> : <MenuIcon />}
@@ -58,14 +58,14 @@ export default function Home() {
 
         {/* Mobile Menu Backdrop */}
         {isMenuOpen && (
-          <div className="md:hidden absolute top-20 left-0 w-full bg-white border-b border-slate-100 shadow-xl p-6 flex flex-col gap-4 animate-in fade-in slide-in-from-top-5 duration-200">
-            <Link onClick={() => setIsMenuOpen(false)} href="#features" className="text-lg font-semibold text-slate-900 border-b border-slate-50 pb-2">Features</Link>
-            <Link onClick={() => setIsMenuOpen(false)} href="#about" className="text-lg font-semibold text-slate-900 border-b border-slate-50 pb-2">About</Link>
-            <Link onClick={() => setIsMenuOpen(false)} href="/login" className="text-lg font-semibold text-slate-900 border-b border-slate-50 pb-2">Log in</Link>
+          <div className="md:hidden absolute top-16 left-0 w-full bg-white border-b border-border shadow-md p-6 flex flex-col gap-4">
+            <Link onClick={() => setIsMenuOpen(false)} href="#features" className="text-base font-medium text-slate-900 border-b border-slate-100 pb-3">Features</Link>
+            <Link onClick={() => setIsMenuOpen(false)} href="#about" className="text-base font-medium text-slate-900 border-b border-slate-100 pb-3">About</Link>
+            <Link onClick={() => setIsMenuOpen(false)} href="/login" className="text-base font-medium text-slate-900 border-b border-slate-100 pb-3">Log in</Link>
             <Link
               onClick={() => setIsMenuOpen(false)}
               href="/signup"
-              className="w-full text-center px-6 py-4 rounded-xl bg-blue-600 text-white font-bold shadow-lg mt-2"
+              className="w-full text-center px-4 py-3 rounded-md bg-primary text-primary-foreground font-medium shadow-sm mt-2"
             >
               Get Started
             </Link>
@@ -73,166 +73,174 @@ export default function Home() {
         )}
       </header>
 
-      <main className="flex-1 pt-20">
+      <main className="flex-1 pt-16">
         {/* Hero Section */}
-        <section className="relative pt-12 pb-20 lg:pt-32 lg:pb-32 overflow-hidden">
-          {/* Subtle background decoration */}
-          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full -z-10">
-            <div className="absolute top-[-10%] left-[-10%] w-[80%] lg:w-[40%] h-[40%] bg-blue-50 rounded-full blur-[120px] opacity-60" />
-            <div className="absolute bottom-[20%] right-[-10%] w-[60%] lg:w-[30%] h-[30%] bg-indigo-50 rounded-full blur-[100px] opacity-50" />
-          </div>
-
+        <section className="relative pt-20 pb-24 lg:pt-32 lg:pb-32 overflow-hidden bg-white">
           <div className="mx-auto max-w-7xl px-6 lg:px-8">
-            <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-16">
+            <div className="flex flex-col lg:flex-row items-center gap-16">
               <div className="flex-1 text-center lg:text-left order-2 lg:order-1">
-                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent/10 border border-accent/20 text-accent text-[10px] sm:text-xs font-bold mb-6 lg:mb-8 uppercase tracking-wider animate-bounce-subtle">
-                  🚀 Next Generation Education
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-100 text-slate-700 text-xs font-semibold mb-8 border border-slate-200">
+                  <span className="w-2 h-2 rounded-full bg-primary"></span>
+                  Institutional Management, Simplified
                 </div>
-                <h1 className="text-4xl sm:text-5xl md:text-7xl font-extrabold tracking-tight text-primary leading-[1.1] mb-6 lg:mb-8">
-                  Empowering the future of <span className="text-secondary">learning.</span>
+                <h1 className="text-5xl sm:text-6xl lg:text-7xl font-semibold tracking-tight text-slate-900 leading-[1.1] mb-6">
+                  The infrastructure for <br className="hidden lg:block" />
+                  <span className="text-primary">modern education.</span>
                 </h1>
-                <p className="text-lg sm:text-xl leading-relaxed text-slate-600 mb-8 lg:mb-10 max-w-2xl mx-auto lg:mx-0 font-medium">
-                  Knowva is an all-in-one ecosystem designed to bridge the gap between students, faculty, and administration with seamless collaboration tools.
+                <p className="text-lg sm:text-xl leading-relaxed text-slate-600 mb-10 max-w-2xl mx-auto lg:mx-0">
+                  Knowva provides a complete, unified platform connecting students, faculty, and administration through precision engineering and intuitive design.
                 </p>
                 <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
                   <Link
                     href="/signup"
-                    className="w-full sm:w-auto px-8 py-4 rounded-full bg-primary text-white font-bold hover:bg-primary/90 transition-all shadow-xl shadow-primary/20 hover:shadow-2xl hover:-translate-y-1 active:translate-y-0 text-center"
+                    className="w-full sm:w-auto px-8 py-3.5 rounded-md bg-primary text-primary-foreground font-medium hover:bg-primary/90 transition-all shadow-sm text-center"
                   >
                     Start for free
                   </Link>
                   <Link
                     href="#features"
-                    className="w-full sm:w-auto px-8 py-4 rounded-full border border-border bg-white text-primary font-bold hover:border-accent hover:text-accent transition-all text-center"
+                    className="w-full sm:w-auto px-8 py-3.5 rounded-md border border-slate-200 bg-white text-slate-700 font-medium hover:bg-slate-50 transition-all text-center"
                   >
-                    See how it works
+                    Explore Platform
                   </Link>
                 </div>
 
-                <div className="mt-12 flex items-center justify-center lg:justify-start gap-4 grayscale opacity-50">
-                  <span className="text-[10px] font-semibold text-slate-400 uppercase tracking-widest">Trusted by leading institutions</span>
+                <div className="mt-14 pt-8 border-t border-slate-100 hidden lg:block">
+                  <p className="text-sm text-slate-500 mb-4">Trusted by innovative institutions</p>
+                  <div className="flex gap-8 opacity-40 grayscale">
+                    {/* Placeholder logos */}
+                    <div className="h-6 w-24 bg-slate-300 rounded"></div>
+                    <div className="h-6 w-32 bg-slate-300 rounded"></div>
+                    <div className="h-6 w-20 bg-slate-300 rounded"></div>
+                  </div>
                 </div>
               </div>
 
-              <div className="flex-1 relative order-1 lg:order-2 w-full max-w-lg lg:max-w-none">
-                <div className="relative z-10 rounded-3xl border border-border bg-white p-2 sm:p-4 shadow-2xl overflow-hidden group">
-                  <div className="aspect-[4/3] bg-slate-50 rounded-2xl flex items-center justify-center group-hover:scale-[1.02] transition-transform duration-700">
-                    <Brand size="lg" className="scale-125 sm:scale-150 opacity-20" />
-                    <div className="absolute inset-0 bg-gradient-to-tr from-primary/10 to-transparent" />
+              <div className="flex-1 order-1 lg:order-2 w-full max-w-lg lg:max-w-none perspective-1000">
+                <div className="relative rounded-2xl border border-border bg-white shadow-2xl overflow-hidden transform rotate-y-[-5deg] rotate-x-[5deg] transition-transform hover:rotate-0 duration-700">
+                  {/* Mock UI Header */}
+                  <div className="h-12 border-b border-border bg-slate-50 flex items-center px-4 gap-2">
+                    <div className="flex gap-1.5">
+                      <div className="w-3 h-3 rounded-full bg-slate-300"></div>
+                      <div className="w-3 h-3 rounded-full bg-slate-300"></div>
+                      <div className="w-3 h-3 rounded-full bg-slate-300"></div>
+                    </div>
+                  </div>
+                  {/* Mock UI Body */}
+                  <div className="p-6 bg-white aspect-[4/3] flex flex-col gap-4">
+                    <div className="flex gap-4">
+                      <div className="h-24 flex-1 rounded-xl bg-slate-50 border border-slate-100 p-4">
+                        <div className="h-3 w-1/3 bg-slate-200 rounded mb-4"></div>
+                        <div className="h-8 w-1/2 bg-primary/20 rounded"></div>
+                      </div>
+                      <div className="h-24 flex-1 rounded-xl bg-slate-50 border border-slate-100 p-4">
+                        <div className="h-3 w-1/3 bg-slate-200 rounded mb-4"></div>
+                        <div className="h-8 w-1/2 bg-slate-200 rounded"></div>
+                      </div>
+                    </div>
+                    <div className="flex-1 rounded-xl bg-slate-50 border border-slate-100 p-4">
+                      <div className="h-4 w-1/4 bg-slate-200 rounded mb-6"></div>
+                      <div className="space-y-3">
+                        <div className="h-3 w-full bg-slate-100 rounded"></div>
+                        <div className="h-3 w-full bg-slate-100 rounded"></div>
+                        <div className="h-3 w-5/6 bg-slate-100 rounded"></div>
+                      </div>
+                    </div>
                   </div>
                 </div>
-                {/* Decorative floating elements */}
-                <div className="absolute -top-6 -right-6 w-24 h-24 bg-primary/10 rounded-full blur-2xl animate-pulse" />
-                <div className="absolute -bottom-8 -left-8 w-32 h-32 bg-secondary/10 rounded-full blur-3xl animate-pulse delay-700" />
               </div>
             </div>
           </div>
         </section>
 
-        {/* Features Section - Bento Grid Layout */}
-        <section id="features" className="py-24 bg-white/40 backdrop-blur-sm border-t border-border">
+        {/* Features Section - Standard Grid */}
+        <section id="features" className="py-24 bg-slate-50 border-t border-border">
           <div className="mx-auto max-w-7xl px-6 lg:px-8">
-            <div className="mx-auto max-w-2xl text-center mb-16 lg:mb-24">
-              <h2 className="text-secondary font-bold tracking-tight uppercase text-xs sm:text-sm mb-4">Core Ecosystem</h2>
-              <p className="text-4xl font-bold tracking-tight text-primary sm:text-6xl mb-6">
-                Redefining the <br className="hidden sm:block" /> institutional <span className="text-secondary">standard.</span>
+            <div className="mx-auto max-w-2xl text-center mb-16 lg:mb-20">
+              <h2 className="text-primary font-semibold tracking-wide uppercase text-sm mb-3">Core Platform</h2>
+              <p className="text-3xl font-semibold tracking-tight text-slate-900 sm:text-4xl mb-4">
+                Everything you need to manage education.
               </p>
-              <p className="text-lg leading-relaxed text-slate-600 max-w-xl mx-auto">
-                Discover a suite of tools designed to harmonize education through precision engineering and human-centric design.
+              <p className="text-lg text-slate-600 max-w-xl mx-auto">
+                A highly secure, reliable, and scalable foundation built for the needs of students, faculty, and administrators.
               </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-6 grid-rows-none md:grid-rows-2 gap-4 h-auto md:h-[600px]">
-              {/* Feature 1: Large Bento Card */}
-              <div className="md:col-span-3 md:row-span-2 group relative bg-white p-8 lg:p-12 rounded-[2rem] border border-border shadow-sm hover:shadow-2xl hover:-translate-y-1 transition-all duration-500 overflow-hidden flex flex-col justify-between">
-                <div className="relative z-10">
-                  <div className="mb-8 w-16 h-16 rounded-2xl bg-[#F5FEFE] text-secondary flex items-center justify-center border border-[#d1e9e9]">
-                    <UserIcon />
-                  </div>
-                  <h3 className="text-3xl font-bold text-primary mb-6 group-hover:text-secondary transition-colors">
-                    Student Portal
-                  </h3>
-                  <p className="text-slate-600 leading-relaxed text-lg max-w-md">
-                    A comprehensive cockpit for the modern learner. From real-time grades to interactive course materials, everything is accessible in a single, unified interface.
-                  </p>
-                </div>
-                {/* Visual decoration for the large card */}
-                <div className="absolute -bottom-10 -right-10 w-64 h-64 bg-[#F5FEFE] rounded-full opacity-50 group-hover:scale-110 transition-transform duration-700" />
-                <div className="relative z-10 mt-8 flex gap-2">
-                  <span className="px-3 py-1 bg-[#F5FEFE] border border-[#d1e9e9] rounded-full text-[10px] font-bold text-secondary uppercase tracking-wider">Live Tracking</span>
-                  <span className="px-3 py-1 bg-[#F5FEFE] border border-[#d1e9e9] rounded-full text-[10px] font-bold text-secondary uppercase tracking-wider">Interactive</span>
-                </div>
-              </div>
-
-              {/* Feature 2: Wide Bento Card - Now Cosmic Orange High Impact */}
-              <div className="md:col-span-3 md:row-span-1 group bg-accent p-8 rounded-[2rem] shadow-xl hover:-translate-y-1 transition-all duration-500 flex flex-col sm:flex-row items-center gap-8 overflow-hidden">
-                <div className="flex-1 text-center sm:text-left">
-                  <h3 className="text-2xl font-bold text-white mb-4">
-                    Faculty Tools
-                  </h3>
-                  <p className="text-white/80 leading-relaxed text-sm">
-                    Empowering educators with automated grading and seamless attendance workflows.
-                  </p>
-                </div>
-                <div className="w-20 h-20 shrink-0 bg-white/20 rounded-2xl flex items-center justify-center text-white backdrop-blur-md">
-                  <div className="w-10 h-10"><AcademicCapIcon /></div>
-                </div>
-              </div>
-
-              {/* Feature 3: Small Bento Card A - Orange Accent */}
-              <div className="md:col-span-1 md:row-span-1 group bg-[#F5FEFE] border border-accent/20 p-6 rounded-[2rem] shadow-lg hover:shadow-accent/10 hover:-translate-y-1 transition-all duration-500 flex flex-col items-center justify-center text-center">
-                <div className="w-12 h-12 text-accent mb-4 h-12 w-12 animate-pulse-slow"><ChartBarIcon /></div>
-                <h4 className="font-bold text-primary text-sm tracking-tight">Analytics</h4>
-              </div>
-
-              {/* Feature 4: Small Bento Card B */}
-              <div className="md:col-span-2 md:row-span-1 group bg-secondary p-8 rounded-[2rem] shadow-xl hover:-translate-y-1 hover:border-accent border border-transparent transition-all duration-500 flex flex-col justify-end relative overflow-hidden">
-                <div className="absolute top-0 right-0 p-4 opacity-20 text-white">
-                  <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <circle cx="20" cy="20" r="20" fill="currentColor" />
-                  </svg>
-                </div>
-                <h3 className="text-xl font-bold text-white mb-2">Admin Control</h3>
-                <p className="text-white/70 text-xs">High-level institutional management.</p>
-              </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              <FeatureCard
+                icon={<StudentIcon />}
+                title="Student Gateway"
+                description="A streamlined portal for assignments, grades, attendance tracking, and frictionless communication with educators."
+              />
+              <FeatureCard
+                icon={<FacultyIcon />}
+                title="Faculty Operations"
+                description="Powerful tools for automated grading pipelines, syllabus management, and real-time student performance analytics."
+              />
+              <FeatureCard
+                icon={<AdminIcon />}
+                title="Administrative Control"
+                description="Centralized oversight for curriculum planning, role-based access control, and campus-wide announcements."
+              />
+              <FeatureCard
+                icon={<AnalyticsIcon />}
+                title="Actionable Insights"
+                description="Data-driven dashboards that provide instant visibility into cohort metrics, attrition rates, and engagement."
+              />
+              <FeatureCard
+                icon={<SecurityIcon />}
+                title="Enterprise Security"
+                description="Bank-grade encryption, secure session management, and robust infrastructure ensuring your data remains protected."
+              />
+              <FeatureCard
+                icon={<IntegrationIcon />}
+                title="Seamless Ecosystem"
+                description="Designed to work harmoniously across all devices with instant synchronization and a responsive architecture."
+              />
             </div>
           </div>
         </section>
 
         {/* Call to Action */}
-        <section className="py-16 lg:py-24 bg-blue-600">
+        <section className="py-20 lg:py-24 bg-white border-t border-slate-100">
           <div className="mx-auto max-w-4xl px-6 text-center">
-            <h2 className="text-2xl sm:text-3xl lg:text-5xl font-bold text-white mb-6 lg:mb-8">
-              Ready to modernize your campus experience?
+            <h2 className="text-3xl sm:text-4xl font-semibold text-slate-900 mb-6">
+              Ready to upgrade your infrastructure?
             </h2>
-            <p className="text-blue-100 text-lg lg:text-xl mb-10 lg:mb-12">
-              Join hundreds of institutions already shaping the future of education with Knowva.
+            <p className="text-slate-600 text-lg mb-10 max-w-2xl mx-auto">
+              Join leading institutions deploying Knowva to orchestrate their academic environments with precision.
             </p>
             <Link
               href="/signup"
-              className="inline-block px-8 py-4 lg:px-10 lg:py-5 rounded-full bg-white text-blue-600 font-black text-lg hover:bg-blue-50 transition-all shadow-2xl hover:scale-105 active:scale-95"
+              className="inline-block px-8 py-4 rounded-md bg-primary text-white font-medium text-lg hover:bg-primary/90 transition-all shadow-sm"
             >
-              Get Started Now
+              Start Deployment
             </Link>
           </div>
         </section>
       </main>
 
       {/* Footer */}
-      <footer className="bg-white border-t border-slate-100 py-12 lg:py-16">
+      <footer className="bg-slate-50 border-t border-border py-12">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <div className="flex flex-col md:flex-row justify-between items-center gap-8 mb-8 lg:mb-12">
-            <Brand size="md" />
-            <div className="flex gap-8 text-sm font-medium text-slate-500">
-              <Link href="#" className="hover:text-blue-600">Privacy</Link>
-              <Link href="#" className="hover:text-blue-600">Terms</Link>
-              <Link href="#" className="hover:text-blue-600">Contact</Link>
+          <div className="flex flex-col md:flex-row justify-between items-center gap-6 mb-8">
+            <Brand size="sm" />
+            <div className="flex gap-6 text-sm text-slate-500">
+              <Link href="#" className="hover:text-slate-900 transition-colors">Documentation</Link>
+              <Link href="#" className="hover:text-slate-900 transition-colors">Privacy</Link>
+              <Link href="#" className="hover:text-slate-900 transition-colors">Terms of Service</Link>
             </div>
           </div>
-          <div className="border-t border-slate-50 pt-8 text-center md:text-left">
+          <div className="border-t border-slate-200 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
             <p className="text-sm text-slate-400">
-              &copy; {new Date().getFullYear()} Knowva Inc. Designed for the future of education.
+              &copy; {new Date().getFullYear()} Knowva Systems. All rights reserved.
             </p>
+            <div className="flex gap-4">
+              {/* Social placeholders */}
+              <div className="w-5 h-5 rounded bg-slate-300"></div>
+              <div className="w-5 h-5 rounded bg-slate-300"></div>
+              <div className="w-5 h-5 rounded bg-slate-300"></div>
+            </div>
           </div>
         </div>
       </footer>
@@ -240,55 +248,67 @@ export default function Home() {
   );
 }
 
-function FeatureCard({ icon, title, description, color }) {
-  const colorMap = {
-    blue: "bg-blue-50 text-blue-600",
-    indigo: "bg-indigo-50 text-indigo-600",
-    slate: "bg-slate-100 text-slate-900",
-  };
-
+function FeatureCard({ icon, title, description }) {
   return (
-    <div className="group bg-white p-6 sm:p-8 rounded-3xl border border-slate-200 shadow-sm hover:shadow-2xl hover:-translate-y-2 transition-all duration-300">
-      <div className={`mb-6 sm:mb-8 w-14 h-14 rounded-2xl flex items-center justify-center ${colorMap[color] || colorMap.blue}`}>
-        <div className="w-7 h-7">{icon}</div>
+    <div className="bg-white p-8 rounded-xl border border-border shadow-sm hover:shadow-md transition-all">
+      <div className="mb-6 w-12 h-12 rounded-lg bg-slate-50 border border-slate-100 text-slate-700 flex items-center justify-center">
+        <div className="w-6 h-6">{icon}</div>
       </div>
-      <h3 className="text-xl font-bold text-slate-950 mb-3 sm:mb-4 group-hover:text-blue-600 transition-colors">
+      <h3 className="text-lg font-semibold text-slate-900 mb-2">
         {title}
       </h3>
-      <p className="text-slate-600 leading-relaxed text-sm sm:text-base">
+      <p className="text-slate-600 leading-relaxed text-sm">
         {description}
       </p>
     </div>
   );
 }
 
-// Simple icons
-const UserIcon = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
-    <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
-  </svg>
-)
-
-const AcademicCapIcon = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
-    <path strokeLinecap="round" strokeLinejoin="round" d="M4.26 10.147a60.436 60.436 0 00-.491 6.347A48.627 48.627 0 0112 20.904a48.627 48.627 0 018.232-4.41 60.46 60.46 0 00-.491-6.347m-15.482 0a50.57 50.57 0 00-2.658-.813A59.905 59.905 0 0112 3.493a59.902 59.902 0 0110.499 5.24 50.552 50.552 0 00-2.658.814m-15.482 0A50.55 50.55 0 0112 13.489a50.55 50.55 0 0112-4.152M2.25 12h19.5" />
-  </svg>
-)
-
-const ChartBarIcon = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
-    <path strokeLinecap="round" strokeLinejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 013 19.875v-6.75zM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V8.625zM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V4.125z" />
-  </svg>
-)
-
+// Clean SVG Icons
 const MenuIcon = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-6 h-6">
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
     <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
   </svg>
 )
 
 const CloseIcon = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-6 h-6">
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
     <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+  </svg>
+)
+
+const StudentIcon = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
+    <path strokeLinecap="round" strokeLinejoin="round" d="M4.26 10.147a60.436 60.436 0 00-.491 6.347A48.627 48.627 0 0112 20.904a48.627 48.627 0 018.232-4.41 60.46 60.46 0 00-.491-6.347m-15.482 0a50.57 50.57 0 00-2.658-.813A59.905 59.905 0 0112 3.493a59.902 59.902 0 0110.499 5.24 50.552 50.552 0 00-2.658.814m-15.482 0A50.55 50.55 0 0112 13.489a50.55 50.55 0 0112-4.152M2.25 12h19.5" />
+  </svg>
+)
+
+const FacultyIcon = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
+    <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
+  </svg>
+)
+
+const AdminIcon = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
+    <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" />
+  </svg>
+)
+
+const AnalyticsIcon = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
+    <path strokeLinecap="round" strokeLinejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 013 19.875v-6.75zM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V8.625zM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V4.125z" />
+  </svg>
+)
+
+const SecurityIcon = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
+    <path strokeLinecap="round" strokeLinejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z" />
+  </svg>
+)
+
+const IntegrationIcon = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
+    <path strokeLinecap="round" strokeLinejoin="round" d="M13.19 8.688a4.5 4.5 0 011.242 7.244l-4.5 4.5a4.5 4.5 0 01-6.364-6.364l1.757-1.757m13.35-.622l1.757-1.757a4.5 4.5 0 00-6.364-6.364l-4.5 4.5a4.5 4.5 0 001.242 7.244" />
   </svg>
 )

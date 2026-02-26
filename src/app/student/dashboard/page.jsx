@@ -120,10 +120,10 @@ export default function StudentDashboard() {
 
         {/* Stats Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          <StatCard title="My Courses" value={stats.totalCourses} icon="📚" />
-          <StatCard title="Average Marks" value={`${stats.averageMarks}%`} icon="📝" />
-          <StatCard title="Attendance" value={`${stats.attendancePercentage}%`} icon="✅" />
-          <StatCard title="Announcements" value={stats.totalAnnouncements} icon="📢" />
+          <StatCard title="My Courses" value={stats.totalCourses} icon={<CoursesIcon />} />
+          <StatCard title="Average Marks" value={`${stats.averageMarks}%`} icon={<MarksIcon />} />
+          <StatCard title="Attendance" value={`${stats.attendancePercentage}%`} icon={<AttendanceIcon />} />
+          <StatCard title="Announcements" value={stats.totalAnnouncements} icon={<AnnouncementsIcon />} />
         </div>
 
         {/* My Courses */}
@@ -229,7 +229,7 @@ function StatCard({ title, value, icon }) {
   return (
     <div className="rounded-xl border border-border bg-card p-6 shadow-sm">
       <div className="flex items-center justify-between mb-4">
-        <span className="text-2xl p-2 rounded-lg bg-primary/10">{icon}</span>
+        <span className="text-primary p-2 rounded-lg bg-primary/5 w-10 h-10 flex items-center justify-center border border-primary/10">{icon}</span>
       </div>
       <div>
         <p className="text-2xl font-bold text-foreground">{value}</p>
@@ -238,3 +238,16 @@ function StatCard({ title, value, icon }) {
     </div>
   );
 }
+
+const CoursesIcon = () => (
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+);
+const MarksIcon = () => (
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
+);
+const AttendanceIcon = () => (
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11"></polyline></svg>
+);
+const AnnouncementsIcon = () => (
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>
+);

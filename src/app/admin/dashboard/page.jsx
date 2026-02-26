@@ -106,18 +106,18 @@ export default function AdminDashboard() {
 
         {/* Stats Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          <StatCard title="Total Students" value={stats.totalStudents} icon="👥" />
-          <StatCard title="Total Faculty" value={stats.totalFaculty} icon="👨‍🏫" />
-          <StatCard title="Total Courses" value={stats.totalCourses} icon="📚" />
-          <StatCard title="Announcements" value={stats.totalAnnouncements} icon="📢" />
+          <StatCard title="Total Students" value={stats.totalStudents} icon={<StudentsIcon />} />
+          <StatCard title="Total Faculty" value={stats.totalFaculty} icon={<FacultyIcon />} />
+          <StatCard title="Total Courses" value={stats.totalCourses} icon={<CoursesIcon />} />
+          <StatCard title="Announcements" value={stats.totalAnnouncements} icon={<AnnouncementsIcon />} />
         </div>
 
         {/* Quick Actions */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-          <QuickActionLink href="/students" icon="👥" title="Manage Students" description="View and edit students" />
-          <QuickActionLink href="/admin/faculty" icon="👨‍🏫" title="Manage Faculty" description="View and edit faculty" />
-          <QuickActionLink href="/admin/courses" icon="📚" title="Manage Courses" description="Create and assign courses" />
-          <QuickActionLink href="/announcements/new" icon="📢" title="Post Announcement" description="Share updates" />
+          <QuickActionLink href="/students" icon={<StudentsIcon />} title="Manage Students" description="View and edit students" />
+          <QuickActionLink href="/admin/faculty" icon={<FacultyIcon />} title="Manage Faculty" description="View and edit faculty" />
+          <QuickActionLink href="/admin/courses" icon={<CoursesIcon />} title="Manage Courses" description="Create and assign courses" />
+          <QuickActionLink href="/announcements/new" icon={<AnnouncementsIcon />} title="Post Announcement" description="Share updates" />
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
@@ -226,7 +226,7 @@ function StatCard({ title, value, icon }) {
   return (
     <div className="rounded-xl border border-border bg-card p-6 shadow-sm">
       <div className="flex items-center justify-between mb-4">
-        <span className="text-2xl p-2 rounded-lg bg-primary/10">{icon}</span>
+        <span className="text-primary p-2 rounded-lg bg-primary/5 w-10 h-10 flex items-center justify-center border border-primary/10">{icon}</span>
       </div>
       <div>
         <p className="text-2xl font-bold text-foreground">{value}</p>
@@ -239,9 +239,22 @@ function StatCard({ title, value, icon }) {
 function QuickActionLink({ href, icon, title, description }) {
   return (
     <Link href={href} className="flex flex-col items-center justify-center rounded-xl border border-border bg-card p-6 text-center hover:bg-muted/50 hover:border-primary/50 transition-all shadow-sm group">
-      <div className="text-3xl mb-3 transform group-hover:scale-110 transition-transform">{icon}</div>
+      <div className="text-primary mb-4 w-8 h-8 flex items-center justify-center transform group-hover:scale-110 transition-transform">{icon}</div>
       <p className="font-semibold text-foreground">{title}</p>
       <p className="text-xs text-muted-foreground mt-1">{description}</p>
     </Link>
   );
 }
+
+const CoursesIcon = () => (
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+);
+const StudentsIcon = () => (
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+);
+const FacultyIcon = () => (
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><polyline points="16 11 18 13 22 9"></polyline></svg>
+);
+const AnnouncementsIcon = () => (
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>
+);

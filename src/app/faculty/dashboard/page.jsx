@@ -105,18 +105,18 @@ export default function FacultyDashboard() {
 
         {/* Stats Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          <StatCard title="My Courses" value={stats.totalCourses} icon="📚" />
-          <StatCard title="Total Students" value={stats.totalStudents} icon="👥" />
-          <StatCard title="Pending Tasks" value={stats.pendingAttendance} icon="📋" />
-          <StatCard title="Announcements" value={stats.totalAnnouncements} icon="📢" />
+          <StatCard title="My Courses" value={stats.totalCourses} icon={<CoursesIcon />} />
+          <StatCard title="Total Students" value={stats.totalStudents} icon={<StudentsIcon />} />
+          <StatCard title="Pending Tasks" value={stats.pendingAttendance} icon={<TasksIcon />} />
+          <StatCard title="Announcements" value={stats.totalAnnouncements} icon={<AnnouncementsIcon />} />
         </div>
 
         {/* Quick Actions */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-          <QuickActionLink href="/faculty/attendance" icon="✅" title="Mark Attendance" description="Record today's attendance" />
-          <QuickActionLink href="/faculty/marks" icon="📝" title="Upload Marks" description="Add assessment scores" />
-          <QuickActionLink href="/faculty/students" icon="👥" title="View Students" description="Manage your students" />
-          <QuickActionLink href="/announcements/new" icon="📢" title="Post Announcement" description="Share updates" />
+          <QuickActionLink href="/faculty/attendance" icon={<AttendanceIcon />} title="Mark Attendance" description="Record today's attendance" />
+          <QuickActionLink href="/faculty/marks" icon={<MarksIcon />} title="Upload Marks" description="Add assessment scores" />
+          <QuickActionLink href="/faculty/students" icon={<StudentsIcon />} title="View Students" description="Manage your students" />
+          <QuickActionLink href="/announcements/new" icon={<AnnouncementsIcon />} title="Post Announcement" description="Share updates" />
         </div>
 
         {/* My Courses */}
@@ -219,7 +219,7 @@ function StatCard({ title, value, icon }) {
   return (
     <div className="rounded-xl border border-border bg-card p-6 shadow-sm">
       <div className="flex items-center justify-between mb-4">
-        <span className="text-2xl p-2 rounded-lg bg-primary/10">{icon}</span>
+        <span className="text-primary p-2 rounded-lg bg-primary/5 w-10 h-10 flex items-center justify-center border border-primary/10">{icon}</span>
       </div>
       <div>
         <p className="text-2xl font-bold text-foreground">{value}</p>
@@ -232,9 +232,28 @@ function StatCard({ title, value, icon }) {
 function QuickActionLink({ href, icon, title, description }) {
   return (
     <Link href={href} className="flex flex-col items-center justify-center rounded-xl border border-border bg-card p-6 text-center hover:bg-muted/50 hover:border-primary/50 transition-all shadow-sm group">
-      <div className="text-3xl mb-3 transform group-hover:scale-110 transition-transform">{icon}</div>
+      <div className="text-primary mb-4 w-8 h-8 flex items-center justify-center transform group-hover:scale-110 transition-transform">{icon}</div>
       <p className="font-semibold text-foreground">{title}</p>
       <p className="text-xs text-muted-foreground mt-1">{description}</p>
     </Link>
   );
 }
+
+const CoursesIcon = () => (
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+);
+const StudentsIcon = () => (
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+);
+const TasksIcon = () => (
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+);
+const AnnouncementsIcon = () => (
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>
+);
+const AttendanceIcon = () => (
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11"></polyline></svg>
+);
+const MarksIcon = () => (
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
+);

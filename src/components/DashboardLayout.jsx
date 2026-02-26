@@ -102,9 +102,8 @@ export default function DashboardLayout({ children, role }) {
           </div>
 
           <div className="flex items-center gap-6">
-            <div className="flex items-center gap-3 px-3 py-1.5 rounded-full bg-slate-50 border border-border shadow-sm relative">
-              <div className="absolute top-0 right-0 w-3 h-3 bg-accent rounded-full border-2 border-white -mr-1 -mt-1 scale-110 animate-pulse"></div>
-              <div className="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-[10px] text-white font-bold uppercase shadow-lg shadow-primary/20">
+            <div className="flex items-center gap-3 px-3 py-1.5 rounded-full bg-slate-50 border border-border">
+              <div className="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-[10px] text-white font-bold uppercase">
                 {user.name.charAt(0)}
               </div>
               <span className="text-sm font-bold text-primary">{user.name}</span>
@@ -131,12 +130,12 @@ export default function DashboardLayout({ children, role }) {
                   <Link
                     key={item.href}
                     href={item.href}
-                    className={`flex items-center gap-4 px-5 py-4 rounded-2xl transition-all duration-500 group ${isActive
-                      ? "bg-primary text-white shadow-xl shadow-primary/30 translate-x-1"
-                      : "text-slate-500 hover:bg-accent/5 hover:text-accent hover:translate-x-1"
+                    className={`flex items-center gap-3 px-4 py-3 rounded-lg transition-all group ${isActive
+                      ? "bg-primary text-primary-foreground font-medium"
+                      : "text-slate-600 hover:bg-slate-100 hover:text-slate-900 font-medium"
                       }`}
                   >
-                    <div className={`${isActive ? "text-white" : "text-slate-400 group-hover:text-accent"} transition-colors shrink-0`}>
+                    <div className={`${isActive ? "text-primary-foreground" : "text-slate-400 group-hover:text-slate-600"} transition-colors shrink-0`}>
                       {item.icon}
                     </div>
                     <span className="text-sm font-bold tracking-tight">{item.label}</span>
@@ -147,26 +146,18 @@ export default function DashboardLayout({ children, role }) {
           </div>
 
           <div className="p-6">
-            <div className="p-5 bg-accent/5 rounded-3xl border border-accent/20 relative overflow-hidden group">
-              <div className="relative z-10">
-                <p className="text-[10px] font-black text-accent uppercase tracking-widest mb-2">Support</p>
-                <p className="text-xs text-slate-500 leading-relaxed font-medium">Need institutional help?<br />Contact our tech desk.</p>
-              </div>
-              {/* Subtle decoration */}
-              <div className="absolute -bottom-4 -right-4 w-12 h-12 bg-accent/10 rounded-full blur-xl group-hover:scale-150 transition-transform duration-700" />
+            <div className="p-4 bg-slate-50 rounded-xl border border-border">
+              <p className="text-xs font-semibold text-slate-900 mb-1">Support</p>
+              <p className="text-xs text-slate-500">Need institutional help?<br />Contact our tech desk.</p>
             </div>
           </div>
         </aside>
 
         {/* Main Content Area */}
-        <main className="flex-1 overflow-y-auto p-6 lg:p-10 relative bg-background/50">
+        <main className="flex-1 overflow-y-auto p-6 lg:p-10 relative bg-slate-50/50">
           <div className="mx-auto max-w-6xl relative z-10">
             {children}
           </div>
-
-          {/* Subtle background decoration */}
-          <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-secondary/5 rounded-full blur-[120px] -z-10 pointer-events-none" />
-          <div className="absolute bottom-0 left-0 w-[300px] h-[300px] bg-accent/5 rounded-full blur-[100px] -z-10 pointer-events-none" />
         </main>
       </div>
     </div>
