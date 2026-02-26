@@ -72,52 +72,36 @@
 }
 
 @media (prefers-color-scheme: dark) {
+
+  /* Enforcing the light theme as per the professional design requirement */
   :root {
-    --background: #020617;
-    /* slate-950 */
-    --foreground: #f8fafc;
-    /* slate-50 */
+    --background: #ffffff;
+    --foreground: #0f172a;
 
-    --card: #0f172a;
-    /* slate-900 */
-    --card-foreground: #f8fafc;
-    /* slate-50 */
+    --card: #ffffff;
+    --card-foreground: #0f172a;
 
-    --popover: #0f172a;
-    /* slate-900 */
-    --popover-foreground: #f8fafc;
-    /* slate-50 */
+    --popover: #ffffff;
+    --popover-foreground: #0f172a;
 
-    --primary: #6366f1;
-    /* indigo-500 */
+    --primary: #2563eb;
     --primary-foreground: #ffffff;
 
-    --secondary: #1e293b;
-    /* slate-800 */
-    --secondary-foreground: #f8fafc;
-    /* slate-50 */
+    --secondary: #f1f5f9;
+    --secondary-foreground: #0f172a;
 
-    --muted: #1e293b;
-    /* slate-800 */
-    --muted-foreground: #94a3b8;
-    /* slate-400 */
+    --muted: #f8fafc;
+    --muted-foreground: #64748b;
 
-    --accent: #1e293b;
-    /* slate-800 */
-    --accent-foreground: #f8fafc;
-    /* slate-50 */
+    --accent: #f1f5f9;
+    --accent-foreground: #0f172a;
 
-    --destructive: #7f1d1d;
-    /* red-900 */
-    --destructive-foreground: #f8fafc;
-    /* slate-50 */
+    --destructive: #ef4444;
+    --destructive-foreground: #ffffff;
 
-    --border: #1e293b;
-    /* slate-800 */
-    --input: #1e293b;
-    /* slate-800 */
-    --ring: #4f46e5;
-    /* indigo-600 */
+    --border: #e2e8f0;
+    --input: #e2e8f0;
+    --ring: #2563eb;
   }
 }
 

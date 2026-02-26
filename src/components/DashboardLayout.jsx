@@ -87,7 +87,7 @@ export default function DashboardLayout({ children, role }) {
   }
 
   return (
-    <div className="min-h-screen bg-background text-primary flex flex-col font-sans">
+    <div className="min-h-screen bg-slate-50 text-slate-900 flex flex-col font-sans">
       {/* Header */}
       <header className="h-20 border-b border-border bg-white/80 backdrop-blur-md sticky top-0 z-[60]">
         <div className="h-full px-6 flex items-center justify-between">
