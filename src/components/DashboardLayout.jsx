@@ -101,7 +101,7 @@ export default function DashboardLayout({ children, role }) {
             </span>
           </div>
 
-          <div className="flex items-center gap-6">
+          <div className="flex items-center gap-7size">
             <div className="flex items-center gap-3 px-3 py-1.5 rounded-full bg-slate-50 border border-border">
               <div className="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-[10px] text-white font-bold uppercase">
                 {user.name.charAt(0)}
