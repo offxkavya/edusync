@@ -1,6 +1,5 @@
 "use client";
 
-import jwt from "jsonwebtoken";
 
 const AUTH_STORAGE_KEY = "token";
 
@@ -22,9 +21,18 @@ export function clearAuthToken() {
 export function decodeToken(token) {
   try {
     if (!token) return null;
-    // Decode without verification for client-side role checking
-    const decoded = jwt.decode(token);
-    return decoded;
+    const base64Url = token.split('.')[1];
+    if (!base64Url) return null;
+    const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+    const jsonPayload = decodeURIComponent(
+      atob(base64)
+        .split('')
+        .map(function (c) {
+          return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+        })
+        .join('')
+    );
+    return JSON.parse(jsonPayload);
   } catch (error) {
     return null;
   }
