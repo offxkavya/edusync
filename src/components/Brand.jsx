@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import { motion } from "framer-motion";
 
 /**
  * Brand component for Knowva.
@@ -16,11 +17,11 @@ export default function Brand({ size = "md", theme = "dark", className = "" }) {
     const themes = {
         dark: {
             text: "text-slate-900",
-            icon: "text-blue-600",
+            icon: "text-slate-900",
         },
         light: {
             text: "text-white",
-            icon: "text-blue-400",
+            icon: "text-white",
         }
     };
 
@@ -28,25 +29,31 @@ export default function Brand({ size = "md", theme = "dark", className = "" }) {
     const currentTheme = themes[theme] || themes.dark;
 
     return (
-        <div className={`flex items-center ${currentSize.gap} ${className}`}>
+        <motion.div 
+            initial={{ opacity: 0, x: -10 }}
+            animate={{ opacity: 1, x: 0 }}
+            whileHover={{ scale: 1.02 }}
+            className={`flex items-center ${currentSize.gap} ${className} cursor-pointer group`}
+        >
             {/* Minimal Geometric Mark */}
-            <div className={`${currentSize.icon} flex items-center justify-center`}>
+            <div className={`${currentSize.icon} flex items-center justify-center relative`}>
                 <svg
                     viewBox="0 0 24 24"
                     fill="none"
                     xmlns="http://www.w3.org/2000/svg"
-                    className={`w-full h-full ${currentTheme.icon}`}
+                    className={`w-full h-full ${currentTheme.icon} transition-transform group-hover:rotate-12 duration-500`}
                 >
-                    <rect x="3" y="3" width="7" height="7" rx="1.5" fill="currentColor" />
-                    <rect x="14" y="3" width="7" height="7" rx="1.5" fill="currentColor" fillOpacity="0.5" />
-                    <rect x="3" y="14" width="7" height="7" rx="1.5" fill="currentColor" fillOpacity="0.5" />
-                    <path fill="currentColor" d="M14 14C14 13.4477 14.4477 13 15 13H20C20.5523 13 21 13.4477 21 14V19C21 19.5523 20.5523 20 20 20H15C14.4477 20 14 19.5523 14 19V14Z" />
+                    <rect x="3" y="3" width="7" height="7" rx="2" fill="currentColor" />
+                    <rect x="14" y="3" width="7" height="7" rx="2" fill="currentColor" fillOpacity="0.3" />
+                    <rect x="3" y="14" width="7" height="7" rx="2" fill="currentColor" fillOpacity="0.3" />
+                    <rect x="14" y="14" width="7" height="7" rx="2" fill="currentColor" />
                 </svg>
+                <div className="absolute -inset-1 bg-slate-900/5 rounded-full blur-md opacity-0 group-hover:opacity-100 transition-opacity"></div>
             </div>
 
-            <span className={`${currentSize.text} font-bold tracking-tight ${currentTheme.text} transition-colors`}>
-                Knowva
+            <span className={`${currentSize.text} font-black tracking-tight ${currentTheme.text} transition-colors font-heading`}>
+                EduSync
             </span>
-        </div>
+        </motion.div>
     );
 }

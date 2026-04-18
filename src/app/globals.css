@@ -1,46 +1,45 @@
 @import "tailwindcss";
 
+@layer base {
+  @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&family=Inter:wght@100..900&display=swap');
+}
+
 :root {
-  /* User-Provided Custom Palette (Refined to a Professional SaaS Look) */
-  --background: #ffffff;
-  --foreground: #0f172a;
-  /* Slate 900 */
+  /* Premium Neptune & Slate Palette */
+  --background: #fdfdfe;
+  --foreground: #020617;
+  /* Slate 950 */
 
   --card: #ffffff;
-  --card-foreground: #0f172a;
+  --card-foreground: #020617;
 
   --popover: #ffffff;
-  --popover-foreground: #0f172a;
+  --popover-foreground: #020617;
 
-  --primary: #2563eb;
-  /* Blue 600 */
+  /* Deep Indigo-Blue Primary */
+  --primary: #0f172a; /* Slate 900 for a very premium feel */
   --primary-foreground: #ffffff;
 
   --secondary: #f1f5f9;
-  /* Slate 100 */
   --secondary-foreground: #0f172a;
 
   --muted: #f8fafc;
-  /* Slate 50 */
   --muted-foreground: #64748b;
-  /* Slate 500 */
 
   --accent: #f1f5f9;
-  /* Slate 100 */
   --accent-foreground: #0f172a;
 
   --destructive: #ef4444;
-  /* Red 500 */
-  --destructive-foreground: #ffffff;
+  --destructive-foreground: #f8fafc;
 
   --border: #e2e8f0;
-  /* Slate 200 */
   --input: #e2e8f0;
-  --ring: #2563eb;
-  /* Blue 600 */
+  --ring: #94a3b8;
 
-  --radius: 0.5rem;
-  /* Clean professional sharp corners */
+  --radius: 0.75rem;
+
+  /* Custom Glows */
+  --glow-primary: rgba(15, 23, 42, 0.1);
 }
 
 @theme inline {
@@ -63,52 +62,59 @@
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
-  --radius-sm: calc(var(--radius) - 2px);
+  
+  --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius));
-  --radius-lg: calc(var(--radius) + 2px);
+  --radius-lg: calc(var(--radius) + 4px);
 
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: "Outfit", "Inter", sans-serif;
+  --font-heading: "Outfit", sans-serif;
+  
+  --animate-float: float 6s ease-in-out infinite;
+  --animate-pulse-slow: pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+  }
 }
 
-@media (prefers-color-scheme: dark) {
+@layer utilities {
+  .glass {
+    @apply bg-white/70 backdrop-blur-xl border border-white/20;
+  }
+  
+  .glass-dark {
+    @apply bg-slate-950/40 backdrop-blur-xl border border-white/10;
+  }
 
-  /* Enforcing the light theme as per the professional design requirement */
-  :root {
-    --background: #ffffff;
-    --foreground: #0f172a;
-
-    --card: #ffffff;
-    --card-foreground: #0f172a;
-
-    --popover: #ffffff;
-    --popover-foreground: #0f172a;
-
-    --primary: #2563eb;
-    --primary-foreground: #ffffff;
-
-    --secondary: #f1f5f9;
-    --secondary-foreground: #0f172a;
-
-    --muted: #f8fafc;
-    --muted-foreground: #64748b;
-
-    --accent: #f1f5f9;
-    --accent-foreground: #0f172a;
-
-    --destructive: #ef4444;
-    --destructive-foreground: #ffffff;
-
-    --border: #e2e8f0;
-    --input: #e2e8f0;
-    --ring: #2563eb;
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-br from-slate-900 via-slate-800 to-slate-600;
   }
 }
 
 body {
   background-color: var(--background);
   color: var(--foreground);
-  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+/* Custom Scrollbar for a cleaner look */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #e2e8f0;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #cbd5e1;
 }
