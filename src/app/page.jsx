@@ -3,6 +3,21 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import { motion, AnimatePresence } from "framer-motion";
+import { 
+  ArrowRight, 
+  CheckCircle2, 
+  PieChart, 
+  ShieldCheck, 
+  Zap, 
+  Globe2, 
+  GraduationCap, 
+  Users, 
+  Layout, 
+  ChevronRight,
+  Menu,
+  X
+} from "lucide-react";
 import { getAuthToken, decodeToken } from "@/lib/auth-client";
 import Brand from "@/components/Brand";
 
@@ -15,32 +30,39 @@ export default function Home() {
     if (token) {
       const decoded = decodeToken(token);
       if (decoded?.role) {
-        if (decoded.role === "ADMIN") {
-          router.replace("/admin/dashboard");
-        } else if (decoded.role === "FACULTY") {
-          router.replace("/faculty/dashboard");
-        } else if (decoded.role === "STUDENT") {
-          router.replace("/student/dashboard");
-        }
+        const routes = {
+          ADMIN: "/admin/dashboard",
+          FACULTY: "/faculty/dashboard",
+          STUDENT: "/student/dashboard"
+        };
+        router.replace(routes[decoded.role]);
       }
     }
   }, [router]);
 
   return (
-    <div className="min-h-screen bg-background text-foreground flex flex-col font-sans selection:bg-primary/10 selection:text-primary">
+    <div className="min-h-screen bg-[#fdfdfe] text-slate-950 flex flex-col font-sans selection:bg-slate-900 selection:text-white">
       {/* Navbar */}
-      <header className="fixed top-0 w-full bg-white/95 backdrop-blur-sm border-b border-border z-[100]">
-        <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-6 lg:px-8">
+      <header className="fixed top-0 w-full bg-white/70 backdrop-blur-xl border-b border-slate-100 z-[100]">
+        <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-6 lg:px-8">
           <Brand size="md" />
 
           {/* Desktop Nav */}
-          <nav className="hidden md:flex items-center gap-8">
-            <Link href="#features" className="text-sm font-medium text-slate-600 hover:text-primary transition-colors">Features</Link>
-            <Link href="#about" className="text-sm font-medium text-slate-600 hover:text-primary transition-colors">About</Link>
-            <Link href="/login" className="text-sm font-medium text-slate-600 hover:text-primary transition-colors">Log in</Link>
+          <nav className="hidden md:flex items-center gap-10">
+            {["Features", "Enterprise", "Resources"].map((item) => (
+              <Link 
+                key={item} 
+                href={`#${item.toLowerCase()}`} 
+                className="text-sm font-semibold text-slate-500 hover:text-slate-900 transition-colors"
+              >
+                {item}
+              </Link>
+            ))}
+            <div className="h-4 w-px bg-slate-200"></div>
+            <Link href="/login" className="text-sm font-semibold text-slate-900">Log in</Link>
             <Link
               href="/signup"
-              className="px-4 py-2 rounded-md bg-primary text-primary-foreground text-sm font-medium hover:bg-primary/90 transition-all shadow-sm active:scale-95"
+              className="px-6 py-2.5 rounded-full bg-slate-950 text-white text-sm font-bold hover:bg-slate-800 transition-all shadow-xl shadow-slate-900/10 active:scale-95"
             >
               Get Started
             </Link>
@@ -49,197 +71,332 @@ export default function Home() {
           {/* Mobile Toggle */}
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="md:hidden p-2 text-slate-600 hover:text-primary transition-colors"
-            aria-label="Toggle menu"
+            className="md:hidden p-2 text-slate-900"
           >
-            {isMenuOpen ? <CloseIcon /> : <MenuIcon />}
+            {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
         </div>
 
-        {/* Mobile Menu Backdrop */}
-        {isMenuOpen && (
-          <div className="md:hidden absolute top-16 left-0 w-full bg-white border-b border-border shadow-md p-6 flex flex-col gap-4">
-            <Link onClick={() => setIsMenuOpen(false)} href="#features" className="text-base font-medium text-slate-900 border-b border-slate-100 pb-3">Features</Link>
-            <Link onClick={() => setIsMenuOpen(false)} href="#about" className="text-base font-medium text-slate-900 border-b border-slate-100 pb-3">About</Link>
-            <Link onClick={() => setIsMenuOpen(false)} href="/login" className="text-base font-medium text-slate-900 border-b border-slate-100 pb-3">Log in</Link>
-            <Link
-              onClick={() => setIsMenuOpen(false)}
-              href="/signup"
-              className="w-full text-center px-4 py-3 rounded-md bg-primary text-primary-foreground font-medium shadow-sm mt-2"
+        {/* Mobile Menu */}
+        <AnimatePresence>
+          {isMenuOpen && (
+            <motion.div 
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              className="md:hidden absolute top-20 left-0 w-full bg-white border-b border-slate-100 shadow-2xl p-8 flex flex-col gap-6"
             >
-              Get Started
-            </Link>
-          </div>
-        )}
+              <Link onClick={() => setIsMenuOpen(false)} href="#features" className="text-lg font-bold">Features</Link>
+              <Link onClick={() => setIsMenuOpen(false)} href="#about" className="text-lg font-bold">About</Link>
+              <Link onClick={() => setIsMenuOpen(false)} href="/login" className="text-lg font-bold">Log in</Link>
+              <Link
+                onClick={() => setIsMenuOpen(false)}
+                href="/signup"
+                className="w-full text-center px-6 py-4 rounded-2xl bg-slate-900 text-white font-bold"
+              >
+                Get Started
+              </Link>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </header>
 
-      <main className="flex-1 pt-16">
-        {/* Hero Section */}
-        <section className="relative pt-20 pb-24 lg:pt-32 lg:pb-32 overflow-hidden bg-white">
+      <main className="flex-1">
+        {/* Post-Modern Hero Section */}
+        <section className="relative pt-32 pb-20 lg:pt-56 lg:pb-40 overflow-hidden">
+          {/* Background Decorations */}
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full -z-10 pointer-events-none">
+            <div className="absolute top-[10%] left-[10%] w-[500px] h-[500px] bg-slate-900/[0.03] rounded-full blur-[120px] animate-pulse-slow"></div>
+            <div className="absolute bottom-[20%] right-[10%] w-[400px] h-[400px] bg-slate-900/[0.02] rounded-full blur-[100px] animate-pulse-slow" style={{ animationDelay: '2s' }}></div>
+          </div>
+
           <div className="mx-auto max-w-7xl px-6 lg:px-8">
-            <div className="flex flex-col lg:flex-row items-center gap-16">
-              <div className="flex-1 text-center lg:text-left order-2 lg:order-1">
-                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-100 text-slate-700 text-xs font-semibold mb-8 border border-slate-200">
-                  <span className="w-2 h-2 rounded-full bg-primary"></span>
-                  Institutional Management, Simplified
+            <div className="flex flex-col items-center text-center max-w-4xl mx-auto">
+              <motion.div 
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-slate-100/50 border border-slate-200 text-slate-600 text-[11px] font-black uppercase tracking-widest mb-10 backdrop-blur-sm"
+              >
+                <span className="relative flex h-2 w-2">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-slate-400 opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-slate-900"></span>
+                </span>
+                The Future of Learning Management
+              </motion.div>
+
+              <motion.h1 
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.1 }}
+                className="text-6xl sm:text-7xl lg:text-8xl font-black tracking-tighter text-slate-950 leading-[0.9] mb-8"
+              >
+                Orchestrate <br />
+                <span className="text-slate-400">Education</span> with <br />
+                <span className="relative">
+                  Precision.
+                  <svg className="absolute -bottom-4 left-0 w-full h-3 text-slate-200 -z-10" viewBox="0 0 200 20" fill="none" preserveAspectRatio="none">
+                    <path d="M0 15C50 5 150 5 200 15" stroke="currentColor" strokeWidth="10" strokeLinecap="round" />
+                  </svg>
+                </span>
+              </motion.h1>
+
+              <motion.p 
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.2 }}
+                className="text-lg sm:text-xl leading-relaxed text-slate-500 mb-12 max-w-2xl font-medium"
+              >
+                EduSync is the high-performance infrastructure for modern academic institutions. A unified ecosystem for students, faculty, and administration.
+              </motion.p>
+
+              <motion.div 
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.3 }}
+                className="flex flex-col sm:flex-row items-center gap-4 w-full sm:w-auto"
+              >
+                <Link
+                  href="/signup"
+                  className="w-full sm:w-auto px-10 py-5 rounded-full bg-slate-950 text-white font-bold hover:bg-slate-800 transition-all shadow-2xl shadow-slate-900/20 text-center flex items-center justify-center gap-2 group"
+                >
+                  Get Started for Free
+                  <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
+                </Link>
+                <Link
+                  href="#features"
+                  className="w-full sm:w-auto px-10 py-5 rounded-full border border-slate-200 bg-white text-slate-900 font-bold hover:bg-slate-50 transition-all text-center flex items-center justify-center gap-2"
+                >
+                  Explore Platform
+                </Link>
+              </motion.div>
+
+              <motion.div 
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 0.4 }}
+                transition={{ delay: 0.6 }}
+                className="mt-20 pt-10 border-t border-slate-100 w-full max-w-xl"
+              >
+                <p className="text-[10px] font-black uppercase tracking-[0.3em] text-slate-400 mb-6">Built for Innovative Institutions</p>
+                <div className="flex justify-between items-center px-4 grayscale opacity-60">
+                   <span className="text-xl font-black italic tracking-tighter">VERSO</span>
+                   <span className="text-xl font-black tracking-widest">KINETIC</span>
+                   <span className="text-xl font-bold font-serif italic">Nova</span>
+                   <span className="text-xl font-medium uppercase tracking-[0.2em]">Orizon</span>
                 </div>
-                <h1 className="text-5xl sm:text-6xl lg:text-7xl font-semibold tracking-tight text-slate-900 leading-[1.1] mb-6">
-                  The infrastructure for <br className="hidden lg:block" />
-                  <span className="text-primary">modern education.</span>
-                </h1>
-                <p className="text-lg sm:text-xl leading-relaxed text-slate-600 mb-10 max-w-2xl mx-auto lg:mx-0">
-                  Knowva provides a complete, unified platform connecting students, faculty, and administration through precision engineering and intuitive design.
+              </motion.div>
+            </div>
+          </div>
+        </section>
+
+        {/* Dynamic Interface Showcase */}
+        <section className="py-20 bg-slate-50 overflow-hidden relative">
+           <div className="mx-auto max-w-7xl px-6 lg:px-8 relative z-10">
+              <div className="relative mx-auto max-w-5xl rounded-[32px] overflow-hidden border border-slate-200 bg-white shadow-[0_32px_128px_-32px_rgba(0,0,0,0.1)] group">
+                 <div className="h-14 border-b border-slate-100 bg-slate-50/50 flex items-center px-6 gap-3">
+                    <div className="flex gap-2">
+                      <div className="w-3 h-3 rounded-full bg-slate-200"></div>
+                      <div className="w-3 h-3 rounded-full bg-slate-200"></div>
+                      <div className="w-3 h-3 rounded-full bg-slate-200"></div>
+                    </div>
+                    <div className="h-6 w-48 bg-slate-200/50 rounded-full mx-auto"></div>
+                 </div>
+                 <div className="aspect-[16/10] bg-white p-10 flex gap-10">
+                    <div className="w-64 border-r border-slate-50 space-y-8 pr-10">
+                       <div className="h-8 w-24 bg-slate-100 rounded-lg"></div>
+                       <div className="space-y-4">
+                          {[1,2,3,4,5].map(i => (
+                             <div key={i} className={`h-4 w-full rounded flex items-center gap-3 ${i===1 ? 'bg-slate-900/10' : 'bg-slate-50'}`}>
+                                <div className="w-4 h-4 rounded ml-2 bg-slate-200"></div>
+                             </div>
+                          ))}
+                       </div>
+                    </div>
+                    <div className="flex-1 space-y-10">
+                       <div className="flex gap-6">
+                          <div className="h-32 flex-1 rounded-3xl bg-slate-900 border border-slate-800 p-6 flex flex-col justify-between">
+                             <div className="w-8 h-8 rounded-full bg-white/10"></div>
+                             <div className="h-4 w-1/2 bg-white/20 rounded"></div>
+                          </div>
+                          <div className="h-32 flex-1 rounded-3xl bg-slate-50 border border-slate-100 p-6 flex flex-col justify-between">
+                             <div className="w-8 h-8 rounded-full bg-slate-200"></div>
+                             <div className="h-4 w-1/2 bg-slate-200 rounded"></div>
+                          </div>
+                       </div>
+                       <div className="flex-1 rounded-3xl bg-slate-50 border border-slate-100 p-8">
+                          <div className="h-6 w-1/4 bg-slate-200 rounded mb-10"></div>
+                          <div className="space-y-4">
+                             {[1,2,3].map(i => (
+                                <div key={i} className="h-4 w-full bg-slate-100 rounded-lg"></div>
+                             ))}
+                             <div className="h-4 w-2/3 bg-slate-100 rounded-lg"></div>
+                          </div>
+                       </div>
+                    </div>
+                 </div>
+                 {/* Floating Label */}
+                 <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none transition-transform duration-700 group-hover:scale-110">
+                    <div className="px-8 py-4 bg-white shadow-2xl rounded-2xl border border-slate-100 flex items-center gap-4">
+                       <div className="w-12 h-12 bg-slate-950 rounded-xl flex items-center justify-center text-white">
+                          <GraduationCap size={24} />
+                       </div>
+                       <div className="text-left">
+                          <p className="text-xs font-black uppercase tracking-widest text-slate-400 leading-none mb-1">Live Dashboard</p>
+                          <p className="text-lg font-bold text-slate-950 leading-none">EduSync Core UI</p>
+                       </div>
+                    </div>
+                 </div>
+              </div>
+           </div>
+           <div className="absolute bottom-0 left-0 w-full h-1/2 bg-gradient-to-t from-white to-transparent -z-10"></div>
+        </section>
+
+        {/* Feature Grid - Non-Linear */}
+        <section id="features" className="py-32 lg:py-48 bg-white overflow-hidden">
+          <div className="mx-auto max-w-7xl px-6 lg:px-8">
+            <div className="grid lg:grid-cols-12 gap-16 lg:gap-24 items-start">
+              <div className="lg:col-span-4 sticky top-40">
+                <p className="text-[12px] font-black uppercase tracking-[0.4em] text-slate-400 mb-6">Core Infrastructure</p>
+                <h2 className="text-5xl font-black text-slate-950 leading-[0.9] mb-8">
+                  Built for the <br /> modern <br /> <span className="text-slate-400 italic font-serif">ecosystem.</span>
+                </h2>
+                <p className="text-lg text-slate-500 font-medium leading-relaxed mb-10">
+                  We've engineered every component to ensure maximum reliability and institutional continuity.
                 </p>
-                <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
-                  <Link
-                    href="/signup"
-                    className="w-full sm:w-auto px-8 py-3.5 rounded-md bg-primary text-primary-foreground font-medium hover:bg-primary/90 transition-all shadow-sm text-center"
-                  >
-                    Start for free
-                  </Link>
-                  <Link
-                    href="#features"
-                    className="w-full sm:w-auto px-8 py-3.5 rounded-md border border-slate-200 bg-white text-slate-700 font-medium hover:bg-slate-50 transition-all text-center"
-                  >
-                    Explore Platform
-                  </Link>
-                </div>
-
-                <div className="mt-14 pt-8 border-t border-slate-100 hidden lg:block">
-                  <p className="text-sm text-slate-500 mb-4">Trusted by innovative institutions</p>
-                  <div className="flex gap-8 opacity-40 grayscale">
-                    {/* Placeholder logos */}
-                    <div className="h-6 w-24 bg-slate-300 rounded"></div>
-                    <div className="h-6 w-32 bg-slate-300 rounded"></div>
-                    <div className="h-6 w-20 bg-slate-300 rounded"></div>
-                  </div>
+                <div className="flex flex-col gap-6">
+                   <div className="flex items-center gap-4 text-slate-900 font-bold">
+                      <div className="w-6 h-6 rounded-full bg-slate-100 flex items-center justify-center"><CheckCircle2 size={14} /></div>
+                      Institutional Resilience
+                   </div>
+                   <div className="flex items-center gap-4 text-slate-900 font-bold">
+                      <div className="w-6 h-6 rounded-full bg-slate-100 flex items-center justify-center"><CheckCircle2 size={14} /></div>
+                      Grade-One Security
+                   </div>
+                   <div className="flex items-center gap-4 text-slate-900 font-bold">
+                      <div className="w-6 h-6 rounded-full bg-slate-100 flex items-center justify-center"><CheckCircle2 size={14} /></div>
+                      Real-Time Synchronization
+                   </div>
                 </div>
               </div>
 
-              <div className="flex-1 order-1 lg:order-2 w-full max-w-lg lg:max-w-none perspective-1000">
-                <div className="relative rounded-2xl border border-border bg-white shadow-2xl overflow-hidden transform rotate-y-[-5deg] rotate-x-[5deg] transition-transform hover:rotate-0 duration-700">
-                  {/* Mock UI Header */}
-                  <div className="h-12 border-b border-border bg-slate-50 flex items-center px-4 gap-2">
-                    <div className="flex gap-1.5">
-                      <div className="w-3 h-3 rounded-full bg-slate-300"></div>
-                      <div className="w-3 h-3 rounded-full bg-slate-300"></div>
-                      <div className="w-3 h-3 rounded-full bg-slate-300"></div>
-                    </div>
-                  </div>
-                  {/* Mock UI Body */}
-                  <div className="p-6 bg-white aspect-[4/3] flex flex-col gap-4">
-                    <div className="flex gap-4">
-                      <div className="h-24 flex-1 rounded-xl bg-slate-50 border border-slate-100 p-4">
-                        <div className="h-3 w-1/3 bg-slate-200 rounded mb-4"></div>
-                        <div className="h-8 w-1/2 bg-primary/20 rounded"></div>
-                      </div>
-                      <div className="h-24 flex-1 rounded-xl bg-slate-50 border border-slate-100 p-4">
-                        <div className="h-3 w-1/3 bg-slate-200 rounded mb-4"></div>
-                        <div className="h-8 w-1/2 bg-slate-200 rounded"></div>
-                      </div>
-                    </div>
-                    <div className="flex-1 rounded-xl bg-slate-50 border border-slate-100 p-4">
-                      <div className="h-4 w-1/4 bg-slate-200 rounded mb-6"></div>
-                      <div className="space-y-3">
-                        <div className="h-3 w-full bg-slate-100 rounded"></div>
-                        <div className="h-3 w-full bg-slate-100 rounded"></div>
-                        <div className="h-3 w-5/6 bg-slate-100 rounded"></div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+              <div className="lg:col-span-8 grid grid-cols-1 md:grid-cols-2 gap-8">
+                <FeatureMetric 
+                  icon={<GraduationCap />}
+                  title="Academic Portal"
+                  value="100%"
+                  desc="Unified student access to coursework, grades, and attendance."
+                />
+                <FeatureMetric 
+                  icon={<Users />}
+                  title="Faculty Stack"
+                  value="24/7"
+                  desc="Precision tools for educators to manage large-scale cohorts."
+                />
+                <FeatureMetric 
+                  icon={<PieChart />}
+                  title="Neural Analytics"
+                  value="Real-time"
+                  desc="Data-driven insights into institutional engagement metrics."
+                />
+                <FeatureMetric 
+                  icon={<ShieldCheck />}
+                  title="Sovereign Data"
+                  value="AES-256"
+                  desc="Security that meets the world's most rigorous standards."
+                />
+                <FeatureMetric 
+                  icon={<Zap />}
+                  title="Instant Sync"
+                  value="<50ms"
+                  desc="Asynchronous processing ensures zero operational latency."
+                />
+                <FeatureMetric 
+                  icon={<Globe2 />}
+                  title="Edge Network"
+                  value="Global"
+                  desc="Distributed infrastructure for low-latency worldwide access."
+                />
               </div>
             </div>
           </div>
         </section>
 
-        {/* Features Section - Standard Grid */}
-        <section id="features" className="py-24 bg-slate-50 border-t border-border">
-          <div className="mx-auto max-w-7xl px-6 lg:px-8">
-            <div className="mx-auto max-w-2xl text-center mb-16 lg:mb-20">
-              <h2 className="text-primary font-semibold tracking-wide uppercase text-sm mb-3">Core Platform</h2>
-              <p className="text-3xl font-semibold tracking-tight text-slate-900 sm:text-4xl mb-4">
-                Everything you need to manage education.
-              </p>
-              <p className="text-lg text-slate-600 max-w-xl mx-auto">
-                A highly secure, reliable, and scalable foundation built for the needs of students, faculty, and administrators.
-              </p>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              <FeatureCard
-                icon={<StudentIcon />}
-                title="Student Gateway"
-                description="A streamlined portal for assignments, grades, attendance tracking, and frictionless communication with educators."
-              />
-              <FeatureCard
-                icon={<FacultyIcon />}
-                title="Faculty Operations"
-                description="Powerful tools for automated grading pipelines, syllabus management, and real-time student performance analytics."
-              />
-              <FeatureCard
-                icon={<AdminIcon />}
-                title="Administrative Control"
-                description="Centralized oversight for curriculum planning, role-based access control, and campus-wide announcements."
-              />
-              <FeatureCard
-                icon={<AnalyticsIcon />}
-                title="Actionable Insights"
-                description="Data-driven dashboards that provide instant visibility into cohort metrics, attrition rates, and engagement."
-              />
-              <FeatureCard
-                icon={<SecurityIcon />}
-                title="Enterprise Security"
-                description="Bank-grade encryption, secure session management, and robust infrastructure ensuring your data remains protected."
-              />
-              <FeatureCard
-                icon={<IntegrationIcon />}
-                title="Seamless Ecosystem"
-                description="Designed to work harmoniously across all devices with instant synchronization and a responsive architecture."
-              />
-            </div>
+        {/* CTA Section - Minimalist */}
+        <section className="py-40 bg-slate-950 relative overflow-hidden">
+          <div className="absolute inset-0 -z-10 opacity-30">
+             <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-white/[0.03] rounded-full blur-[150px]"></div>
+             <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-white/[0.02] rounded-full blur-[120px]"></div>
           </div>
-        </section>
-
-        {/* Call to Action */}
-        <section className="py-20 lg:py-24 bg-white border-t border-slate-100">
           <div className="mx-auto max-w-4xl px-6 text-center">
-            <h2 className="text-3xl sm:text-4xl font-semibold text-slate-900 mb-6">
-              Ready to upgrade your infrastructure?
-            </h2>
-            <p className="text-slate-600 text-lg mb-10 max-w-2xl mx-auto">
-              Join leading institutions deploying Knowva to orchestrate their academic environments with precision.
-            </p>
-            <Link
-              href="/signup"
-              className="inline-block px-8 py-4 rounded-md bg-primary text-white font-medium text-lg hover:bg-primary/90 transition-all shadow-sm"
-            >
-              Start Deployment
-            </Link>
+             <motion.div 
+               whileInView={{ opacity: 1, scale: 1 }}
+               initial={{ opacity: 0, scale: 0.9 }}
+               className="flex flex-col items-center"
+             >
+                <div className="w-20 h-20 bg-white rounded-3xl mb-12 flex items-center justify-center shadow-2xl">
+                   <Brand size="lg" theme="dark" className="!gap-0" />
+                </div>
+                <h2 className="text-4xl sm:text-6xl font-black text-white leading-none mb-10">
+                  Ready to upgrade your institutional stack?
+                </h2>
+                <div className="flex flex-col sm:flex-row items-center gap-6">
+                   <Link
+                    href="/signup"
+                    className="px-12 py-6 rounded-full bg-white text-slate-950 font-black text-lg hover:bg-slate-100 transition-all flex items-center gap-3 group"
+                  >
+                    Start Deployment
+                    <ArrowRight size={20} className="group-hover:translate-x-2 transition-transform" />
+                  </Link>
+                  <Link href="#contact" className="text-white font-bold border-b-2 border-white/20 hover:border-white transition-all pb-1">
+                    Request Demo
+                  </Link>
+                </div>
+             </motion.div>
           </div>
         </section>
       </main>
 
-      {/* Footer */}
-      <footer className="bg-slate-50 border-t border-border py-12">
+      {/* Footer - Professional & Dense */}
+      <footer className="bg-white border-t border-slate-100 py-24">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <div className="flex flex-col md:flex-row justify-between items-center gap-6 mb-8">
-            <Brand size="sm" />
-            <div className="flex gap-6 text-sm text-slate-500">
-              <Link href="#" className="hover:text-slate-900 transition-colors">Documentation</Link>
-              <Link href="#" className="hover:text-slate-900 transition-colors">Privacy</Link>
-              <Link href="#" className="hover:text-slate-900 transition-colors">Terms of Service</Link>
+          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-12 lg:gap-20 mb-20">
+            <div className="col-span-2">
+              <Brand size="md" className="mb-8" />
+              <p className="text-slate-400 text-sm font-medium leading-relaxed max-w-xs">
+                Orchestrating academic excellence through precision engineering and human-centric design.
+              </p>
+            </div>
+            <div>
+              <h4 className="text-xs font-black uppercase tracking-widest text-slate-950 mb-6">Product</h4>
+              <ul className="space-y-4 text-sm font-semibold text-slate-500">
+                <li><Link href="#" className="hover:text-slate-950 transition-colors">Infrastructure</Link></li>
+                <li><Link href="#" className="hover:text-slate-950 transition-colors">Analytics</Link></li>
+                <li><Link href="#" className="hover:text-slate-950 transition-colors">Security</Link></li>
+              </ul>
+            </div>
+            <div>
+              <h4 className="text-xs font-black uppercase tracking-widest text-slate-950 mb-6">Company</h4>
+              <ul className="space-y-4 text-sm font-semibold text-slate-500">
+                <li><Link href="#" className="hover:text-slate-950 transition-colors">Institutional</Link></li>
+                <li><Link href="#" className="hover:text-slate-950 transition-colors">Research</Link></li>
+                <li><Link href="#" className="hover:text-slate-950 transition-colors">Contact</Link></li>
+              </ul>
+            </div>
+            <div>
+              <h4 className="text-xs font-black uppercase tracking-widest text-slate-950 mb-6">Legal</h4>
+              <ul className="space-y-4 text-sm font-semibold text-slate-500">
+                <li><Link href="#" className="hover:text-slate-950 transition-colors">Privacy</Link></li>
+                <li><Link href="#" className="hover:text-slate-950 transition-colors">Terms</Link></li>
+                <li><Link href="#" className="hover:text-slate-950 transition-colors">Trust</Link></li>
+              </ul>
             </div>
           </div>
-          <div className="border-t border-slate-200 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
-            <p className="text-sm text-slate-400">
-              &copy; {new Date().getFullYear()} Knowva Systems. All rights reserved.
+          <div className="pt-10 border-t border-slate-100 flex flex-col md:flex-row justify-between items-center gap-6">
+            <p className="text-xs font-bold text-slate-400">
+              &copy; {new Date().getFullYear()} EduSync Systems Inc. All rights reserved.
             </p>
-            <div className="flex gap-4">
-              {/* Social placeholders */}
-              <div className="w-5 h-5 rounded bg-slate-300"></div>
-              <div className="w-5 h-5 rounded bg-slate-300"></div>
-              <div className="w-5 h-5 rounded bg-slate-300"></div>
+            <div className="flex gap-8 text-[10px] font-black uppercase tracking-widest text-slate-400">
+               <span className="flex items-center gap-2 cursor-pointer hover:text-slate-950"><Globe2 size={12}/> Global (EN)</span>
+               <span className="cursor-pointer hover:text-slate-950">System Status: Operational</span>
             </div>
           </div>
         </div>
@@ -248,67 +405,20 @@ export default function Home() {
   );
 }
 
-function FeatureCard({ icon, title, description }) {
+function FeatureMetric({ icon, title, value, desc }) {
   return (
-    <div className="bg-white p-8 rounded-xl border border-border shadow-sm hover:shadow-md transition-all">
-      <div className="mb-6 w-12 h-12 rounded-lg bg-slate-50 border border-slate-100 text-slate-700 flex items-center justify-center">
-        <div className="w-6 h-6">{icon}</div>
+    <motion.div 
+      whileHover={{ y: -5 }}
+      className="p-10 rounded-[40px] bg-slate-50 border border-slate-100 flex flex-col items-start text-left group transition-all hover:bg-white hover:shadow-2xl hover:shadow-slate-900/5 hover:border-slate-200"
+    >
+      <div className="w-14 h-14 rounded-2xl bg-white shadow-lg shadow-slate-900/5 mb-10 flex items-center justify-center text-slate-900 group-hover:bg-slate-950 group-hover:text-white transition-all">
+        {icon}
       </div>
-      <h3 className="text-lg font-semibold text-slate-900 mb-2">
-        {title}
-      </h3>
-      <p className="text-slate-600 leading-relaxed text-sm">
-        {description}
-      </p>
-    </div>
+      <div>
+        <p className="text-sm font-black uppercase tracking-[0.2em] text-slate-400 mb-2 leading-none">{title}</p>
+        <p className="text-4xl font-black text-slate-950 tracking-tighter mb-4 leading-none">{value}</p>
+        <p className="text-slate-500 font-medium text-sm leading-relaxed">{desc}</p>
+      </div>
+    </motion.div>
   );
 }
-
-// Clean SVG Icons
-const MenuIcon = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
-    <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
-  </svg>
-)
-
-const CloseIcon = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
-    <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
-  </svg>
-)
-
-const StudentIcon = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
-    <path strokeLinecap="round" strokeLinejoin="round" d="M4.26 10.147a60.436 60.436 0 00-.491 6.347A48.627 48.627 0 0112 20.904a48.627 48.627 0 018.232-4.41 60.46 60.46 0 00-.491-6.347m-15.482 0a50.57 50.57 0 00-2.658-.813A59.905 59.905 0 0112 3.493a59.902 59.902 0 0110.499 5.24 50.552 50.552 0 00-2.658.814m-15.482 0A50.55 50.55 0 0112 13.489a50.55 50.55 0 0112-4.152M2.25 12h19.5" />
-  </svg>
-)
-
-const FacultyIcon = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
-    <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
-  </svg>
-)
-
-const AdminIcon = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
-    <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" />
-  </svg>
-)
-
-const AnalyticsIcon = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
-    <path strokeLinecap="round" strokeLinejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 013 19.875v-6.75zM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V8.625zM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V4.125z" />
-  </svg>
-)
-
-const SecurityIcon = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
-    <path strokeLinecap="round" strokeLinejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z" />
-  </svg>
-)
-
-const IntegrationIcon = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
-    <path strokeLinecap="round" strokeLinejoin="round" d="M13.19 8.688a4.5 4.5 0 011.242 7.244l-4.5 4.5a4.5 4.5 0 01-6.364-6.364l1.757-1.757m13.35-.622l1.757-1.757a4.5 4.5 0 00-6.364-6.364l-4.5 4.5a4.5 4.5 0 001.242 7.244" />
-  </svg>
-)
