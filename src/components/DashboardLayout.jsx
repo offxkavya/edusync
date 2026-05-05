@@ -130,7 +130,7 @@ export default function DashboardLayout({ children, role }) {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
-                className="w-9 h-10 bg-slate-950 rounded-xl flex items-center justify-center text-white font-black"
+                className="w-10 h-10 bg-slate-950 rounded-xl flex items-center justify-center text-white font-black"
               >
                 E
               </motion.div>
