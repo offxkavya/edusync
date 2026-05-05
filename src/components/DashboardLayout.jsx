@@ -62,7 +62,7 @@ export default function DashboardLayout({ children, role }) {
   if (!user) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-[#fdfdfe]">
-        <div className="flex flex-col items-center gap-5">
+        <div className="flex flex-col items-center gap-6">
           <motion.div 
             animate={{ rotate: 360 }}
             transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
