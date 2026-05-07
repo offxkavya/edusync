@@ -138,7 +138,7 @@ export default function DashboardLayout({ children, role }) {
           </AnimatePresence>
         </div>
 
-        <div className="flex-1 px-4 py-6 overflow-y-auto">
+        <div className="flex-1 px-4 py-5 overflow-y-auto">
           <p className={`text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] mb-6 px-4 transition-opacity ${isSidebarOpen ? "opacity-100" : "opacity-0"}`}>
             Main Menu
           </p>
