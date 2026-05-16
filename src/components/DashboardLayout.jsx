@@ -128,7 +128,7 @@ export default function DashboardLayout({ children, role }) {
               <motion.div
                 key="short-logo"
                 initial={{ opacity: 0 }}
-                animate={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 className="w-10 h-10 bg-slate-950 rounded-xl flex items-center justify-center text-white font-black"
               >
