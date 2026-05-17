@@ -142,7 +142,7 @@ export default function DashboardLayout({ children, role }) {
           <p className={`text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] mb-6 px-4 transition-opacity ${isSidebarOpen ? "opacity-100" : "opacity-0"}`}>
             Main Menu
           </p>
-          <nav className="space-y-2">
+          <nav className="space-y-1">
             {navItems.map((item) => {
               const isActive = pathname === item.href;
               const Icon = item.icon;
